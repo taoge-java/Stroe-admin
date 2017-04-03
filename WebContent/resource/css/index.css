@@ -1,0 +1,248 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+	padding: 0;
+	margin: 0;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+.cs-north {
+	height: 60px;
+	background: #B3DFDA;
+}
+
+.cs-north-bg {
+	width: 100%;
+	height: 100%;
+	background: url(../images/topbg.gif) repeat-x;
+}
+.cs-north-bg-left {
+	width: 100%;
+	height: 100%;
+	background: url(../images/topleft.jpg) left center no-repeat;
+}
+.cs-north-bg-right {
+	width: 100%;
+	height: 100%;
+	background: url(../images/topright.jpg) right center no-repeat;
+}
+
+.cs-north-logo {
+	height: 40px;
+	padding: 26px 0px 0px 20px;
+	color: #fff;
+	font-size: 22px;
+	font-weight: bold;
+	text-decoration: none;
+    background: url(../images/logo.png) 25px 17px no-repeat;
+    float: left;
+width: 500px;
+}
+
+
+	 .right-items{float:right;margin-top:8px;margin-right:14px;}
+	.right-items span{margin-bottom:-5px;font-size:14px;color:white}
+	.right-items span b{ color:#80fff5;margin: 0 3px;}
+	.right-items a{margin-bottom:-5px;font-size:14px;color:white; cursor: pointer;}
+
+.cs-west {
+	width: 200px;
+	padding: 0px;
+	border-left: 1px solid #99BBE8;
+}
+
+.cs-south {
+	height: 25px;
+	background: url('../images/panel_title.gif') repeat-x;
+	padding: 0px;
+	text-align: center;
+}
+
+.cs-navi-tab {
+	padding: 5px;
+}
+
+.cs-tab-menu {
+	width: 120px;
+}
+
+.cs-home-remark {
+	padding: 10px;
+}
+
+.accordion ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 10px;
+}
+
+.accordion ul li {
+	padding: 0px;
+}
+
+.accordion ul li a {
+	line-height: 24px;
+	cursor: pointer;
+	text-decoration: none
+}
+
+.accordion ul li a span {
+	color: #333
+}
+
+.accordion ul li div {
+	margin: 2px 0px;
+	padding: 3px 0;
+	padding-left: 5px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+
+.menuItem li div:hover {
+	border: 1px dashed #006F99;
+	background: #88CBF2;
+	cursor: pointer;
+}
+
+.menuItem li div:hover .menu-ico{
+	background-color: #88cbf2;
+	border-color: #006F99;
+}
+
+.menuItem li div.selected .menu-ico{
+	background-color: #fff;
+	border-color: #006F99;
+}
+
+.accordion ul li div.hover a {
+	color: #D16C00;
+	text-decoration: none;
+}
+
+.accordion ul li div.selected {
+	border: 1px solid #006F99;
+	background: #88CBF2;
+	cursor: default;
+}
+
+.accordion ul li div.selected a {
+	color: #D16C00;
+	font-weight: bold;
+}
+/*********************/
+.icon {
+	padding-left: 18px;
+	display: inline-block;
+	line-height: 18px;
+}
+
+.icon-category-arrow{
+	background: url('../images/list.gif') no-repeat left center;
+}
+
+.icon-chart_curve {
+	background: url('../images/icons/chart_curve.png') no-repeat;
+}
+
+.textbox {
+	height: 20px;
+	margin: 0;
+	padding: 0 2px;
+	box-sizing: content-box;
+}
+
+.fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+
+.fitem input {
+	width: 160px;
+}
+.tabsnoscrollbar{overflow: hidden}
+
+/*导航菜单图标*/
+.menu-ico{ background:url("../images/icons/menu-ico.png") top left no-repeat;display: inline-block;margin-right: 5px;border-radius:20px;border: 1px solid #88CBF2;}
+.menu-ico-yjcssz{ width:30px; height:30px; background-position:-10px -10px; }
+.menu-ico-jxch{ width:30px; height:30px; background-position:-10px -50px; }
+.menu-ico-cssz{ width:30px; height:30px; background-position:-10px -90px; }
+.menu-ico-rzgl{ width:30px; height:30px; background-position:-10px -130px; }
+.menu-ico-spxxgl{ width:30px; height:30px; background-position:-10px -170px; }
+.menu-ico-sgrz{ width:30px; height:30px; background-position:-10px -210px; }
+.menu-ico-jxsgl{ width:30px; height:30px; background-position:-10px -250px; }
+.menu-ico-shjj{ width:30px; height:30px; background-position:-10px -290px; }
+.menu-ico-gysgl{ width:30px; height:30px; background-position:-10px -330px; }
+.menu-ico-smtq{ width:30px; height:30px; background-position:-10px -370px; }
+.menu-ico-gggl{ width:30px; height:30px; background-position:-10px -410px; }
+.menu-ico-jsjx{ width:30px; height:30px; background-position:-10px -450px; }
+.menu-ico-xwgl{ width:30px; height:30px; background-position:-10px -490px; }
+.menu-ico-fpzz{ width:30px; height:30px; background-position:-10px -530px; }
+.menu-ico-xxfl{ width:30px; height:30px; background-position:-10px -570px; }
+.menu-ico-fpck{ width:30px; height:30px; background-position:-10px -610px; }
+.menu-ico-xcsbsj{ width:30px; height:30px; background-position:-10px -650px; }
+.menu-ico-fprk{ width:30px; height:30px; background-position:-10px -690px; }
+.menu-ico-zdscpz{ width:30px; height:30px; background-position:-10px -730px; }
+.menu-ico-zzsjkfx{ width:30px; height:30px; background-position:-10px -770px; }
+.menu-ico-cdrzsj{ width:30px; height:30px; background-position:-10px -810px; }
+.menu-ico-jxtj{ width:30px; height:30px; background-position:-10px -850px; }
+.menu-ico-jxdksj{ width:30px; height:30px; background-position:-10px -890px; }
+.menu-ico-cefp{ width:30px; height:30px; background-position:-10px -930px; }
+.menu-ico-xxbssj{ width:30px; height:30px; background-position:-10px -970px; }
+.menu-ico-jxfbt{ width:30px; height:30px; background-position:-10px -1010px; }
+.menu-ico-ydwdtx{ width:30px; height:30px; background-position:-10px -1050px; }
+.menu-ico-xxfbt{ width:30px; height:30px; background-position:-10px -1090px; }
+.menu-ico-zzjggl{ width:30px; height:30px; background-position:-10px -1130px; }
+.menu-ico-dkqxtx{ width:30px; height:30px; background-position:-10px -1170px; }
+.menu-ico-jxsjjk{ width:30px; height:30px; background-position:-10px -1210px; }
+.menu-ico-rzxxgl{ width:30px; height:30px; background-position:-10px -1250px; }
+.menu-ico-jxqdtx{ width:30px; height:30px; background-position:-10px -1290px; }
+.menu-ico-xxsjjk{ width:30px; height:30px; background-position:-10px -1330px; }
+.menu-ico-jsgl{ width:30px; height:30px; background-position:-10px -1370px; }
+.menu-ico-kpcytx{ width:30px; height:30px; background-position:-10px -1410px; }
+.menu-ico-sjcl{ width:30px; height:30px; background-position:-10px -1450px; }
+.menu-ico-yhgl{ width:30px; height:30px; background-position:-10px -1490px; }
+.menu-ico-fpkcyj{ width:30px; height:30px; background-position:-10px -1530px; }
+.menu-ico-plkp{ width:30px; height:30px; background-position:-10px -1570px; }
+.menu-ico-cdgl{ width:30px; height:30px; background-position:-10px -1610px; }
+.menu-ico-tskptx{ width:30px; height:30px; background-position:-10px -1650px; }
+.menu-ico-spgl{ width:30px; height:30px; background-position:-10px -1690px; }
+.menu-ico-yjlxgl{ width:30px; height:30px; background-position:-10px -1730px; }
+.menu-ico-rzjgqd{ width:30px; height:30px; background-position:-10px -1770px; }
+.menu-ico-kpsq{ width:30px; height:30px; background-position:-10px -1810px; }
+
+
+#receipt-dlg{background: url("../images/fpbg.png") no-repeat;}
+/***********form**************/
