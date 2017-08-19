@@ -1,4 +1,4 @@
-package com.stroe.config;
+package com.stroe.admin.config;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -15,8 +15,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
-import com.stroe.interceptor.ViewContextInterceptor;
-import com.stroe.model.BaseModel;
+import com.stroe.admin.interceptor.ViewContextInterceptor;
+import com.stroe.admin.model.BaseModel;
 
 public class StroeConfig extends JFinalConfig{
 

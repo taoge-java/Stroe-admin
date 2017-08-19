@@ -1,14 +1,13 @@
-package com.stroe.interceptor;
+package com.stroe.admin.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.velocity.tools.generic.DateTool;
 import org.apache.velocity.tools.generic.NumberTool;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.stroe.config.StroeConfig;
+import com.stroe.admin.config.StroeConfig;
 
 /**
  * 一些公共数据信息
@@ -26,5 +25,4 @@ public class ViewContextInterceptor  implements Interceptor{
 		request.setAttribute("resuoucesUpload", StroeConfig.UploadPath);
 		inv.invoke();
 	}
-
 }

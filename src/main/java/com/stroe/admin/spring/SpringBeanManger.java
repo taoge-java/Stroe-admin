@@ -1,4 +1,4 @@
-package com.stroe.spring;
+package com.stroe.admin.spring;
 
 public class SpringBeanManger {
 

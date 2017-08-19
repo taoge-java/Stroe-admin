@@ -1,4 +1,4 @@
-package com.stroe.dto;
+package com.stroe.admin.dto;
 
 /**
  * 保存用户登录信息

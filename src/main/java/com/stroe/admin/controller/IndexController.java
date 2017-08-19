@@ -1,7 +1,7 @@
-package com.stroe.controller;
+package com.stroe.admin.controller;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.common.BaseController;
+import com.stroe.admin.common.BaseController;
 
 /**
  * 访问商城首页

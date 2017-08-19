@@ -1,4 +1,4 @@
-package com.stroe.model;
+package com.stroe.admin.model;
 
 import com.jfinal.plugin.activerecord.Model;
 

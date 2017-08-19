@@ -1,7 +1,7 @@
-package com.stroe.common;
+package com.stroe.admin.common;
 
 import com.jfinal.core.Controller;
-import com.stroe.config.StroeConfig;
+import com.stroe.admin.config.StroeConfig;
 
 /**
  * 控制器父类

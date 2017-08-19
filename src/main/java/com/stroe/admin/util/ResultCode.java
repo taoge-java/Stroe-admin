@@ -1,4 +1,4 @@
-package com.stroe.util;
+package com.stroe.admin.util;
 
 /**
  * ajax校验工具类

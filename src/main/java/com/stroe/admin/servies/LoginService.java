@@ -1,6 +1,4 @@
-package com.stroe.servies;
-
-import com.stroe.util.Result;
+package com.stroe.admin.servies;
 
 /**
  * 用户登录service层
@@ -10,7 +8,4 @@ import com.stroe.util.Result;
  */
 public class LoginService {
 
-	public Result login(){
-		return null;
-	}
 }

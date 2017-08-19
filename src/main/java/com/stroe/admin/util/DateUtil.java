@@ -1,4 +1,4 @@
-package com.stroe.util;
+package com.stroe.admin.util;
 
 public class DateUtil {
 

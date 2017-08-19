@@ -1,4 +1,4 @@
-package com.stroe.mail;
+package com.stroe.admin.mail;
 
 /**
  * 邮件客户端接口
