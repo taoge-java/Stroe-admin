@@ -1,34 +1,35 @@
 package com.stroe.admin.util;
-
 /**
- * ajax校验工具类
+ * 为方便处理ajax请求
  * @author zengjintao
- * 2017年2月26日 14:21
+ * @version 1.0
+ * @create_at 2017年6月28日上午9:28:04
  */
 public class ResultCode {
+	
+	public static final int SUCCESS=1;
+	
+	public static final int FAIL=0;
+	
+	public int code=SUCCESS;
+	
+	public String message="";
 
-	private static final int  SUCCESS=1;
-	
-	@SuppressWarnings("unused")
-	private static final int FAIL=-1;
-	
-	private String message="";
-
-	private int code=SUCCESS;
-	
-	
-	public ResultCode(int code,String message) {
-		this.code=code;
-		this.message = message;
+	public int getCode() {
+		return code;
 	}
-
 
 	public String getMessage() {
 		return message;
 	}
 
+	public ResultCode(int code, String message) {
+		this.code = code;
+		this.message = message;
+		System.out.println("MESSAGE:"+message);
+	}
 
-	public int getCode() {
-		return code;
+	public ResultCode(int code) {
+		this.code=code;
 	}
 }

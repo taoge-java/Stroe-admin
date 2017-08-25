@@ -1,7 +1,7 @@
 package com.stroe.admin.controller.account;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.admin.common.BaseController;
+import com.stroe.admin.controller.base.BaseController;
 /**
  * 
  * @author zengjintao

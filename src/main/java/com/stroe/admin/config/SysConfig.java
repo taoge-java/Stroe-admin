@@ -9,41 +9,43 @@ import com.jfinal.config.Routes;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
 import com.jfinal.ext.route.AutoBindRoutes;
+import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
+import com.jfinal.template.Engine;
 import com.stroe.admin.interceptor.ViewContextInterceptor;
 import com.stroe.admin.model.BaseModel;
 
-public class StroeConfig extends JFinalConfig{
-
-	private Logger log=Logger.getLogger(StroeConfig.class);
+public class SysConfig extends JFinalConfig{
 	
 	public static final String BASE_VIEW="/WEB-INF/views";
 	
 	public static  String redisHost;
 	
-	public static String UploadPath;
+	public static String uploadPath;
 	
-	@SuppressWarnings("unused")
-	private static String UploadDown;
+	public static String uploadDown;
+	
 	private static String redisPassword;
+	
+	private Prop proKit = null;
+	
 	@Override
 	public void configConstant(Constants constants) {
 		constants.setViewType(ViewType.VELOCITY);
 		constants.setDevMode(true);
-		PropKit.use("config.properties");//加载config配置文件
-		redisHost=PropKit.get("db.redis.host");
-		redisPassword=PropKit.get("db.redis.password");
-		UploadPath=PropKit.get("resource.upload.path");
-		UploadDown=PropKit.get("resource.upload.domain");
-		constants.setUploadedFileSaveDirectory(UploadPath);//设置文件上传路径
+		proKit = PropKit.use("config.properties");//加载config配置文件
+		redisHost = proKit.get("db.redis.host");
+		redisPassword = proKit.get("db.redis.password");
+		uploadPath = proKit.get("resource.upload.path");
+		uploadDown = proKit.get("resource.upload.domain");
+		
+		constants.setBaseUploadPath(uploadPath);//设置文件上传路径
 		constants.setError404View(BASE_VIEW+"/error/404.vm");
 		constants.setError500View(BASE_VIEW+"/error/500.vm");
-		constants.setBaseViewPath(BASE_VIEW);
 	}
 
 	
@@ -61,12 +63,8 @@ public class StroeConfig extends JFinalConfig{
 	@Override
 	public void configPlugin(Plugins plugins) {
 		/**配置cp3p0数据库连接池**/
-		DruidPlugin druid = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+		DruidPlugin druid = new DruidPlugin(proKit.get("jdbcUrl"), proKit.get("user"), proKit.get("password"));
 		plugins.add(druid);
-//		C3p0Plugin c3p0=new C3p0Plugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
-//		ActiveRecordPlugin active=new ActiveRecordPlugin(c3p0);
-//		plugins.add(c3p0);
-//		plugins.add(active);
 		//配置数据表自动路由映射
 		AutoTableBindPlugin table=new AutoTableBindPlugin(druid);
 		table.autoScan(true);
@@ -81,16 +79,18 @@ public class StroeConfig extends JFinalConfig{
 
 	@Override
 	public void configRoute(Routes routes) {
+		routes.setBaseViewPath(BASE_VIEW);
 		routes.add(new AutoBindRoutes());
 	}
 
 	@Override
 	public void afterJFinalStart() {
-       new Thread(new Runnable() {
-			@Override
-			public void run() {
-				log.info("系统数据初始化完成。。。。。。");
-			}
-		}).start();
+       
+	}
+
+
+	@Override
+	public void configEngine(Engine engine) {
+		
 	}
 }
