@@ -1,7 +1,12 @@
 package com.stroe.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.controller.base.BaseController;
+import com.stroe.admin.dto.OnlineManger;
+import com.stroe.admin.dto.UserSession;
+import com.stroe.admin.util.ResultCode;
 
 /**
  * 访问商城首页
@@ -14,7 +19,24 @@ public class IndexController extends BaseController{
 	/**
 	 * 访问商城首页
 	 */
-	public void index(){
-		renderView("/login.vm");
+	@Autowired
+	private OnlineManger onlineManger;
+	
+	public void index(){}
+		
+	public void success(){
+		rendView("/index.vm");
+	}
+	/**
+	 * 客户端向服务器发送心跳包
+	 */
+	public void heart(){
+		UserSession session=getCurrentUser();
+		UserSession onlineUser=onlineManger.getUserSession(session.getSessionId());
+		if(onlineUser==null){
+			renderJson(new ResultCode(ResultCode.FAIL, "您的帐号已在"+session.getLast_login_ip()+"上登录,"+"请重新登录"+session.getLast_login_ip()));
+			return;
+		}
+		renderNull();
 	}
 }

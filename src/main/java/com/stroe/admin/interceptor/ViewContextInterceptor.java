@@ -1,4 +1,4 @@
-package com.stroe.admin.interceptor;
+ package com.stroe.admin.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,21 +7,24 @@ import org.apache.velocity.tools.generic.NumberTool;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.stroe.admin.config.SysConfig;
-
+import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.dto.UserSession;
 /**
- * 一些公共数据信息
- * @author zengjinto
- * 2017年2月23号  下午21:06
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月22日 下午5:29:20
  */
-public class ViewContextInterceptor  implements Interceptor{
+public class ViewContextInterceptor implements 	Interceptor{
 
 	@Override
 	public void intercept(Invocation inv) {
-		HttpServletRequest  request=inv.getController().getRequest();
+        HttpServletRequest request = inv.getController().getRequest();
+		request.setAttribute("dateTool", new DateTool());
 		request.setAttribute("number", new NumberTool());
-		request.setAttribute("dateTool",new DateTool());
-		request.setAttribute("resuoucesUpload", SysConfig.uploadPath);
+		UserSession session=(UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		if(session!=null){
+			request.setAttribute("session", session);
+		}
 		inv.invoke();
 	}
 }

@@ -301,7 +301,7 @@ public class QRCodeUtil {
 		if(null == imagePath || "".equals(imagePath))
 			return "";
 		imagePath = imagePath.replaceAll("/", "\\" + File.separator);
-		return String.format("%s%s%s", SysConfig.uploadPath, File.separator, imagePath);
+		return String.format("%s%s%s", SysConfig.resourceUpload, File.separator, imagePath);
 	}
 	
 	/**
@@ -325,7 +325,7 @@ public class QRCodeUtil {
 			e.printStackTrace();
 		}
 		String dateFileName = dateFileName();
-		String directoryName = SysConfig.uploadPath+ File.separator + getDiskImagePath(dateFileName);
+		String directoryName = SysConfig.resourceUpload+ File.separator + getDiskImagePath(dateFileName);
 		mkdirs(directoryName);
 		String imageFileName = CmsFileUtils.getRandFileName() + DEFAULT_SUFFIX_NAME;
 		boolean isSuccess = false;
