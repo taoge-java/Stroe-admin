@@ -18,8 +18,7 @@ import com.stroe.admin.spring.AopManger;
  */
 public class AopInterceptor implements Interceptor{
 	
-	
-private  ApplicationContext ctx;
+    private  ApplicationContext ctx;
 	
 	public AopInterceptor(ApplicationContext ctx){
 		this.ctx = ctx;

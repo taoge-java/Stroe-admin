@@ -48,7 +48,7 @@ public class LoginController extends BaseController{
 				redirect("/",false);
 			}
 		}else{
-			rendView("/account/login.vm");
+			renderView("/account/login.vm");
 		}
 	}
 

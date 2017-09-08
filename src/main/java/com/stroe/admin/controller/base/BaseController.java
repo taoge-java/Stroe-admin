@@ -7,7 +7,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.jfinal.aop.Duang;
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.stroe.admin.common.CommonConstant;
@@ -23,16 +22,12 @@ import com.stroe.admin.util.NumberUtils;
  * @author zengjintao
  * 2017年2月23号  下午21:06
  */
-public class BaseController extends Controller{
+public abstract class BaseController extends Controller{
 
-	public  int pageSize=20;
+	public  int pageSize = 30;
 	
-	public void rendView(String path){
+	public void renderView(String path){
 		render(SysConfig.BASE_VIEW+path);
-	}
-	
-	public <T> T getInstance(Class<T> cls){
-		return Duang.duang(cls.getSimpleName(),cls);
 	}
 	
     /**

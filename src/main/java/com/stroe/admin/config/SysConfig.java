@@ -1,9 +1,5 @@
 package com.stroe.admin.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Properties;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -14,12 +10,10 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
-import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
-import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.stroe.admin.interceptor.AopInterceptor;
@@ -32,7 +26,7 @@ import com.stroe.admin.service.base.Result;
 import com.stroe.admin.spring.SpringBeanManger;
 
 
-public class SysConfig extends JFinalConfig{
+public  class SysConfig extends JFinalConfig{
 	
 	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
 	
@@ -54,7 +48,7 @@ public class SysConfig extends JFinalConfig{
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
-		 constants.setViewType(ViewType.VELOCITY);
+		 constants.setViewType(ViewType.JFINAL_TEMPLATE);
 		 constants.setEncoding("utf-8");
 		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
 		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
@@ -67,19 +61,6 @@ public class SysConfig extends JFinalConfig{
 		 weixinToken=PropKit.get("weixin.token").trim();
 		 cookie_name=PropKit.get("cookie.name").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
-		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
-		 InputStream inputStream=null;
-		 /**
-		  * 加载Velocity配置文件
-		  */
-		 try {
-		     inputStream = new FileInputStream(new File(fullFile));
-			 Properties p = new Properties();
-			 p.load(inputStream);
-			 VelocityRender.setProperties(p);
-		 } catch (Exception e) {
-			e.printStackTrace();
-		 }
 	}
 	@Override
 	public void configRoute(Routes routes) {
@@ -142,5 +123,6 @@ public class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
+		
 	}
 }

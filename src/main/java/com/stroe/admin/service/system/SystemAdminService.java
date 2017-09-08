@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
+import com.stroe.admin.annotation.Aop;
 import com.stroe.admin.common.CommonConstant;
 import com.stroe.admin.model.system.SystemAdmin;
 import com.stroe.admin.model.system.SystemRole;
@@ -15,6 +16,13 @@ import com.stroe.admin.util.Md5Utils;
 import com.stroe.admin.util.ResultCode;
 import com.stroe.admin.util.StrKit;
 
+/**
+ * 管理员管理业务层
+ * @author taoge
+ * @version 1.0
+ * @create_at 2017年8月27日下午12:09:37
+ */
+@Aop
 public class SystemAdminService extends BaseService{
 	
 	private static final Log LOG=Log.getLog(SystemAdminService.class);

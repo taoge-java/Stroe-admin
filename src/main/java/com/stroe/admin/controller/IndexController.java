@@ -25,7 +25,7 @@ public class IndexController extends BaseController{
 	public void index(){}
 		
 	public void success(){
-		rendView("/index.vm");
+		renderView("/index.vm");
 	}
 	/**
 	 * 客户端向服务器发送心跳包
