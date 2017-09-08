@@ -19,7 +19,7 @@ import com.stroe.admin.spring.AopManger;
 public class AopInterceptor implements Interceptor{
 	
 	
-	private  ApplicationContext ctx;
+private  ApplicationContext ctx;
 	
 	public AopInterceptor(ApplicationContext ctx){
 		this.ctx = ctx;
@@ -36,27 +36,10 @@ public class AopInterceptor implements Interceptor{
 			Object bean = null;
 			if (field.isAnnotationPresent(AopBean.class)){
 				bean = AopManger.beanMap.get(field.getName());
-				//Class<?> cla = genie.get(field.getType()).getClass();
-				Class<?> cla = field.getType();
-				//service层aop的自动注入
-				for(Field f : cla.getDeclaredFields()){
-					Object serviceBean = null;
-					if(f.isAnnotationPresent(AopBean.class)){
-						serviceBean = AopManger.beanMap.get(f.getName());
-					}else if(f.isAnnotationPresent(Autowired.class)){
-						serviceBean = ctx.getBean(f.getName());
-					}
-					if(serviceBean != null){
-						try {
-							f.setAccessible(true);
-							f.set(bean, serviceBean);
-						} catch (IllegalArgumentException | IllegalAccessException e) {
-							throw new NullPointerException();
-						}
-					}
-				}
+				initServiceBean(bean,field);
 			}else if(field.isAnnotationPresent(Autowired.class)){
 				bean = ctx.getBean(field.getName());
+				initServiceBean(bean,field);
 			}else{
 				continue ;
 		    }
@@ -70,5 +53,26 @@ public class AopInterceptor implements Interceptor{
 			}
 		}
 		inv.invoke();
+	}
+	
+	private  void initServiceBean(Object bean,Field field){
+		Class<?> cla = field.getType();
+		//service层aop的自动注入
+		for(Field f : cla.getDeclaredFields()){
+			Object serviceBean = null;
+			if(f.isAnnotationPresent(AopBean.class)){
+				serviceBean = AopManger.beanMap.get(f.getName());
+			}else if(f.isAnnotationPresent(Autowired.class)){
+				serviceBean = ctx.getBean(f.getName());
+			}
+			if(serviceBean != null){
+				try {
+					f.setAccessible(true);
+					f.set(bean, serviceBean);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					throw new NullPointerException("Field can not be null");
+				}
+			}
+		}
 	}
 }
