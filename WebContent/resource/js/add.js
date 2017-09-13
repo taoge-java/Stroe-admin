@@ -50,7 +50,7 @@ $(function(){
 			return false;
 		}
 		$.ajax({
-			url:"$BASE_PATH/Student/student/Ajaxadd",
+			url:"#(BASE_PATH)/Student/student/Ajaxadd",
 			type:"post",
 			dataType:"json",
 			data:{

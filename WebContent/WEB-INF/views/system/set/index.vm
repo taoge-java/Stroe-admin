@@ -13,11 +13,11 @@
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="$BASE_PATH/resource/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="$BASE_PATH/resource/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="$BASE_PATH/resource/lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="$BASE_PATH/resource/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="$BASE_PATH/resource/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/css/style.css" />
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
@@ -73,7 +73,7 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/infromation" title="资讯管理">资讯管理</a></li>
+					<li><a href="#(BASE_PATH)/infromation" title="资讯管理">资讯管理</a></li>
 				</ul>
 	       </dd>
         </dl>
@@ -81,7 +81,7 @@
 			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/picture" title="图片管理">图片管理</a></li>
+					<li><a href="#(BASE_PATH)/picture" title="图片管理">图片管理</a></li>
 				</ul>
 	       </dd>
         </dl>
@@ -89,9 +89,9 @@
 			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/product/info" title="产品管理">产品管理</a></li>
-					<li><a href="$BASE_PATH/product/brand" title="品牌管理">品牌管理</a></li>
-					<li><a href="$BASE_PATH/product/category" title="分类管理">分类管理</a></li>
+					<li><a href="#(BASE_PATH)/product/info" title="产品管理">产品管理</a></li>
+					<li><a href="#(BASE_PATH)/product/brand" title="品牌管理">品牌管理</a></li>
+					<li><a href="#(BASE_PATH)/product/category" title="分类管理">分类管理</a></li>
 		        </ul>
 	        </dd>
        </dl>
@@ -108,7 +108,7 @@
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/userInfo" title="会员列表">会员列表</a></li>
+					<li><a href="#(BASE_PATH)/userInfo" title="会员列表">会员列表</a></li>
 					<li><a href="" title="删除的会员">删除的会员</a></li>
 					<li><a href="" title="等级管理">等级管理</a></li>
 					<li><a href="" title="积分管理">积分管理</a></li>
@@ -122,9 +122,9 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/system/role" title="角色管理">角色管理</a></li>
+					<li><a href="#(BASE_PATH)/system/role" title="角色管理">角色管理</a></li>
 					<li><a href="" title="权限管理">权限管理</a></li>
-					<li><a href="$BASE_PATH/system/admin" title="管理员列表">管理员列表</a></li>
+					<li><a href="#(BASE_PATH)/system/admin" title="管理员列表">管理员列表</a></li>
 		      </ul>
 	       </dd>
         </dl>
@@ -146,7 +146,7 @@
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="$BASE_PATH/system/set" title="系统设置">系统设置</a></li>
+					<li><a href="#(BASE_PATH)/system/set" title="系统设置">系统设置</a></li>
 					<li><a href="" title="栏目管理">栏目管理</a></li>
 					<li><a href="" title="数据字典">数据字典</a></li>
 					<li><a href="" title="屏蔽词">屏蔽词</a></li>
@@ -281,16 +281,16 @@
 </section>
 
 <!--_footer 作为公共模版分离出去--> 
-<script type="text/javascript" src="$BASE_PATH/resource/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="$BASE_PATH/resource/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui.admin/js/H-ui.admin.page.js"></script>
 <!--/_footer /作为公共模版分离出去--> 
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="$BASE_PATH/resource/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="$BASE_PATH/resource/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
-<script type="text/javascript" src="$BASE_PATH/resource/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({

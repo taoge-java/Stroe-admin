@@ -84,7 +84,7 @@
 			<dd style="display:block">
 				<ul>
 					<li class="current">
-						<a href="$BASE_PATH/information" title="资讯管理">资讯管理</a>
+						<a href="#(BASE_PATH)/information" title="资讯管理">资讯管理</a>
 					</li>
 				</ul>
 			</dd>
@@ -94,7 +94,7 @@
 			<dd>
 				<ul>
 					<li>
-						<a href="$BASE_PATH/picture" title="图片管理">图片管理</a>
+						<a href="#(BASE_PATH)/picture" title="图片管理">图片管理</a>
 					</li>
 				</ul>
 			</dd>

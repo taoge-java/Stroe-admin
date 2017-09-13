@@ -16,6 +16,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.stroe.admin.directive.Number;
 import com.stroe.admin.interceptor.AopInterceptor;
 import com.stroe.admin.interceptor.PermissionInterceptor;
 import com.stroe.admin.interceptor.ViewContextInterceptor;
@@ -69,7 +70,9 @@ public  class SysConfig extends JFinalConfig{
 	
 	
 	@Override
-	public void configEngine(Engine engine) {}
+	public void configEngine(Engine engine) {
+		engine.addDirective("number", new Number());
+	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
