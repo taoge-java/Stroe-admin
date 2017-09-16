@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.Stroe</groupId>
   <artifactId>Stroe-admin</artifactId>
-  <packaging>stroe</packaging>
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Maven Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -279,6 +279,12 @@
 	    <groupId>net.sf.ehcache</groupId>
 	    <artifactId>ehcache</artifactId>
 	    <version>2.10.4</version>
+	</dependency>
+      <!-- https://mvnrepository.com/artifact/org.webjars.bower/ueditor-bower -->
+	<dependency>
+	    <groupId>org.webjars.bower</groupId>
+	    <artifactId>ueditor-bower</artifactId>
+	    <version>1.4.3</version>
 	</dependency>
       
       <dependency>

@@ -5,7 +5,6 @@ package com.stroe.admin.directive;
 
 import java.io.Writer;
 
-import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
 import com.jfinal.template.expr.ast.Expr;
 import com.jfinal.template.expr.ast.ExprList;
@@ -17,7 +16,7 @@ import com.jfinal.template.stat.Scope;
  * @version 1.0
  * @create_at 2017年9月9日上午8:58:13
  */
-public class IF extends Directive{
+public class IF extends BaseDirective{
 
     private Expr valueExpr;
 	

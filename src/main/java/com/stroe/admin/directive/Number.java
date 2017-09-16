@@ -5,7 +5,6 @@ package com.stroe.admin.directive;
 
 import java.io.Writer;
 
-import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
 import com.jfinal.template.expr.ast.Expr;
 import com.jfinal.template.expr.ast.ExprList;
@@ -18,11 +17,11 @@ import com.stroe.admin.util.NumberTools;
  * @version 1.0
  * @create_at 2017年9月9日上午8:58:39
  */
-public class Number extends Directive{
+public class Number extends BaseDirective{
 	
     private Expr valueExpr;
 	
-    NumberTools number = NumberTools.geNumberTools();
+    private NumberTools number = NumberTools.geNumberTools();
 	
 	@Override
 	public void setExprList(ExprList exprList) {
@@ -38,9 +37,5 @@ public class Number extends Directive{
 		write(writer,number.toNumber(object));
 	}
 	
-	@Override
-	public boolean hasEnd() {
-		return super.hasEnd();
-	}
 
 }

@@ -13,7 +13,7 @@ import com.stroe.admin.controller.base.BaseController;
 public class ProductCategoryController extends BaseController{
 
 	public void index(){
-		renderView("/productInfo/category/index.vm");
+		renderView("/product/category/index.vm");
 	}
 	
     public void list(){

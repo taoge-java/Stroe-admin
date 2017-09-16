@@ -72,6 +72,7 @@ public  class SysConfig extends JFinalConfig{
 	@Override
 	public void configEngine(Engine engine) {
 		engine.addDirective("number", new Number());
+		engine.addSharedFunction("/WEB-INF/views/macro/left_menu.vm");
 	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })

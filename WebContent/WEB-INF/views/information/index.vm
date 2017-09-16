@@ -1,4 +1,4 @@
-﻿﻿<!--_meta 作为公共模版分离出去-->
+<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -28,158 +28,14 @@
 <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-<aside class="Hui-aside">
-	
-	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt class="selected" ><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd style="display:block">
-				<ul>
-					<li class="current">
-						<a href="#(BASE_PATH)/information" title="资讯管理">资讯管理</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/picture" title="图片管理">图片管理</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/product/brand" title="品牌管理">品牌管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/product/category" title="分类管理">分类管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/product/info" title="产品管理">产品管理</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a>
-					</li>
-					<li>
-						<a href="feedback-list.html" title="意见反馈">意见反馈</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="会员列表">会员列表</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="删除的会员">删除的会员</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="等级管理">等级管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="积分管理">积分管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="浏览记录">浏览记录</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="下载记录">下载记录</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="分享记录">分享记录</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="角色管理">角色管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="权限管理">权限管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="管理员列表">管理员列表</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-tongji">
-			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="折线图">折线图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="时间轴折线图">时间轴折线图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="区域图">区域图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="柱状图">柱状图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="饼状图">饼状图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="3D柱状图">3D柱状图</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="3D饼状图">3D饼状图</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-system">
-			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="系统设置">系统设置</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="栏目管理">栏目管理</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="数据字典">数据字典</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="屏蔽词">屏蔽词</a>
-					</li>
-					<li>
-						<a href="#(BASE_PATH)/userInfo" title="系统日志">系统日志</a>
-					</li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-</aside>
-<div class="dislpayArrow hidden-xs">
-	<a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
-</div>
+<!--_header 作为公共模版分离出去-->
+#include("/WEB-INF/views/common/header.vm")
+<!--/_header 作为公共模版分离出去-->
+
+<!--_menu 作为公共模版分离出去-->
+#@left_menu("information","")
 <!--/_menu 作为公共模版分离出去-->
+
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
@@ -208,7 +64,8 @@
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-				<a class="btn btn-primary radius" data-title="添加资讯" _href="article-add.html" onclick="article_add('添加资讯','article-add.html')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a>
+				<a class="btn btn-primary radius" data-title="添加资讯" onclick="addInformation()" href="javascript:;">
+					<i class="Hui-iconfont">&#xe600;</i> 添加资讯</a>
 				</span>
 				<span class="r">共有数据：<strong>54</strong> 条</span>
 			</div>
@@ -273,6 +130,31 @@
 <script type="text/javascript" src="#(BASE_PATH)/resource/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="#(BASE_PATH)/resource/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
+  //添加资讯
+  function addInformation(){
+      $.ajax({
+	       url:"#(BASE_PATH)/information/add",
+		   dataType:"html",
+		   data:{
+		       
+		   },
+		   success:function(data){
+		       layer.open({
+            	  type:1,
+            	  area:['1000px','800px'],
+            	  title:'新增地区',
+            	  content:data,
+            	  scrollbar: false,
+                  skin:'layui-layer-green',
+                  yes:function(index,layero){
+                     
+                  },
+                  btn:['保存','关闭']
+              });
+		   }
+	  })
+  }
+
 $('.table-sort').dataTable({
 	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 	"bStateSave": true,//状态保存

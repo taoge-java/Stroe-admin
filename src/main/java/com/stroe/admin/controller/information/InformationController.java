@@ -21,7 +21,7 @@ public class InformationController extends BaseController{
 	}
     
 	public void add(){
-		
+		renderView("/information/add.vm");
 	}
 	
     public void create(){

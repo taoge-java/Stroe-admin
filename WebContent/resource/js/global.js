@@ -32,6 +32,10 @@ function page(cont,totalPage,groups,url,content){
 	       });
 	});
 }
+
+function addInformation(url,data,dataType){
+	
+}
 /***
  * 系统时间
  */
