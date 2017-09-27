@@ -10,6 +10,7 @@ import com.jfinal.template.expr.ast.Expr;
 import com.jfinal.template.expr.ast.ExprList;
 import com.jfinal.template.stat.ParseException;
 import com.jfinal.template.stat.Scope;
+import com.stroe.admin.directive.annoation.Directive;
 import com.stroe.admin.util.NumberTools;
 
 /**
@@ -17,6 +18,7 @@ import com.stroe.admin.util.NumberTools;
  * @version 1.0
  * @create_at 2017年9月9日上午8:58:39
  */
+@Directive(name="number")
 public class Number extends BaseDirective{
 	
     private Expr valueExpr;

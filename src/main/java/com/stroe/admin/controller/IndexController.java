@@ -22,7 +22,9 @@ public class IndexController extends BaseController{
 	@Autowired
 	private OnlineManger onlineManger;
 	
-	public void index(){}
+	public void index(){
+		renderView("/index.vm");
+	}
 		
 	public void success(){
 		renderView("/index.vm");

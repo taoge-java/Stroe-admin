@@ -1,6 +1,8 @@
 package com.stroe.admin.config;
 
 
+import java.util.List;
+
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -11,12 +13,13 @@ import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import com.stroe.admin.directive.Number;
+import com.stroe.admin.directive.annoation.Directive;
 import com.stroe.admin.interceptor.AopInterceptor;
 import com.stroe.admin.interceptor.PermissionInterceptor;
 import com.stroe.admin.interceptor.ViewContextInterceptor;
@@ -25,9 +28,13 @@ import com.stroe.admin.service.base.BaseService;
 import com.stroe.admin.service.base.DefaultResult;
 import com.stroe.admin.service.base.Result;
 import com.stroe.admin.spring.SpringBeanManger;
+import com.stroe.admin.util.ClassUtil;
+import com.stroe.admin.util.PackageUtil;
 
 
 public  class SysConfig extends JFinalConfig{
+	
+	private static final Log LOG = Log.getLog(SysConfig.class);
 	
 	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
 	
@@ -71,7 +78,18 @@ public  class SysConfig extends JFinalConfig{
 	
 	@Override
 	public void configEngine(Engine engine) {
-		engine.addDirective("number", new Number());
+		List<Class<? extends com.jfinal.template.Directive>> list = PackageUtil.scanPackage("com.stroe.admin.directive");
+		for (Class<? extends com.jfinal.template.Directive> cla : list) {
+			Directive directive = cla.getAnnotation(Directive.class);
+			if(directive != null){
+				try {
+					engine.addDirective(directive.name(), ClassUtil.newInstance(cla));
+					LOG.debug("add directive "+cla);
+				} catch (Exception e) {
+					LOG.error("add directive "+directive.name()+" fail", e);
+				}
+			}
+		}
 		engine.addSharedFunction("/WEB-INF/views/macro/left_menu.vm");
 	}
 		

@@ -10,12 +10,14 @@ import com.jfinal.template.expr.ast.Expr;
 import com.jfinal.template.expr.ast.ExprList;
 import com.jfinal.template.expr.ast.Logic;
 import com.jfinal.template.stat.Scope;
+import com.stroe.admin.directive.annoation.Directive;
 
 /**
  * @author taoge
  * @version 1.0
  * @create_at 2017年9月9日上午8:58:13
  */
+@Directive(name="if")
 public class IF extends BaseDirective{
 
     private Expr valueExpr;

@@ -1,7 +1,9 @@
 package com.stroe.admin.controller.product;
 
 import com.jfinal.ext.route.ControllerBind;
+import com.stroe.admin.annotation.AopBean;
 import com.stroe.admin.controller.base.BaseController;
+import com.stroe.admin.service.product.ProductBrandService;
 
 /**
  * 品牌管理
@@ -12,6 +14,9 @@ import com.stroe.admin.controller.base.BaseController;
 @ControllerBind(controllerKey="/product/brand")
 public class ProductBrandController extends BaseController{
 
+	@AopBean
+	private ProductBrandService productBrandService;
+	
 	public  void index() {
 		renderView("/product/brand/index.vm");
 	}

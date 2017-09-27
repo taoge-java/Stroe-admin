@@ -36,20 +36,7 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
-		String userCookie = getCookie(CommonConstant.COOKIE_USER_ID);
-		int userId=0;
-		if(userCookie != null){
-			userId = Integer.parseInt(EncryptUtil.getBase64UserName(userCookie));
-			SystemAdmin admin = SystemAdmin.dao.findById(userId);
-			if(admin!=null){
-				loginSuccess(admin);//登陆成功
-				redirect("/success");
-			}else{
-				redirect("/",false);
-			}
-		}else{
-			renderView("/account/login.vm");
-		}
+		renderView("/account/login.vm");
 	}
 
 	/**

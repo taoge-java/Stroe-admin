@@ -12,8 +12,4 @@ import com.jfinal.template.Directive;
  */
 public abstract class BaseDirective extends Directive{
 	
-	@Override
-	public boolean hasEnd() {
-		return super.hasEnd();
-	}
 }
