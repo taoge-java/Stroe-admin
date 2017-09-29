@@ -16,6 +16,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.plugin.redis.Redis;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
@@ -24,6 +25,7 @@ import com.stroe.admin.interceptor.AopInterceptor;
 import com.stroe.admin.interceptor.PermissionInterceptor;
 import com.stroe.admin.interceptor.ViewContextInterceptor;
 import com.stroe.admin.model.BaseModel;
+import com.stroe.admin.redis.RedisListener;
 import com.stroe.admin.service.base.BaseService;
 import com.stroe.admin.service.base.DefaultResult;
 import com.stroe.admin.service.base.Result;
@@ -84,9 +86,9 @@ public  class SysConfig extends JFinalConfig{
 			if(directive != null){
 				try {
 					engine.addDirective(directive.name(), ClassUtil.newInstance(cla));
-					LOG.debug("add directive "+cla);
+					LOG.debug("add directive "+ cla.getName());
 				} catch (Exception e) {
-					LOG.error("add directive "+directive.name()+" fail", e);
+					LOG.error("add directive "+ directive.name()+" fail", e);
 				}
 			}
 		}
@@ -145,6 +147,13 @@ public  class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
-		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+		         RedisListener redisListener = new RedisListener();
+		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
+				 LOG.info("消息订阅成功");
+			}
+		 }).start();
 	}
 }

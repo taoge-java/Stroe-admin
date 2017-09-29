@@ -2,6 +2,8 @@ package com.stroe.admin.controller.information;
 
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.controller.base.BaseController;
+import com.stroe.admin.model.system.SystemAdmin;
+import com.stroe.admin.util.ResultCode;
 
 /**
  * 资讯管理
@@ -16,6 +18,15 @@ public class InformationController extends BaseController{
 		renderView("/information/index.vm");
 	}
 		
+	public void test(){
+		String name = getPara("name");
+		SystemAdmin systemAdmin = SystemAdmin.dao.findById(3);
+		int count = systemAdmin.getInt("login_count");
+		systemAdmin.set("login_count", count-Integer.parseInt(name));
+		systemAdmin.update();
+		renderJson(new ResultCode(ResultCode.SUCCESS, "购买成功"));
+	}
+	
     public void list(){
 		
 	}

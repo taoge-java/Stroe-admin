@@ -39,6 +39,10 @@ public class PermissionInterceptor implements Interceptor{
 		HttpServletRequest request=inv.getController().getRequest();
 		HttpServletResponse response=inv.getController().getResponse();
 		Object object_session=request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		if(inv.getControllerKey().startsWith("/information")){
+			inv.invoke();
+			return;
+		}
 		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey())&&object_session==null){
 			try {
 				response.sendRedirect(request.getContextPath()+"/account/");

@@ -6,16 +6,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -26,18 +28,44 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpClientUtil {
 	
-	@SuppressWarnings("unused")
 	public static  String httpPostRequest(String url,Map<String,String> map){
 		String content=null;
 		HttpClientBuilder builder=HttpClientBuilder.create();
 		CloseableHttpClient httpClient= builder.build();
-		HttpPost post=new HttpPost(url);
-		//NameValuePair:代表数据类型
-		List<NameValuePair> valuePair = new ArrayList<NameValuePair>();
-		Iterator<String> iterator = map.keySet().iterator();
-		while(iterator.hasNext()){
-			String key=iterator.next();
-			//valuePair.add(new BasicNameValuePair(key,map.get(key)));
+		try {
+			HttpPost httpPost=new HttpPost(url);
+			//NameValuePair:代表数据类型
+			List<NameValuePair> valuePair = new ArrayList<NameValuePair>();
+			Iterator<String> iterator = map.keySet().iterator();
+			while(iterator.hasNext()){
+				String key=iterator.next();
+				valuePair.add(new BasicNameValuePair(key,map.get(key)));
+			}
+			 // 设置参数  
+			httpPost.setEntity(new UrlEncodedFormEntity(valuePair, "UTF-8")); 
+			HttpResponse response = httpClient.execute(httpPost);
+			if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
+				HttpEntity entity = response.getEntity();
+				content = EntityUtils.toString(entity, "UTF-8");
+				try {
+					EntityUtils.consume(response.getEntity());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			httpPost.abort();
+	        httpPost = null;
+		
+		} catch (IOException e) {
+			
+		} finally {
+			if (httpClient != null) {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return content;
 	}

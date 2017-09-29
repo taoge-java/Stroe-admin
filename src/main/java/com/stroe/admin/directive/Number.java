@@ -23,7 +23,7 @@ public class Number extends BaseDirective{
 	
     private Expr valueExpr;
 	
-    private NumberTools number = NumberTools.geNumberTools();
+    private static final NumberTools number = NumberTools.geNumberTools();
 	
 	@Override
 	public void setExprList(ExprList exprList) {
@@ -38,6 +38,4 @@ public class Number extends BaseDirective{
 		Object object = valueExpr.eval(scope);
 		write(writer,number.toNumber(object));
 	}
-	
-
 }

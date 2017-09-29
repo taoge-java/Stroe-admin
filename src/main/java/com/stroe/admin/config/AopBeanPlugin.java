@@ -76,7 +76,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 					 }else{
 						 AopManger.beanMap.put(key, object);
 					 }
-					 LOG.info("create aop bean "+object);
+					 LOG.debug("created singleton aop bean '"+key+"'");
 				 }
 			 }
 			 continue;
