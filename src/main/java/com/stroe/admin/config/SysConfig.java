@@ -21,9 +21,6 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.stroe.admin.directive.annoation.Directive;
-import com.stroe.admin.interceptor.AopInterceptor;
-import com.stroe.admin.interceptor.PermissionInterceptor;
-import com.stroe.admin.interceptor.ViewContextInterceptor;
 import com.stroe.admin.model.BaseModel;
 import com.stroe.admin.redis.RedisListener;
 import com.stroe.admin.service.base.BaseService;
@@ -32,6 +29,12 @@ import com.stroe.admin.service.base.Result;
 import com.stroe.admin.spring.SpringBeanManger;
 import com.stroe.admin.util.ClassUtil;
 import com.stroe.admin.util.PackageUtil;
+import com.stroe.admin.web.handler.ContextPathHandler;
+import com.stroe.admin.web.handler.StroeHandler;
+import com.stroe.admin.web.handler.WebSocketHandler;
+import com.stroe.admin.web.interceptor.AopInterceptor;
+import com.stroe.admin.web.interceptor.PermissionInterceptor;
+import com.stroe.admin.web.interceptor.ViewContextInterceptor;
 
 
 public  class SysConfig extends JFinalConfig{
