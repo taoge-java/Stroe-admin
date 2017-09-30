@@ -10,8 +10,8 @@ import com.jfinal.handler.Handler;
 import com.stroe.admin.kit.RequestManger;
 import com.stroe.admin.session.StroeServletRequestWrapper;
 
-
 /**
+ * 为方便处理分布式session
  * @author zengjintao
  * @version 1.0
  * @create_at 2017年9月29日下午8:51:41

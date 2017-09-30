@@ -89,6 +89,7 @@ public  class SysConfig extends JFinalConfig{
 					LOG.debug("add directive "+ cla.getName());
 				} catch (Exception e) {
 					LOG.error("add directive "+ directive.name()+" fail", e);
+					throw new RuntimeException();
 				}
 			}
 		}
@@ -140,6 +141,7 @@ public  class SysConfig extends JFinalConfig{
 		handlers.add(new ContextPathHandler());
 		handlers.add(new RenderingTimeHandler());
 		handlers.add(new WebSocketHandler());
+		handlers.add(new StroeHandler());
 	}
 	
 	/**
