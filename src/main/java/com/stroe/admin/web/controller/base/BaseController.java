@@ -26,6 +26,8 @@ public abstract class BaseController extends Controller{
 
 	public  int pageSize = 30;
 	
+	public abstract void index();
+	
 	public void renderView(String path){
 		render(SysConfig.BASE_VIEW+path);
 	}

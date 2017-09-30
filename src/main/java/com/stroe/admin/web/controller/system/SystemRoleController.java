@@ -12,4 +12,9 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/system/role")
 public class SystemRoleController extends BaseController{
 
+	@Override
+	public void index() {
+		
+	}
+
 }
