@@ -36,31 +36,30 @@ public class PermissionInterceptor implements Interceptor{
 
 	@Override
 	public void intercept(Invocation inv) {
-		HttpServletRequest request=inv.getController().getRequest();
-		HttpServletResponse response=inv.getController().getResponse();
-		Object object_session=request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		HttpServletRequest request = inv.getController().getRequest();
+		HttpServletResponse response = inv.getController().getResponse();
 		if(inv.getControllerKey().startsWith("/information")){
 			inv.invoke();
 			return;
 		}
-		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey())&&object_session==null){
+		UserSession session = (UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey()) && session == null){
 			try {
 				response.sendRedirect(request.getContextPath()+"/account/");
 			} catch (IOException e) {
 				LOG.error("",e);
 			}
 		}else{
-			UserSession session=(UserSession) object_session;
-			if(session!=null&&session.isSuperFlag())//是超级管理员
+			if(session !=null && session.isSuperFlag())//是超级管理员
 			   inv.invoke();
 			else{
-				String[] oper={};
-				Method method=inv.getMethod();
-				Permission permission=method.getAnnotation(Permission.class);
-				if(permission!=null&&permission.points()!=null){
+				String[] oper = {};
+				Method method = inv.getMethod();
+				Permission permission = method.getAnnotation(Permission.class);
+				if(permission != null && permission.points() != null){
 					oper=permission.points();
 				}
-				if(oper!=null&&(oper.length==0||session.hasAnyOper(oper))){
+				if(oper != null&&(oper.length == 0||session.hasAnyOper(oper))){
 					inv.invoke();
 				}else{
 					inv.getController().renderJavascript("alert('您的权限不足')");
@@ -70,10 +69,10 @@ public class PermissionInterceptor implements Interceptor{
 	}
 
 	private boolean isNeedLogin(String controllerKey,String actionKey) {
-		if(controllerKey==null){
+		if(controllerKey == null){
 			return true;
 		}
-		if(noNeedLoginUrl.contains(controllerKey)||noNeedLoginUrl.contains(actionKey)){
+		if(noNeedLoginUrl.contains(controllerKey) || noNeedLoginUrl.contains(actionKey)){
 			return false;
 		}
 		return true;

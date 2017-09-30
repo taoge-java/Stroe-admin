@@ -18,18 +18,18 @@ public class RedisUtil {
 	}
 	
 	public static String set(String key,Object value){
-		return Redis.use(CommonConstant.HOSTCAHENAME).set(key, value);
+		return Redis.use(CommonConstant.SESSION_CACHE_NAME).set(key, value);
 	}
 	
 	public static String set(String key,Object value,int seconds){
-		return Redis.use(CommonConstant.HOSTCAHENAME).setex(key, seconds, value);
+		return Redis.use(CommonConstant.SESSION_CACHE_NAME).setex(key, seconds, value);
 	}
 	
 	public static <T> T get(String key){
-		return Redis.use(CommonConstant.HOSTCAHENAME).get(key);
+		return Redis.use(CommonConstant.SESSION_CACHE_NAME).get(key);
 	}
 	
 	public static void delete(String key){
-		 Redis.use(CommonConstant.HOSTCAHENAME).del(key);
+		 Redis.use(CommonConstant.SESSION_CACHE_NAME).del(key);
 	}
 }

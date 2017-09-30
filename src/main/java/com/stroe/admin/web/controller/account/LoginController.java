@@ -11,7 +11,6 @@ import com.stroe.admin.dto.OnlineUser;
 import com.stroe.admin.dto.UserSession;
 import com.stroe.admin.model.system.SystemAdmin;
 import com.stroe.admin.util.DateUtil;
-import com.stroe.admin.util.EncryptUtil;
 import com.stroe.admin.util.ImageUtil;
 import com.stroe.admin.util.IpUtils;
 import com.stroe.admin.util.Md5Utils;
@@ -52,19 +51,11 @@ public class LoginController extends BaseController{
 		String password = getPara("password");
 		String code = getPara("code");
 		String number = (String) this.getSession().getAttribute(CommonConstant.IMAGE_CODE);//获取session中得验证码
-		String remberPassword[]= getParaValues("checkbox");//判断用户是否记住密码
 		
 		SystemAdmin admin = SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
 		if(admin == null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
-		}
-		//判断用户是否选择自动登陆
-		if(remberPassword != null && remberPassword.length>0){//将用户名密码保存在cookie中
-			String encryptUserInfo = EncryptUtil.encryptUserInfo(admin.getInt("id").toString(), password);
-			setCookie(CommonConstant.COOKIE_USER_ID,encryptUserInfo,60*60*24*30,"/");
-		}else{//清除cookie
-			removeCookie(CommonConstant.COOKIE_USER_ID, "/");
 		}
 		if(StrKit.isEmpoty(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
@@ -131,15 +122,7 @@ public class LoginController extends BaseController{
 	 * 用户注销
 	 */
 	public void exit(){		
-		if(getCurrentUser() != null){
-			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
-				onlineManger.remove(getCurrentUser());
-        	}
-			systemLog("登出系统",LogType.LOGIN.getValue());
-			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
-			getRequest().getSession().invalidate();//用户注销
-			removeCookie(CommonConstant.COOKIE_USER_ID, "/");//清除cookie
-			redirect("/",false);
-		}
+		getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
+		redirect("/",false);
 	}
 }

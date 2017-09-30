@@ -7,18 +7,15 @@ package com.stroe.admin.common;
 public class CommonConstant {
 	
 	/*用户session常量*/
-	public static final String  SESSION_ID_KEY="session_id_key";
-	/**每页显示数量**/
-	public static final int pageSize=10;
+	public static final String  SESSION_ID_KEY= "session_id_key";
     /**图形验证码*/
-	public static final String IMAGE_CODE="image_code";
+	public static final String IMAGE_CODE = "image_code";
 	 /**用户cookie*/
-	public static final String COOKIE_USERNAME="username_cookie";
+	public static final String COOKIE_USERNAME = "username_cookie";
 	
-	public static final String COOKIE_USER_ID="cookie_user_id";
+	public static final String COOKIE_USER_ID = "cookie_user_id";
 		
-	public static final String COOKIE_PASSWORD="password_cookie";
-		
+	public static final String COOKIE_PASSWORD = "password_cookie";
 	/*redis缓存常量*/	
-	public static final String HOSTCAHENAME="stroe-admin";
+	public static final String SESSION_CACHE_NAME = "stroe";
 }

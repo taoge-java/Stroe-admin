@@ -20,6 +20,7 @@ import com.jfinal.plugin.redis.Redis;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.stroe.admin.common.CommonConstant;
 import com.stroe.admin.directive.annoation.Directive;
 import com.stroe.admin.model.BaseModel;
 import com.stroe.admin.redis.RedisListener;
@@ -116,7 +117,7 @@ public  class SysConfig extends JFinalConfig{
  	   
 	    plugin.add(new EhCachePlugin());//配置缓存插件
 	    // 配置redis插件
-	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
+	    RedisPlugin redis = new RedisPlugin(CommonConstant.SESSION_CACHE_NAME,redisHost,6379,redisPassword);
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
@@ -161,4 +162,10 @@ public  class SysConfig extends JFinalConfig{
 			}
 		 }).start();
 	}
+	
+	public void beforeJFinalStop(){
+		System.out.println("beforeJFinalStop");
+	};
+	
+	
 }

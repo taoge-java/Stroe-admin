@@ -5,7 +5,6 @@ import java.util.List;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 import com.stroe.admin.annotation.Aop;
-import com.stroe.admin.common.CommonConstant;
 import com.stroe.admin.model.system.SystemAdmin;
 import com.stroe.admin.model.system.SystemRole;
 import com.stroe.admin.service.base.BaseService;
@@ -40,7 +39,7 @@ public class SystemAdminService extends BaseService{
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}
-			Page<SystemAdmin> page = SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
+			Page<SystemAdmin> page = SystemAdmin.dao.paginate(pageNumber, 30, "select *", context.toString(),param.toArray());
 			result.setDefaultModel(page);
 		} catch (Exception e) {
 			resultCode=new ResultCode(ResultCode.FAIL);
