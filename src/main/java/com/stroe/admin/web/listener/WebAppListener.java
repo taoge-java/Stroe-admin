@@ -1,4 +1,4 @@
-package com.stroe.admin.web.listtener;
+package com.stroe.admin.web.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
