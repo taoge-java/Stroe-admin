@@ -25,6 +25,13 @@
 	    <artifactId>com.baidu.ueditor</artifactId>
 	    <version>1.1.2-offical</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache-core -->
+	<dependency>
+	    <groupId>net.sf.ehcache</groupId>
+	    <artifactId>ehcache-core</artifactId>
+	    <version>2.6.11</version>
+	</dependency>
+	
     <dependency>
 	    <groupId>com.jfinal</groupId>
 	    <artifactId>jfinal-ext2</artifactId>
@@ -162,15 +169,17 @@
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 	<dependency>
-	    <groupId>org.apache.poi</groupId>
-	    <artifactId>poi</artifactId>
-	    <version>3.16</version>
-	</dependency>
-	<dependency>
 	    <groupId>us.codecraft</groupId>
 	    <artifactId>webmagic-core</artifactId>
 	    <version>0.7.2</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.17</version>
+	</dependency>
+    
 	<dependency>
 	    <groupId>us.codecraft</groupId>
 	    <artifactId>webmagic-extension</artifactId>
@@ -179,7 +188,7 @@
 	<dependency>
 	    <groupId>com.jfinal</groupId>
 	    <artifactId>jfinal</artifactId>
-	    <version>3.1</version>
+	    <version>3.2</version>
 	</dependency>
 	<dependency>
 	    <groupId>com.jfinal</groupId>
@@ -281,11 +290,13 @@
           <version>1.0.0</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
-	<dependency>
-	    <groupId>net.sf.ehcache</groupId>
-	    <artifactId>ehcache</artifactId>
-	    <version>2.10.4</version>
-	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+<dependency>
+    <groupId>org.ehcache</groupId>
+    <artifactId>ehcache</artifactId>
+    <version>3.4.0</version>
+</dependency>
+
       <!-- https://mvnrepository.com/artifact/org.webjars.bower/ueditor-bower -->
 	<dependency>
 	    <groupId>org.webjars.bower</groupId>
