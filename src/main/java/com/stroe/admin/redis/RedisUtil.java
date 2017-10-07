@@ -1,7 +1,7 @@
 package com.stroe.admin.redis;
 
 import com.jfinal.plugin.redis.Redis;
-import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.constant.CommonConstant;
 
 public class RedisUtil {
 	

@@ -11,7 +11,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.log.Log;
 import com.stroe.admin.annotation.Permission;
-import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.dto.UserSession;
 /**
  * 用户session全局拦截器

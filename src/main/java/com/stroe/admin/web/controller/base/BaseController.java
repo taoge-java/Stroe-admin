@@ -9,8 +9,8 @@ import java.util.Date;
 
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
-import com.stroe.admin.common.CommonConstant;
 import com.stroe.admin.config.SysConfig;
+import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.dto.UserSession;
 import com.stroe.admin.model.system.SystemLog;
 import com.stroe.admin.util.DateUtil;

@@ -37,10 +37,17 @@
 	    <artifactId>jfinal-ext2</artifactId>
 	    <version>2.0.8</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>5.0.0.RELEASE</version>
+	</dependency>
+	
 	<dependency>
 	    <groupId>velocity</groupId>
 	    <artifactId>velocity-dep</artifactId>
-	    <version>1.5</version>
+	    <version>1.4</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.shiro</groupId>
@@ -52,11 +59,7 @@
 	    <artifactId>gson</artifactId>
 	    <version>2.8.0</version>
 	</dependency>
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-webmvc</artifactId>
-	    <version>5.0.0.M5</version>
-	</dependency>
+
 	<dependency>
 	    <groupId>com.alibaba</groupId>
 	    <artifactId>druid</artifactId>
@@ -190,41 +193,51 @@
 	    <artifactId>jfinal</artifactId>
 	    <version>3.2</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.0.0.RELEASE</version>
+	</dependency>
+	
 	<dependency>
 	    <groupId>com.jfinal</groupId>
 	    <artifactId>jetty-server</artifactId>
 	    <version>8.1.8</version>
 	</dependency>
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-context</artifactId>
-	    <version>4.1.6.RELEASE</version>
-	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-core</artifactId>
-	    <version>4.1.6.RELEASE</version>
+	    <version>5.0.0.RELEASE</version>
 	</dependency>
+
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-beans</artifactId>
-	    <version>4.1.6.RELEASE</version>
+	    <version>5.0.0.RELEAS</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-web</artifactId>
-	    <version>4.1.6.RELEASE</version>
+	    <version>5.0.0.RELEASE</version>
 	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-aop</artifactId>
-	    <version>4.1.6.RELEASE</version>
+	    <artifactId>spring-beans</artifactId>
+	    <version>5.0.0.RELEASE</version>
 	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-webmvc</artifactId>
-	    <version>4.1.6.RELEASE</version>
+	    <version>5.0.0.RELEASE</version>
 	</dependency>
+
 	<dependency>
 	    <groupId>commons-lang</groupId>
 	    <artifactId>commons-lang</artifactId>

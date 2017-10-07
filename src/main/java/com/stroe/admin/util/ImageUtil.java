@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.render.Render;
-import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.constant.CommonConstant;
 /**
  * 生成验证码
  * @author zengjintao

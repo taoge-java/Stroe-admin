@@ -1,6 +1,4 @@
 package com.stroe.admin.config;
-
-
 import java.util.List;
 
 import com.jfinal.config.Constants;
@@ -20,7 +18,7 @@ import com.jfinal.plugin.redis.Redis;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.directive.annoation.Directive;
 import com.stroe.admin.model.BaseModel;
 import com.stroe.admin.redis.RedisListener;
@@ -37,12 +35,17 @@ import com.stroe.admin.web.interceptor.AopInterceptor;
 import com.stroe.admin.web.interceptor.PermissionInterceptor;
 import com.stroe.admin.web.interceptor.ViewContextInterceptor;
 
-
+/**
+ * Jfinal Aip引导式配置
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月8日 下午9:13:31
+ */
 public  class SysConfig extends JFinalConfig{
 	
 	private static final Log LOG = Log.getLog(SysConfig.class);
 	
-	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
+	public final static String BASE_VIEW = "/WEB-INF/views";//页面存放路径
 	
 	public static String redisHost; // redis主机
 	
@@ -67,9 +70,9 @@ public  class SysConfig extends JFinalConfig{
 		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
 		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
 		 PropKit.use("config.properties");//加载配置文件
+		 channels=PropKit.get("redis.channels").trim();
 		 redisPassword = PropKit.get("redis.password").trim();
 		 redisHost = PropKit.get("redis.host").trim();
-		 channels=PropKit.get("redis.channels").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 weixinToken=PropKit.get("weixin.token").trim();
@@ -135,7 +138,6 @@ public  class SysConfig extends JFinalConfig{
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
-		//interceptors.add(new IocInterceptor());
 		interceptors.add(new AopInterceptor(SpringBeanManger.getContext()));
 		//interceptors.add(new ShiroInterceptor());
 	}
@@ -166,6 +168,4 @@ public  class SysConfig extends JFinalConfig{
 	public void beforeJFinalStop(){
 		System.out.println("beforeJFinalStop");
 	};
-	
-	
 }

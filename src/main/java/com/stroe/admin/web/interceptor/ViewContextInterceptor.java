@@ -7,7 +7,7 @@ import org.apache.velocity.tools.generic.NumberTool;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.stroe.admin.common.CommonConstant;
+import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.dto.UserSession;
 /**
  * @author zengjintao
