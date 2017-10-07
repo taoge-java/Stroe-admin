@@ -1,4 +1,4 @@
-package com.stroe.admin.common;
+package com.stroe.admin.constant;
 
 public class CommonEnum {
 

@@ -1,4 +1,4 @@
-package com.stroe.admin.common;
+package com.stroe.admin.constant;
 /**
  * 公共常量类
  * @author Administrator
