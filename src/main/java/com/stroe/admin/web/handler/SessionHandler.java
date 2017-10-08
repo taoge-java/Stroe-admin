@@ -16,9 +16,9 @@ import com.stroe.admin.web.session.StroeServletRequestWrapper;
  * @version 1.0
  * @create_at 2017年9月29日下午8:51:41
  */
-public class StroeHandler extends Handler {
+public class SessionHandler extends Handler {
 
-	private RequestManger requestManger = RequestManger.getRequestManger();
+	private static final RequestManger requestManger = RequestManger.getRequestManger();
 	
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response,

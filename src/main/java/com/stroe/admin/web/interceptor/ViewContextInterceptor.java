@@ -21,8 +21,8 @@ public class ViewContextInterceptor implements 	Interceptor{
         HttpServletRequest request = inv.getController().getRequest();
 		request.setAttribute("dateTool", new DateTool());
 		request.setAttribute("number", new NumberTool());
-		UserSession session=(UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
-		if(session!=null){
+		UserSession session = (UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		if(session != null){
 			request.setAttribute("session", session);
 		}
 		inv.invoke();

@@ -29,7 +29,7 @@ import com.stroe.admin.spring.SpringBeanManger;
 import com.stroe.admin.util.ClassUtil;
 import com.stroe.admin.util.PackageUtil;
 import com.stroe.admin.web.handler.ContextPathHandler;
-import com.stroe.admin.web.handler.StroeHandler;
+import com.stroe.admin.web.handler.SessionHandler;
 import com.stroe.admin.web.handler.WebSocketHandler;
 import com.stroe.admin.web.interceptor.AopInterceptor;
 import com.stroe.admin.web.interceptor.PermissionInterceptor;
@@ -147,7 +147,7 @@ public  class SysConfig extends JFinalConfig{
 		handlers.add(new ContextPathHandler());
 		handlers.add(new RenderingTimeHandler());
 		handlers.add(new WebSocketHandler());
-		handlers.add(new StroeHandler());
+		handlers.add(new SessionHandler());
 	}
 	
 	/**

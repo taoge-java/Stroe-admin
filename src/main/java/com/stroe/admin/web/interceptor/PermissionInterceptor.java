@@ -50,7 +50,7 @@ public class PermissionInterceptor implements Interceptor{
 				LOG.error("",e);
 			}
 		}else{
-			if(session !=null && session.isSuperFlag())//是超级管理员
+			if(session != null && session.isSuperFlag())//是超级管理员
 			   inv.invoke();
 			else{
 				String[] oper = {};
