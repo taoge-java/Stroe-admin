@@ -30,7 +30,7 @@ public class LoginController extends BaseController{
 	
 	@Autowired
 	private OnlineManger onlineManger;
-    
+	
 	/**
 	 * 用户登录页面
 	 */
@@ -111,9 +111,10 @@ public class LoginController extends BaseController{
 		session.setMobile(admin.getStr("mobile"));
 		admin.set("last_login_time",DateUtil.getDate());
 		admin.set("last_login_ip",IpUtils.getAddressIp(getRequest()));
-		admin.set("login_count",admin.getInt("login_count"+1));
+		admin.set("login_count",admin.getInt("login_count")+1);
 		admin.update();
 		session.setLast_login_ip(admin.getStr("last_login_ip"));
+		session.setLoginCount(admin.getInt("login_count"));
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
 		onlineManger.add(session);
 		systemLog("登录系统",LogType.LOGIN.getValue());
@@ -121,8 +122,14 @@ public class LoginController extends BaseController{
 	/**
 	 * 用户注销
 	 */
-	public void exit(){		
-		getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
-		redirect("/",false);
+	public void exit(){
+		if(getCurrentUser() != null){
+			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
+				onlineManger.remove(getCurrentUser());
+        	}
+			systemLog("登出系统",LogType.LOGIN.getValue());
+			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
+			redirect("/",false);
+		}
 	}
 }

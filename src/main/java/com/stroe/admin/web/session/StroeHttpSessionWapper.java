@@ -11,8 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
-
-import com.stroe.admin.redis.RedisUtil;
+import com.stroe.admin.redis.RedisCacheManger;
 import com.stroe.admin.util.StrKit;
 
 
@@ -24,11 +23,13 @@ import com.stroe.admin.util.StrKit;
 @SuppressWarnings("deprecation")
 public class StroeHttpSessionWapper implements HttpSession {
 
-    private static final long SESSION_TIME = TimeUnit.DAYS.toSeconds(2);
+    private static final long SESSION_TIME = TimeUnit.DAYS.toSeconds(1);
+    
+    private static final RedisCacheManger redisCacheManger = RedisCacheManger.getRedisCacheManger();
     
 	@Override
 	public Object getAttribute(String key) {
-		return RedisUtil.get(generateKey(key));
+		return redisCacheManger.get(generateKey(key));
 	}
 
 	@Override
@@ -86,12 +87,11 @@ public class StroeHttpSessionWapper implements HttpSession {
 
 	@Override
 	public Object getValue(String key) {
-		return RedisUtil.get(getOrCreateSessionId());
+		return redisCacheManger.get(getOrCreateSessionId());
 	}
 
 	@Override
 	public String[] getValueNames() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -102,18 +102,17 @@ public class StroeHttpSessionWapper implements HttpSession {
 
 	@Override
 	public boolean isNew() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void putValue(String key, Object value) {
-		RedisUtil.set(generateKey(key), value);
+		redisCacheManger.set(generateKey(key), value);
 	}
 
 	@Override
 	public void removeAttribute(String key) {
-		RedisUtil.delete(generateKey(key));
+		redisCacheManger.delete(generateKey(key));
 	}
 
 	@Override
@@ -123,7 +122,7 @@ public class StroeHttpSessionWapper implements HttpSession {
 
 	@Override
 	public void setAttribute(String key, Object value) {
-		RedisUtil.set(generateKey(key), value);
+		redisCacheManger.set(generateKey(key), value);
 	}
 
 	@Override

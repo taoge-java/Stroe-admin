@@ -11,15 +11,22 @@ import java.util.Set;
  */
 public class UserSession implements Serializable {
 	
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String sessionId;//用户sessionId
 	
 	private int userId;//用户id
+
+	private int loginCount;
 	
+	public int getLoginCount() {
+		return loginCount;
+	}
+
+	public void setLoginCount(int loginCount) {
+		this.loginCount = loginCount;
+	}
+
 	private String loginName;//登录名
 	
 	private String nickName;//昵称

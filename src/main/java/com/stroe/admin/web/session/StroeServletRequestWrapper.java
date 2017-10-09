@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
+import com.stroe.admin.redis.RedisCacheManger;
+
 /**
  * @author zengjintao
  * @version 1.0
@@ -14,9 +16,12 @@ import javax.servlet.http.HttpSession;
  */
 public class StroeServletRequestWrapper extends HttpServletRequestWrapper {
 
-	HttpServletRequest originHttpServletRequest;
-    HttpSession httpSession;
-    
+	@SuppressWarnings("unused")
+	private HttpServletRequest originHttpServletRequest;
+	
+	private HttpSession httpSession;
+	
+    private static final RedisCacheManger redisCacheManger = RedisCacheManger.getRedisCacheManger();
 	/**
 	 * @param request
 	 */
@@ -33,7 +38,11 @@ public class StroeServletRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public HttpSession getSession(boolean create) {
     	if (httpSession == null) {
-            httpSession = new StroeHttpSessionWapper();
+    		if(redisCacheManger.hasCache()){
+    			httpSession = new StroeHttpSessionWapper();
+    		}else{
+    			httpSession = super.getSession(create);
+    		}
         }
         return httpSession;
     }

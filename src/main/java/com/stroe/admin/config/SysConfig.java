@@ -21,6 +21,7 @@ import com.jfinal.template.Engine;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.directive.annoation.Directive;
 import com.stroe.admin.model.BaseModel;
+import com.stroe.admin.redis.RedisCacheManger;
 import com.stroe.admin.redis.RedisListener;
 import com.stroe.admin.service.base.BaseService;
 import com.stroe.admin.service.base.DefaultResult;
@@ -44,6 +45,8 @@ import com.stroe.admin.web.interceptor.ViewContextInterceptor;
 public  class SysConfig extends JFinalConfig{
 	
 	private static final Log LOG = Log.getLog(SysConfig.class);
+	
+	private static final RedisCacheManger redisCacheManger = RedisCacheManger.getRedisCacheManger();
 	
 	public final static String BASE_VIEW = "/WEB-INF/views";//页面存放路径
 	
@@ -124,6 +127,7 @@ public  class SysConfig extends JFinalConfig{
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
+	    redisCacheManger.setCache(true);//设置启用分布式缓存
 	    //aop自动注入插件
 	    AopBeanPlugin beanPlugin=new AopBeanPlugin();
 	    beanPlugin.setPackageName("com.stroe.admin.service");

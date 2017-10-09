@@ -2,8 +2,6 @@
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.velocity.tools.generic.DateTool;
-import org.apache.velocity.tools.generic.NumberTool;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -19,8 +17,6 @@ public class ViewContextInterceptor implements 	Interceptor{
 	@Override
 	public void intercept(Invocation inv) {
         HttpServletRequest request = inv.getController().getRequest();
-		request.setAttribute("dateTool", new DateTool());
-		request.setAttribute("number", new NumberTool());
 		UserSession session = (UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
 		if(session != null){
 			request.setAttribute("session", session);
