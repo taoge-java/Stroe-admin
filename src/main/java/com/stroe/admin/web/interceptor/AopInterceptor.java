@@ -20,12 +20,15 @@ public class AopInterceptor implements Interceptor{
 	
     private  ApplicationContext ctx;
 	
+    private static final AopManger aopManger = AopManger.getAopManger();
+    
 	public AopInterceptor(ApplicationContext ctx){
 		this.ctx = ctx;
 	}
 	
 	public AopInterceptor(){}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void intercept(Invocation inv) {
 		Controller controller = inv.getController();
@@ -34,7 +37,7 @@ public class AopInterceptor implements Interceptor{
 		for (Field field : fields) {
 			Object bean = null;
 			if (field.isAnnotationPresent(AopBean.class)){
-				bean = AopManger.beanMap.get(field.getName());
+				bean = aopManger.getBeanMap().get(field.getName());
 				initServiceBean(bean,field);
 			}else if(field.isAnnotationPresent(Autowired.class)){
 				bean = ctx.getBean(field.getName());
@@ -54,13 +57,14 @@ public class AopInterceptor implements Interceptor{
 		inv.invoke();
 	}
 	
+	@SuppressWarnings("static-access")
 	private  void initServiceBean(Object bean,Field field){
 		Class<?> cla = field.getType();
 		//service层aop的自动注入
 		for(Field f : cla.getDeclaredFields()){
 			Object serviceBean = null;
 			if(f.isAnnotationPresent(AopBean.class)){
-				serviceBean = AopManger.beanMap.get(f.getName());
+				serviceBean = aopManger.getBeanMap().get(f.getName());
 			}else if(f.isAnnotationPresent(Autowired.class)){
 				serviceBean = ctx.getBean(f.getName());
 			}

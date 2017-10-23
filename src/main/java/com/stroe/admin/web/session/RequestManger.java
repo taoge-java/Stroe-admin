@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author zengjintao
  * @version 1.0
- * @create_at 2017年9月29日下午8:52:38
+ * @createTime 2017年9月29日下午8:52:38
  */
 public class RequestManger {
 

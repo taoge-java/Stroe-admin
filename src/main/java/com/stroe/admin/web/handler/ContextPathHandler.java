@@ -32,7 +32,7 @@ public class ContextPathHandler extends Handler{
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		if(StrKit.isEmpoty(contextPath))
+		if(StrKit.isEmpty(contextPath))
 			throw new IllegalArgumentException("contextPathName can not be blank.");
 		request.setAttribute(contextPath, request.getContextPath());
 		next.handle(target, request, response, isHandled);

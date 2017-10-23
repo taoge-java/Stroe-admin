@@ -35,7 +35,7 @@ public class SystemAdminService extends BaseService{
 		try {
 			StringBuilder context=new StringBuilder(" from system_admin where 1=1");
 			List<Object> param=new ArrayList<Object>();
-			if(StrKit.isNotEmpoty(login_name)){
+			if(StrKit.isEmpty(login_name)){
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}
@@ -59,7 +59,7 @@ public class SystemAdminService extends BaseService{
 		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
 		try{
-			if(StrKit.isEmpoty(systemAdmin.getStr("login_name"))||StrKit.isEmpoty(password)){
+			if(StrKit.isEmpty(systemAdmin.getStr("login_name"))||StrKit.isEmpty(password)){
 			    resultCode=new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
 			    result.setResultCode(resultCode);
 				return result;

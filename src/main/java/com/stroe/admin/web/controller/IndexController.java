@@ -33,9 +33,9 @@ public class IndexController extends BaseController{
 	 * 客户端向服务器发送心跳包
 	 */
 	public void heart(){
-		UserSession session=getCurrentUser();
-		UserSession onlineUser=onlineManger.getUserSession(session.getSessionId());
-		if(onlineUser==null){
+		UserSession session = getCurrentUser();
+		UserSession onlineUser = onlineManger.getUserSession(session.getSessionId());
+		if(onlineUser == null){
 			renderJson(new ResultCode(ResultCode.FAIL, "您的帐号已在"+session.getLast_login_ip()+"上登录,"+"请重新登录"+session.getLast_login_ip()));
 			return;
 		}

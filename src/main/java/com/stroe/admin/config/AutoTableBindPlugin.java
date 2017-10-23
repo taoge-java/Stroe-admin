@@ -140,7 +140,7 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
 	             }
 	         } else {
 	             tableName = tb.tableName();
-	             if (StrKit.isNotEmpoty(tb.pkName())) {
+	             if (StrKit.isNotEmpty(tb.pkName())) {
 	                 this.addMapping(tableName, tb.pkName(), clazz);
 	                 log.debug("addMapping(" + tableName + ", " + tb.pkName() + "," + clazz.getName() + ")");
 	             } else {

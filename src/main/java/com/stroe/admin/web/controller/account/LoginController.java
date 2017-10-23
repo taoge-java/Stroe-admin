@@ -57,7 +57,7 @@ public class LoginController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
 		}
-		if(StrKit.isEmpoty(code)){//如果用户没有输入验证码
+		if(StrKit.isEmpty(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
 		}else{//出现验证码
 			if(code.equalsIgnoreCase(number)){

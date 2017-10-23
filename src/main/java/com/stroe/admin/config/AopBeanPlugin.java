@@ -71,7 +71,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 				 String simpleName=target.getSimpleName().substring(1, target.getSimpleName().length());
 				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
 				 if(object != null){
-					 if(StrKit.isNotEmpoty(value)){
+					 if(StrKit.isNotEmpty(value)){
 						 AopManger.beanMap.put(value, object);
 					 }else{
 						 AopManger.beanMap.put(key, object);

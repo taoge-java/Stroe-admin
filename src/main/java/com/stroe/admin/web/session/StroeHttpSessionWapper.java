@@ -49,12 +49,12 @@ public class StroeHttpSessionWapper implements HttpSession {
 
 	private String getOrCreateSessionId(){
 		String sessionid = getCookie("JSESSIONID");
-        if (StrKit.isNotEmpoty(sessionid)) {
+        if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 
         sessionid = RequestManger.getRequestManger().getRequestAttr("JSESSIONID");
-        if (StrKit.isNotEmpoty(sessionid)) {
+        if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 

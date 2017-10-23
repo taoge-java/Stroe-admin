@@ -9,6 +9,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.log.Log;
 
 /**
  * 包扫描工具类
@@ -18,13 +19,15 @@ import com.jfinal.kit.PathKit;
  */
 public class PackageUtil {
 	
+	private static final Log LOG = Log.getLog(PackageUtil.class);
 	//普通java项目获取classes路径 filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
 	
 	
 	public static <T> List<Class<? extends T>> scanPackage(String packageName){ 
-		if(StrKit.isEmpoty(packageName))
+		if(StrKit.isEmpty(packageName))
 			throw new RuntimeException("packageName can not be null");
 		String	filePath = PathKit.getRootClassPath() + "/" + packageName.replace(".", "/");
+		LOG.info("class文件路径: "+filePath);
 		List<String> classNames = getClassName(filePath);
 		return getAllClass(classNames);
 	}
@@ -75,6 +78,7 @@ public class PackageUtil {
 	@SuppressWarnings({"unchecked", "rawtypes" })
 	public static <T> List<Class<? extends T>> getAllClass(List<String> classesNames){
 		List<Class<? extends T>> classList = new ArrayList();
+		LOG.info("类:"+classesNames.toString());
 		for(String name:classesNames){
 			try {
 			    Class<?> cla= ClassUtil.getInstance(ClassUtil.forName(name)).get();

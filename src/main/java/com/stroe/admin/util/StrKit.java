@@ -1,5 +1,6 @@
 package com.stroe.admin.util;
 
+
 /**
  * 字符串处理工具类
  * @author zengjintao
@@ -13,7 +14,7 @@ public class StrKit {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isEmpoty(String str){
+	public static boolean isEmpty(String str){
 		return str == null || str.trim().length() == 0 ? true : false;
 	}
 	
@@ -29,15 +30,15 @@ public class StrKit {
 		return str != null && str.length() > 0 ? true:false;
 	}
 	
-	public static boolean isEmpoty(Object object){
+	public static boolean isEmpty(Object object){
 		return object == null || object.toString().trim().length() == 0 ? true:false;
 	}
 	
-	public static boolean isNotEmpoty(String str){
+	public static boolean isNotEmpty(String str){
 		return str != null && str.trim().length() > 0 ? true:false;
 	}
 	
-	public static boolean isNotEmpoty(Object object){
+	public static boolean isNotEmpty(Object object){
 		return object == null ? false : true;
 	}
 	

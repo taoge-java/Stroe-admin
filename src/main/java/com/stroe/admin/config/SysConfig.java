@@ -1,4 +1,5 @@
 package com.stroe.admin.config;
+
 import java.util.List;
 
 import com.jfinal.config.Constants;
@@ -19,7 +20,7 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.stroe.admin.constant.CommonConstant;
-import com.stroe.admin.directive.annoation.Directive;
+import com.stroe.admin.directive.annotation.Directive;
 import com.stroe.admin.model.BaseModel;
 import com.stroe.admin.redis.RedisCacheManger;
 import com.stroe.admin.redis.RedisListener;
@@ -79,7 +80,7 @@ public  class SysConfig extends JFinalConfig{
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 weixinToken=PropKit.get("weixin.token").trim();
-		 cookie_name=PropKit.get("cookie.name").trim();
+		// cookie_name=PropKit.get("cookie.name").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
 	}
 	@Override
@@ -102,7 +103,7 @@ public  class SysConfig extends JFinalConfig{
 					throw new RuntimeException();
 				}
 			}
-		}
+	    }
 		engine.addSharedFunction("/WEB-INF/views/macro/left_menu.vm");
 	}
 		
@@ -136,6 +137,7 @@ public  class SysConfig extends JFinalConfig{
 	    beanPlugin.addExcludeClasses(Result.class);
 	    beanPlugin.addExcludeClasses(BaseService.class);
 	    plugin.add(beanPlugin);
+	    
 	}
 	
 	@Override

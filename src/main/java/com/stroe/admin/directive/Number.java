@@ -10,7 +10,7 @@ import com.jfinal.template.expr.ast.Expr;
 import com.jfinal.template.expr.ast.ExprList;
 import com.jfinal.template.stat.ParseException;
 import com.jfinal.template.stat.Scope;
-import com.stroe.admin.directive.annoation.Directive;
+import com.stroe.admin.directive.annotation.Directive;
 import com.stroe.admin.util.NumberTools;
 
 /**
