@@ -1,0 +1,12 @@
+ <style >
+ </style>
+ <form>
+ <div class=slayer-page">
+    <div>
+        <ul>
+            <li><label>部门</label><input type="text" style="width:200px;" value=""  class="input-text"></li>
+            <li><label>职位</label><input type="text" style="width:200px;" value=""  class="input-text"></li>
+        </ul>
+    </div>
+</div>
+</form>
