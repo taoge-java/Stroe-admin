@@ -1,6 +1,6 @@
 package com.stroe.admin.service.product;
 
-import com.stroe.admin.annotation.Aop;
+import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.service.base.BaseService;
 
 /**
@@ -9,7 +9,7 @@ import com.stroe.admin.service.base.BaseService;
  * @version 1.0
  * @create_at 2017年8月27日
  */
-@Aop
+@Bean
 public class ProductCategoryService extends BaseService{
 
 }

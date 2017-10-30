@@ -44,35 +44,13 @@
    setInterval("heart()",20*1000);//心跳包
            
    //客户端向服务器发送在线消息
-   function heart(){
-       $.ajax({
-	      url:"#(BASE_PATH)/heart",
-		  data:{},
-		  dataType:"json",
-		  type:"post",
-		  success:function(data){
-		       if(data==null||data=="undefined"){
-			       return;
-			   }else{
-			      if(data.code==0){
-    		        layer.alert(data.message, {
-                       icon: 2,
-                       skin: 'layer-ext-moon',
-    			    },function(){
-    			    	location.href="#(BASE_PATH)/account/exit";
-    			    });
-			      }
-			   }
-		  }
-	   });
-   }
    
     /*个人信息*/
     function adminInfo(){
     	$.ajax({
     		url : "#(BASE_PATH)/adminInfo",
     		type: "post",
-			data :{};
+			data: {},
     		dataType :"html",
     		success : function(data){
     			layer.open({
@@ -90,5 +68,4 @@
     		}
     	});
     }
-   </script>
 </script>

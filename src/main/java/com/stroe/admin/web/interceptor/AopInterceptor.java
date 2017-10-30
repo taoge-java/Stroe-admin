@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
-import com.stroe.admin.annotation.AopBean;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.spring.AopManger;
 /**
  * aop对象注入拦截器
@@ -36,7 +36,7 @@ public class AopInterceptor implements Interceptor{
 		//controller层aop的自动注入
 		for (Field field : fields) {
 			Object bean = null;
-			if (field.isAnnotationPresent(AopBean.class)){
+			if (field.isAnnotationPresent(Inject.class)){
 				bean = aopManger.getBeanMap().get(field.getName());
 				initServiceBean(bean,field);
 			}else if(field.isAnnotationPresent(Autowired.class)){
@@ -63,7 +63,7 @@ public class AopInterceptor implements Interceptor{
 		//service层aop的自动注入
 		for(Field f : cla.getDeclaredFields()){
 			Object serviceBean = null;
-			if(f.isAnnotationPresent(AopBean.class)){
+			if(f.isAnnotationPresent(Inject.class)){
 				serviceBean = aopManger.getBeanMap().get(f.getName());
 			}else if(f.isAnnotationPresent(Autowired.class)){
 				serviceBean = ctx.getBean(f.getName());

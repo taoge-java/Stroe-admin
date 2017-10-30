@@ -1,6 +1,6 @@
 package com.stroe.admin.service.product;
 
-import com.stroe.admin.annotation.Aop;
+import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.service.base.BaseService;
 /**
  * 品牌信息业务层
@@ -8,7 +8,7 @@ import com.stroe.admin.service.base.BaseService;
  * @version 1.0
  * @create_at 2017年8月27日下午12:15:58
  */
-@Aop
+@Bean
 public class ProductInfoService extends BaseService{
 
 }

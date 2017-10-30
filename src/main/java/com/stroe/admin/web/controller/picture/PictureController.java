@@ -1,7 +1,7 @@
 package com.stroe.admin.web.controller.picture;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.admin.annotation.AopBean;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.service.picture.PictureService;
 import com.stroe.admin.web.controller.base.BaseController;
 
@@ -14,7 +14,7 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/picture")
 public class PictureController extends BaseController{
 
-	@AopBean
+	@Inject
 	private PictureService pictureService;
 	
 	public void index(){

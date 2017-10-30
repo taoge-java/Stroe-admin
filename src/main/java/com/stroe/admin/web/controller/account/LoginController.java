@@ -1,15 +1,20 @@
 package com.stroe.admin.web.controller.account;
 
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.constant.CommonEnum.LogType;
 import com.stroe.admin.dto.OnlineManger;
 import com.stroe.admin.dto.OnlineUser;
 import com.stroe.admin.dto.UserSession;
 import com.stroe.admin.model.system.SystemAdmin;
+import com.stroe.admin.service.system.SystemRoleService;
 import com.stroe.admin.util.DateUtil;
 import com.stroe.admin.util.ImageUtil;
 import com.stroe.admin.util.IpUtils;
@@ -31,6 +36,9 @@ public class LoginController extends BaseController{
 	@Autowired
 	private OnlineManger onlineManger;
 	
+	@Inject
+	private  SystemRoleService systemRoleService;
+	
 	/**
 	 * 用户登录页面
 	 */
@@ -46,6 +54,9 @@ public class LoginController extends BaseController{
 		render(image);
 	}
 
+	/**
+	 * 用户登录
+	 */
 	public void login(){
 		String userName = getPara("username");
 		String password = getPara("password");
@@ -117,8 +128,45 @@ public class LoginController extends BaseController{
 		session.setLoginCount(admin.getInt("login_count"));
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
 		onlineManger.add(session);
+		//非超级管理员加载权限
+		if(!session.isSuperFlag()){
+			loadPermissions(admin);
+		}
 		systemLog("登录系统",LogType.LOGIN.getValue());
 	}
+	
+	/**
+	 * 加载权限
+	 */
+	private void loadPermissions(SystemAdmin admin){
+		Set<String> operCode = systemRoleService.findRoleById(admin.getInt("role_id"));//操作列表
+		Set<String> menuCode = addMenuCode(operCode);//菜单列表
+		getCurrentUser().setOperCodeSet(operCode);
+		getCurrentUser().setMenuCodeSet(menuCode);
+	}
+
+	/**
+	 * 获取菜单列表
+	 * @param operCode
+	 */
+	private Set<String> addMenuCode(Set<String> operCode) {
+		Set<String> menuCode = new LinkedHashSet<String>();
+		for(String code : operCode){
+			String[] codes = code.split("_");
+			String codeLevel = "";
+			for(int i=0;i<codes.length-2;i++){
+				if("".equals(codeLevel)){
+					codeLevel += codes[i]+"_"+codes[i+1];
+				}else{
+					codeLevel += "_"+codes[i+1];
+				}
+				menuCode.add(codeLevel);
+			}
+		}
+		return menuCode;
+	}
+	
+	
 	/**
 	 * 用户注销
 	 */

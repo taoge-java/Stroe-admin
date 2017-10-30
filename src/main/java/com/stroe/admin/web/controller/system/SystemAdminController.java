@@ -1,7 +1,7 @@
 package com.stroe.admin.web.controller.system;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.admin.annotation.AopBean;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.service.system.SystemAdminService;
 import com.stroe.admin.web.controller.base.BaseController;
 
@@ -14,16 +14,16 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/system/admin")
 public class SystemAdminController extends BaseController{
 
-	@AopBean
+	@Inject
 	private SystemAdminService systemAdminService;
 	
 	
 	public void index(){
-		renderView("/image/index.vm");
+		renderView("/system/admin/index.vm");
 	}
 	
     public void list(){
-		
+    	renderView("/system/admin/list.vm");
 	}
     
 	public void add(){

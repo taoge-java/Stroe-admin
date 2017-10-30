@@ -1,0 +1,150 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui/css/H-ui.min.css" />
+
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/lib/layui-v1.0.5/layui/css/layui.css"> 
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/resource/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+<title>角色管理 - 管理员管理 </title>
+</head>
+<body>
+<!--_header 作为公共模版分离出去-->
+#include("/WEB-INF/views/common/header.vm")
+<!--/_header 作为公共模版分离出去-->
+
+<!--_menu 作为公共模版分离出去-->
+#@left_menu("system","role")
+<!--/_menu 作为公共模版分离出去-->
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 
+		  <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 
+		  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		     <i class="Hui-iconfont">&#xe68f;</i>
+		  </a>
+	</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+		    <form class="Huiform" id="roleForm">
+    			<div class="text-c">
+    					<input type="text" class="input-text" style="width:250px" placeholder="角色名称" id="" name="roleName">
+    					<button type="button" onclick="list(true)" class="btn btn-success" id="">
+    						<i class="Hui-iconfont">&#xe665;</i> 搜权限节点
+    					</button>
+    			</div>
+    			<div class="cl pd-5 bg-1 bk-gray"> 
+    				<span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+    					<a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加角色','admin-role-add.html','800')">
+    						<i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
+                     </span> 
+    				 <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+    			<div class="mt-10">
+                    <div id="role_list">
+					
+					</div>
+					
+    			</div>
+		    </form>
+		</article>
+	</div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/layer/2.4/layer.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui.admin/js/H-ui.admin.page.js"></script> 
+<!--/_footer /作为公共模版分离出去-->
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+  
+  $(function(){
+      $.post("#(BASE_PATH)/system/role/list",{},function(data){
+		   $("#role_list").html("");
+		   $("#role_list").html(data);
+		},"html");
+  
+  });
+  
+  
+  function operRole(){
+      $.ajax({
+		   url:"#(BASE_PATH)/system/role/operRole",
+		   data:{
+		      "id":1
+		   },
+		   type:"post",
+		   dataType:"html",
+		   success:function(data){
+		     layer.open({
+				type : 1,
+				title : '权限设置',
+				content : data,
+				scrollbar: true,
+				btn:['确定'],
+				yes:function(index,layero){
+					getOper(index,id);
+				},
+			 });
+		   }
+	   });
+  }
+  
+  function getOper(index,id){
+	    var nodes = zTree.getCheckedNodes();
+	    var arr = new Array();
+    	for(var i = 0; i<nodes.length; i++){
+    		if(nodes[i].code){
+    			arr.push(nodes[i].id);
+    		}
+    	}
+		$.post("#(BASE_PATH)/system/role/saveOper",{"roleId":id,"operIds":arr.toString()},function(data){
+		   if(data.code == 1) {
+				layer.msg(data.message, {
+            	    skin: 'layui-layer-green',
+            	    closeBtn: 0,
+            	    time: 2000,
+            	    icon: 1,
+            	    shift: 0 //动画类型
+              	});
+			}else{
+				layer.alert(data.message, {
+            	    skin: 'layui-layer-green',
+            	    closeBtn: 0,
+            	    time: 2000,
+            	    icon: 2,
+            	    shift: 0 //动画类型
+            	});
+			}
+			layer.close(index);
+		},"json");
+		setTimeout("location.reload()",800);
+   }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

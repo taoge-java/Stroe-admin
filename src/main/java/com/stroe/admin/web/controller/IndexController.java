@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.dto.OnlineManger;
 import com.stroe.admin.dto.UserSession;
+import com.stroe.admin.model.system.SystemAdmin;
 import com.stroe.admin.util.ResultCode;
 import com.stroe.admin.web.controller.base.BaseController;
 
@@ -29,6 +30,12 @@ public class IndexController extends BaseController{
 	public void success(){
 		renderView("/index.vm");
 	}
+	
+	public void adminInfo() {
+		setAttr("adminInfo",SystemAdmin.dao.findById(getUserId()));
+		renderView("/account/adminInfo.vm");
+	}
+	
 	/**
 	 * 客户端向服务器发送心跳包
 	 */

@@ -5,7 +5,7 @@ import java.util.List;
 import com.jfinal.aop.Duang;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
-import com.stroe.admin.annotation.Aop;
+import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.annotation.Interceptor;
 import com.stroe.admin.spring.AopManger;
 import com.stroe.admin.util.PackageUtil;
@@ -59,9 +59,9 @@ public class AopBeanPlugin<T> implements IPlugin{
 				 Object object = null;
 				 String value = null;
 				 for(Annotation annotation : annotations){
-					 if(annotation instanceof Aop){
+					 if(annotation instanceof Bean){
 						 object= Duang.duang(target.getName(),target);
-						 value=target.getAnnotation(Aop.class).value();
+						 value=target.getAnnotation(Bean.class).value();
 					 }else if(annotation instanceof Interceptor){
 						 Class<? extends com.jfinal.aop.Interceptor>[] interceptorClass = ((Interceptor) annotation).target();
 						 value =((Interceptor) annotation).value();

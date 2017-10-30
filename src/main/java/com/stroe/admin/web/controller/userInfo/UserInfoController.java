@@ -1,7 +1,7 @@
 package com.stroe.admin.web.controller.userInfo;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.admin.annotation.AopBean;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.service.userInfo.UserInfoService;
 import com.stroe.admin.web.controller.base.BaseController;
 
@@ -14,7 +14,7 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/userInfo")
 public class UserInfoController extends BaseController{
 
-	@AopBean
+	@Inject
 	private UserInfoService userInfoService;
 	
 	public void index(){

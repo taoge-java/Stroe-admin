@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
-import com.stroe.admin.annotation.Aop;
+import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.model.system.SystemAdmin;
 import com.stroe.admin.model.system.SystemRole;
 import com.stroe.admin.service.base.BaseService;
@@ -21,7 +21,7 @@ import com.stroe.admin.util.StrKit;
  * @version 1.0
  * @create_at 2017年8月27日下午12:09:37
  */
-@Aop
+@Bean
 public class SystemAdminService extends BaseService{
 	
 	private static final Log LOG=Log.getLog(SystemAdminService.class);
@@ -29,12 +29,12 @@ public class SystemAdminService extends BaseService{
 	/**
 	 * 管理员列表
 	 */
-	public Result getAdminList(String  login_name,int pageNumber){
+	public Result list(String  login_name,int pageNumber){
 		Result result = new DefaultResult();
 		ResultCode resultCode = new ResultCode(ResultCode.SUCCESS);
 		try {
-			StringBuilder context=new StringBuilder(" from system_admin where 1=1");
-			List<Object> param=new ArrayList<Object>();
+			StringBuilder context = new StringBuilder(" from system_admin where 1=1");
+			List<Object> param = new ArrayList<Object>();
 			if(StrKit.isEmpty(login_name)){
 				context.append(" and login_name=?");
 				param.add(login_name);
@@ -42,7 +42,7 @@ public class SystemAdminService extends BaseService{
 			Page<SystemAdmin> page = SystemAdmin.dao.paginate(pageNumber, 30, "select *", context.toString(),param.toArray());
 			result.setDefaultModel(page);
 		} catch (Exception e) {
-			resultCode=new ResultCode(ResultCode.FAIL);
+			resultCode = new ResultCode(ResultCode.FAIL);
 			LOG.error("查询异常",e);
 		}
 		result.setResultCode(resultCode);
@@ -87,13 +87,13 @@ public class SystemAdminService extends BaseService{
 	 * @return
 	 */
 	public Result delById(int id){
-		Result result=new DefaultResult();
-		ResultCode rseultCode=new ResultCode(ResultCode.SUCCESS,"删除成功");
+		Result result = new DefaultResult();
+		ResultCode rseultCode = new ResultCode(ResultCode.SUCCESS,"删除成功");
         try{
 			SystemAdmin.dao.deleteById(id);
 		}catch(Exception e){
-			LOG.error("删除数据异常",e);
 			rseultCode=new ResultCode(ResultCode.FAIL,"删除数据异常");
+			LOG.error("删除数据异常",e);
 		}
         result.setResultCode(rseultCode);
         return result;

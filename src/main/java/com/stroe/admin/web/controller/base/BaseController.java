@@ -48,6 +48,9 @@ public abstract class BaseController extends Controller{
 		return getCurrentUser().getLoginName();
 	}
 	
+	public Integer getUserId(){
+		return getCurrentUser().getUserId();
+	}
 	/**
 	 * 系统日志记录
 	 * @param oper_des
@@ -72,29 +75,29 @@ public abstract class BaseController extends Controller{
 	 * @return
 	 */
 	public String uploadRename(UploadFile upload){
-		File file=upload.getFile();
+		File file = upload.getFile();
 		try {
-			FileInputStream in=new FileInputStream(file);
-			String fileName=upload.getFileName();
-			String style=fileName.substring(fileName.indexOf(","),fileName.length());
-			String newName=NumberUtils.getMessageNum(4)+style;
-			String imagePath=getImagePath();
-			String basePath=SysConfig.resourceUpload+"/"+imagePath;
-			File fi=new File(basePath);
+			FileInputStream in = new FileInputStream(file);
+			String fileName = upload.getFileName();
+			String style = fileName.substring(fileName.indexOf(","),fileName.length());
+			String newName = NumberUtils.getMessageNum(4)+style;
+			String imagePath = getImagePath();
+			String basePath = SysConfig.resourceUpload+"/"+imagePath;
+			File fi = new File(basePath);
 			if(!fi.exists()){
 				fi.mkdirs();
 			}
-			File upFile=new File(basePath,newName);
-			FileOutputStream out=new FileOutputStream(upFile);
-			byte[] bytes=new byte[1024];
-			int flag=0;
-			while((flag=in.read(bytes, 0, 1024))!=-1){
+			File upFile = new File(basePath,newName);
+			FileOutputStream out = new FileOutputStream(upFile);
+			byte[] bytes = new byte[1024];
+			int flag = 0;
+			while((flag = in.read(bytes, 0, 1024)) != -1){
 				out.write(bytes, 0, flag);
 			}
-			if(out!=null){
+			if(out != null){
 				out.close();
 			}
-			if(in!=null){
+			if(in != null){
 				in.close();
 			}
 			file.delete();

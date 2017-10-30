@@ -11,6 +11,7 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -105,6 +106,7 @@ public  class SysConfig extends JFinalConfig{
 			}
 	    }
 		engine.addSharedFunction("/WEB-INF/views/macro/left_menu.vm");
+		engine.addSharedFunction("/WEB-INF/views/macro/paginate.vm");
 	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -116,6 +118,8 @@ public  class SysConfig extends JFinalConfig{
 		DruidPlugin primaryDruid = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 	    plugin.add(primaryDruid);
 	    AutoTableBindPlugin primaryAtbp = new AutoTableBindPlugin(primaryDruid);
+	    primaryAtbp.setBaseSqlTemplatePath(PathKit.getWebRootPath()+"/WEB-INF/classes");
+	    primaryAtbp.addSqlTemplate("system.sql");
 	    //如果你只想用注解而不想让没有注解的model被自动注册，则如下使用
 	    primaryAtbp.autoScan(false);
 	    primaryAtbp.addExcludeClasses(BaseModel.class);
@@ -171,7 +175,4 @@ public  class SysConfig extends JFinalConfig{
 		 }).start();
 	}
 	
-	public void beforeJFinalStop(){
-		System.out.println("beforeJFinalStop");
-	};
 }

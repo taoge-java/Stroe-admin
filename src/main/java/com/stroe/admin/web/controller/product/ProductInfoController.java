@@ -1,7 +1,7 @@
 package com.stroe.admin.web.controller.product;
 
 import com.jfinal.ext.route.ControllerBind;
-import com.stroe.admin.annotation.AopBean;
+import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.service.product.ProductInfoService;
 import com.stroe.admin.web.controller.base.BaseController;
 /**
@@ -13,7 +13,7 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/product/info")
 public class ProductInfoController extends BaseController{
 
-	@AopBean
+	@Inject
 	private ProductInfoService productInfoService;
 	
 	public void index(){

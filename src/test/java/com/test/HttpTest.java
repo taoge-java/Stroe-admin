@@ -48,7 +48,7 @@ public class HttpTest {
 	
 	@SuppressWarnings("unchecked")
 	private static synchronized void post(int buyNumber){
-		String context = HttpClientUtil.httpPostRequest("http://localhost:8082/Stroe-Admin/information/test",Kv.by("name", String.valueOf(buyNumber)));
+		String context = HttpClientUtil.httpPostRequest("http://localhost:8080/Stroe-Admin/information/test",Kv.by("name", String.valueOf(buyNumber)));
 		System.out.println(context);
 	}
 	

@@ -44,10 +44,10 @@ public class ThreadPollEvent implements Event{
 	 * 
 	 */
 	private void checkQueue() {
-		pushLock.lock();
+		pushLock.lock();//加锁
 		MyTask task = mainQueue.poll();
-		executorService.execute(task);
-		pushLock.unlock();
+		executorService.execute(task);//执行等待的线程
+		pushLock.unlock();//释放锁
 	}
 
 	public void shutdown(){
