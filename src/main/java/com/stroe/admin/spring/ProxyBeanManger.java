@@ -3,16 +3,16 @@ package com.stroe.admin.spring;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class AopManger {
+public class ProxyBeanManger {
 
     public static  ConcurrentMap<String,Object> beanMap = new ConcurrentHashMap<String,Object>();
 	
-    private static AopManger aopManger = new AopManger();
+    private static ProxyBeanManger aopManger = new ProxyBeanManger();
     
-    private AopManger(){
+    private ProxyBeanManger(){
     	
     }
-    public static AopManger getAopManger() {
+    public static ProxyBeanManger getAopManger() {
 		return aopManger;
 	}
     
@@ -20,8 +20,9 @@ public class AopManger {
 		return beanMap;
 	}
 
+	
 	public static void setBeanMap(ConcurrentMap<String, Object> beanMap) {
-		AopManger.beanMap = beanMap;
+		ProxyBeanManger.beanMap = beanMap;
 	}
 
 	public void put(String keyName,Object object){

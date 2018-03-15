@@ -7,7 +7,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.annotation.Interceptor;
-import com.stroe.admin.spring.AopManger;
+import com.stroe.admin.spring.ProxyBeanManger;
 import com.stroe.admin.util.PackageUtil;
 import com.stroe.admin.util.StrKit;
 
@@ -17,9 +17,9 @@ import com.stroe.admin.util.StrKit;
  * @version 1.0
  * @create_at 2017年7月25日上午8:14:05
  */
-public class AopBeanPlugin<T> implements IPlugin{
+public class ProxyBeanPlugin<T> implements IPlugin{
 
-	private static final Log LOG=Log.getLog(AopBeanPlugin.class);
+	private static final Log LOG=Log.getLog(ProxyBeanPlugin.class);
 	
     private List<String> beanList=new ArrayList<String>();
 	
@@ -28,7 +28,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 	
 	private boolean autoScan;
 	
-	public AopBeanPlugin<T> setPackageName(String... packageName){
+	public ProxyBeanPlugin<T> setPackageName(String... packageName){
 		if(packageName.length==0||packageName==null)
 			throw new NullPointerException("packageName can not be null");
 		for(String pack:packageName){
@@ -42,7 +42,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 	}
 
 	@SuppressWarnings("rawtypes")
-	public AopBeanPlugin setAutoScan(boolean autoScan) {
+	public ProxyBeanPlugin setAutoScan(boolean autoScan) {
 		this.autoScan = autoScan;
 		return this;
 	}
@@ -72,9 +72,9 @@ public class AopBeanPlugin<T> implements IPlugin{
 				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
 				 if(object != null){
 					 if(StrKit.isNotEmpty(value)){
-						 AopManger.beanMap.put(value, object);
+						 ProxyBeanManger.beanMap.put(value, object);
 					 }else{
-						 AopManger.beanMap.put(key, object);
+						 ProxyBeanManger.beanMap.put(key, object);
 					 }
 					 LOG.debug("created singleton aop bean '"+key+"'");
 				 }
@@ -90,7 +90,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 		return true;
 	}
 	
-	public AopBeanPlugin<T> addExcludeClasses(Class<?>... clazzes) {
+	public ProxyBeanPlugin<T> addExcludeClasses(Class<?>... clazzes) {
         if (clazzes != null) {
             for (Class<?> clazz : clazzes) {
                 excludeClasses.add(clazz);
