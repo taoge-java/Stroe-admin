@@ -16,5 +16,5 @@ public class SystemOper extends BaseModel<SystemOper>{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final  SystemOper dao=new SystemOper();
+	public static final  SystemOper dao = new SystemOper();
 }

@@ -9,7 +9,7 @@ public class NumberUtils {
 	 * @param length
 	 * @return
 	 */
-	public static String getMessageNum(int length){
+	public static String getNumberCode(int length){
 		StringBuffer sb = new StringBuffer();
         String str = "0123456789";
         Random r = new Random();
@@ -27,6 +27,6 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static String getOrderCode(){
-		return DateUtil.getDateCode().replaceAll("-","")+getMessageNum(5);
+		return DateUtil.getDateCode().replaceAll("-","")+getNumberCode(5);
 	}
 }

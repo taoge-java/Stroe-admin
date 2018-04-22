@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.log.Log;
 import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.constant.CommonEnum.LogType;
@@ -31,8 +30,6 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/account")
 public class LoginController extends BaseController{
 
-	private static final Log LOG = Log.getLog(LoginController.class);
-	
 	@Autowired
 	private OnlineManger onlineManger;
 	
@@ -43,7 +40,11 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
-		renderView("/account/login.vm");
+		if(getSession().getAttribute(CommonConstant.SESSION_ID_KEY)!= null){
+			redirect("/");
+		}else{
+			renderView("/account/login.vm");
+		}
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class LoginController extends BaseController{
 			if(code.equalsIgnoreCase(number)){
 		     	loginSrvice(admin,password);//验证码不区分大小写
 			}else{
-				renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
+				renderJson(new ResultCode(ResultCode.FAIL,"验证码错误"));
 				return;
 			}
 		}
@@ -100,7 +101,6 @@ public class LoginController extends BaseController{
 			loginSuccess(admin);//登录成功
 			renderJson(new ResultCode(ResultCode.SUCCESS, "登录成功"));
 		}else{
-			LOG.error("用户名或密码错误");
 			renderJson(new ResultCode(ResultCode.FAIL, "用户名或密码错误"));
 			return;
 		}

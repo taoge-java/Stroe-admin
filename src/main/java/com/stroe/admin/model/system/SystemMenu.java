@@ -16,6 +16,6 @@ public class SystemMenu extends BaseModel<SystemMenu>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final SystemMenu dao=new SystemMenu();
+	public static final SystemMenu dao = new SystemMenu();
 
 }

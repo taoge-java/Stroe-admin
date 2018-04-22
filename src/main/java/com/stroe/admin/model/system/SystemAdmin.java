@@ -16,10 +16,11 @@ public class SystemAdmin extends BaseModel<SystemAdmin>{
 	 */
 	private static final long serialVersionUID = 2457995147027662584L;
 	
-	public static final SystemAdmin dao=new SystemAdmin();
+	public static final SystemAdmin dao = new SystemAdmin();
 
 
-	public void test(){
-		System.out.println("SystemAdmin");
+	public SystemRole getSystemRole(){
+		return SystemRole.dao.findById(getInt("role_id"));
 	}
+	
 }

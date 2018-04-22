@@ -8,11 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.stroe.admin.config.SysConfig;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.dto.UserSession;
-import com.stroe.admin.model.system.SystemLog;
+import com.stroe.admin.model.system.SystemOperLog;
 import com.stroe.admin.util.DateUtil;
 import com.stroe.admin.util.IpUtils;
 import com.stroe.admin.util.NumberUtils;
@@ -24,12 +25,14 @@ import com.stroe.admin.util.NumberUtils;
  */
 public abstract class BaseController extends Controller{
 
-	public  int pageSize = 30;
+	private static final Log LOG = Log.getLog(BaseController.class);
+	
+	protected  int pageSize = 30;
 	
 	public abstract void index();
 	
 	public void renderView(String path){
-		render(SysConfig.BASE_VIEW+path);
+		render(SysConfig.BASE_VIEW + path);
 	}
 	
     /**
@@ -51,6 +54,7 @@ public abstract class BaseController extends Controller{
 	public Integer getUserId(){
 		return getCurrentUser().getUserId();
 	}
+	
 	/**
 	 * 系统日志记录
 	 * @param oper_des
@@ -58,10 +62,10 @@ public abstract class BaseController extends Controller{
 	 */
 	@SuppressWarnings("static-access")
 	public void systemLog(String oper_des,int type){
-		UserSession user=getCurrentUser();
-		SystemLog systemLog=new SystemLog();
+		UserSession user = getCurrentUser();
+		SystemOperLog systemLog = new SystemOperLog();
 		systemLog.set("oper_name", user.getLoginName());
-		systemLog.set("admin_id", user.getUserId());
+		systemLog.set("user_id", user.getUserId());
 		systemLog.set("oper_time", new DateUtil().getDate());
 		systemLog.set("oper_ip", IpUtils.getAddressIp(getRequest()));
 		systemLog.set("login_type",type);
@@ -79,10 +83,10 @@ public abstract class BaseController extends Controller{
 		try {
 			FileInputStream in = new FileInputStream(file);
 			String fileName = upload.getFileName();
-			String style = fileName.substring(fileName.indexOf(","),fileName.length());
-			String newName = NumberUtils.getMessageNum(4)+style;
+			String style = fileName.substring(fileName.indexOf("."),fileName.length());
+			String newName = NumberUtils.getNumberCode(4) + style;
 			String imagePath = getImagePath();
-			String basePath = SysConfig.resourceUpload+"/"+imagePath;
+			String basePath = SysConfig.resourceUpload + "/" + imagePath;
 			File fi = new File(basePath);
 			if(!fi.exists()){
 				fi.mkdirs();
@@ -101,9 +105,10 @@ public abstract class BaseController extends Controller{
 				in.close();
 			}
 			file.delete();
-			return basePath+"/"+newName;
+			return imagePath + "/" + newName;
+//			return basePath + "/" + newName;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("文件上传异常",e);
 		}
 		return null;
 	}
@@ -112,7 +117,7 @@ public abstract class BaseController extends Controller{
 	 * 生成新的图片文件
 	 * @return
 	 */
-	public String getImagePath(){
+	protected String getImagePath(){
 		DateFormat format = new SimpleDateFormat("yyyy-MMdd");
 		return format.format(new Date()).replaceAll("-", "/");
 	}

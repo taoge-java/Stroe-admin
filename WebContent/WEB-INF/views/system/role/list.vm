@@ -21,7 +21,7 @@
 					<td><a href="#">admin</a></td>
 					<td>拥有至高无上的权利</td>
 					<td class="td-manage">
-						#if(!session.isSuperFlag())
+						#if(session.isSuperFlag())
     						<a style="text-decoration:none"  href="javascript:;" title="设置权限">
     							<i class="Hui-iconfont" onClick="operRole()">&#xe61d;</i>
     						</a> 

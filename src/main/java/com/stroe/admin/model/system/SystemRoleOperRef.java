@@ -16,6 +16,6 @@ public class SystemRoleOperRef extends BaseModel<SystemRoleOperRef>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final SystemRoleOperRef dao=new SystemRoleOperRef();
+	public static final SystemRoleOperRef dao = new SystemRoleOperRef();
 
 }

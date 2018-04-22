@@ -21,9 +21,9 @@
 			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "product") class="selected" #end>
 				<ul>
-					<li><a href="#(BASE_PATH)/product/brand" #if(subMenu == "brand") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="品牌管理">品牌管理</a></li>
-					<li><a href="#(BASE_PATH)/product/category" #if(subMenu == "category") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="分类管理">分类管理</a></li>
-					<li><a href="#(BASE_PATH)/product/info" #if(subMenu == "info") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="产品管理">产品管理</a></li>
+					<li><a href="#(BASE_PATH)/goods/brand" #if(subMenu == "brand") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="品牌管理">品牌管理</a></li>
+					<li><a href="#(BASE_PATH)/goods/category" #if(subMenu == "category") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="分类管理">分类管理</a></li>
+					<li><a href="#(BASE_PATH)/goods/info" #if(subMenu == "info") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="产品管理">产品管理</a></li>
 		        </ul>
 	        </dd>
         </dl>
@@ -54,9 +54,8 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "system") class="selected" #end>
 				<ul>
-					<li><a href="#(BASE_PATH)/system/role" #if(subMenu == "role") class=selected  style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="角色管理">角色管理</a></li>
-					<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
-					<li><a href="#(BASE_PATH)/system/admin" #if(subMenu == "admin") class=selected style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="管理员列表">管理员列表</a></li>
+					<li><a href="#(BASE_PATH)/system/role" #if(subMenu == "role") class="selected"  style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="角色管理">角色管理</a></li>
+					<li><a href="#(BASE_PATH)/system/admin" #if(subMenu == "admin") class="selected" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="管理员列表">管理员列表</a></li>
 		        </ul>
 	      </dd>
         </dl>
