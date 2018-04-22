@@ -5,24 +5,19 @@ import java.util.concurrent.ConcurrentMap;
 
 public class ProxyBeanManger {
 
-    public static  ConcurrentMap<String,Object> beanMap = new ConcurrentHashMap<String,Object>();
+    private static final ConcurrentMap<String,Object> beanMap = new ConcurrentHashMap<String,Object>();
 	
-    private static ProxyBeanManger aopManger = new ProxyBeanManger();
+    private static final ProxyBeanManger proxyBeanManger = new ProxyBeanManger();
     
     private ProxyBeanManger(){
     	
     }
-    public static ProxyBeanManger getAopManger() {
-		return aopManger;
+    public static ProxyBeanManger getProxyBeanManger() {
+		return proxyBeanManger;
 	}
     
-	public static ConcurrentMap<String, Object> getBeanMap() {
+	public  ConcurrentMap<String, Object> getBeanMap() {
 		return beanMap;
-	}
-
-	
-	public static void setBeanMap(ConcurrentMap<String, Object> beanMap) {
-		ProxyBeanManger.beanMap = beanMap;
 	}
 
 	public void put(String keyName,Object object){

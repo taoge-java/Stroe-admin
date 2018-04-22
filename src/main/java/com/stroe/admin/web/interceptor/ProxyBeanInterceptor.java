@@ -9,26 +9,27 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.stroe.admin.annotation.Inject;
-import com.stroe.admin.spring.AopManger;
+import com.stroe.admin.spring.ProxyBeanManger;
 /**
  * aop对象注入拦截器
  * @author zengjintao
  * @version 1.0
  * @create_at 2017年7月24日下午9:18:12
  */
-public class AopInterceptor implements Interceptor{
+public class ProxyBeanInterceptor implements Interceptor{
 	
     private  ApplicationContext ctx;
 	
-    private static final AopManger aopManger = AopManger.getAopManger();
+    private static final ProxyBeanManger proxyBeanManger = ProxyBeanManger.getProxyBeanManger();
     
-	public AopInterceptor(ApplicationContext ctx){
+	public ProxyBeanInterceptor(ApplicationContext ctx){
 		this.ctx = ctx;
 	}
 	
-	public AopInterceptor(){}
+	public ProxyBeanInterceptor(){
+
+	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void intercept(Invocation inv) {
 		Controller controller = inv.getController();
@@ -37,7 +38,7 @@ public class AopInterceptor implements Interceptor{
 		for (Field field : fields) {
 			Object bean = null;
 			if (field.isAnnotationPresent(Inject.class)){
-				bean = aopManger.getBeanMap().get(field.getName());
+				bean = proxyBeanManger.getBeanMap().get(field.getName());
 				initServiceBean(bean,field);
 			}else if(field.isAnnotationPresent(Autowired.class)){
 				bean = ctx.getBean(field.getName());
@@ -57,14 +58,13 @@ public class AopInterceptor implements Interceptor{
 		inv.invoke();
 	}
 	
-	@SuppressWarnings("static-access")
 	private  void initServiceBean(Object bean,Field field){
 		Class<?> cla = field.getType();
 		//service层aop的自动注入
 		for(Field f : cla.getDeclaredFields()){
 			Object serviceBean = null;
 			if(f.isAnnotationPresent(Inject.class)){
-				serviceBean = aopManger.getBeanMap().get(f.getName());
+				serviceBean = proxyBeanManger.getBeanMap().get(f.getName());
 			}else if(f.isAnnotationPresent(Autowired.class)){
 				serviceBean = ctx.getBean(f.getName());
 			}

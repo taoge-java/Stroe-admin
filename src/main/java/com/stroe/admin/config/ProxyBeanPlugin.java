@@ -19,10 +19,11 @@ import com.stroe.admin.util.StrKit;
  */
 public class ProxyBeanPlugin<T> implements IPlugin{
 
-	private static final Log LOG=Log.getLog(ProxyBeanPlugin.class);
+	private static final Log LOG = Log.getLog(ProxyBeanPlugin.class);
 	
     private List<String> beanList=new ArrayList<String>();
 	
+    private static final ProxyBeanManger proxyBeanManger = ProxyBeanManger.getProxyBeanManger();
 	@SuppressWarnings("rawtypes")
 	private List<Class> excludeClasses=new ArrayList<Class>();
 	
@@ -72,9 +73,9 @@ public class ProxyBeanPlugin<T> implements IPlugin{
 				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
 				 if(object != null){
 					 if(StrKit.isNotEmpty(value)){
-						 ProxyBeanManger.beanMap.put(value, object);
+						 proxyBeanManger.getBeanMap().put(value, object);
 					 }else{
-						 ProxyBeanManger.beanMap.put(key, object);
+						 proxyBeanManger.getBeanMap().put(key, object);
 					 }
 					 LOG.debug("created singleton aop bean '"+key+"'");
 				 }

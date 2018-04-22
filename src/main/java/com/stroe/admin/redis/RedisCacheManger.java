@@ -1,8 +1,11 @@
 package com.stroe.admin.redis;
 
+
 import com.jfinal.plugin.redis.Cache;
 import com.jfinal.plugin.redis.Redis;
 import com.stroe.admin.constant.CommonConstant;
+
+import redis.clients.jedis.JedisPubSub;
 
 /**
  * redis缓存管理
@@ -34,8 +37,12 @@ public class RedisCacheManger {
 	    Redis.use().getJedis().publish(channel, message);
 	}
 	
-	public  void sub(String channel){
-	    Redis.use().getJedis().subscribe(new RedisListener(), channel);
+	public  void sub(JedisPubSub jedisPubSub,String channel){
+		new Thread(new Runnable() {
+			public void run() {
+				Redis.use().getJedis().subscribe(jedisPubSub, channel);
+			}
+		}).start();
 	}
 	
 	public  void close(){

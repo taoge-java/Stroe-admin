@@ -8,7 +8,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PathKit;
@@ -16,7 +15,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.jfinal.plugin.redis.Redis;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
@@ -34,7 +32,7 @@ import com.stroe.admin.util.PackageUtil;
 import com.stroe.admin.web.handler.ContextPathHandler;
 import com.stroe.admin.web.handler.SessionHandler;
 import com.stroe.admin.web.handler.WebSocketHandler;
-import com.stroe.admin.web.interceptor.AopInterceptor;
+import com.stroe.admin.web.interceptor.ProxyBeanInterceptor;
 import com.stroe.admin.web.interceptor.PermissionInterceptor;
 import com.stroe.admin.web.interceptor.ViewContextInterceptor;
 
@@ -72,15 +70,15 @@ public  class SysConfig extends JFinalConfig{
 		 constants.setDevMode(true);
 		 constants.setViewType(ViewType.JFINAL_TEMPLATE);
 		 constants.setEncoding("utf-8");
-		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
-		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
+		 constants.setError404View(BASE_VIEW+"/common/404.vm");
+		 constants.setError500View(BASE_VIEW+"/common/500.vm");
 		 PropKit.use("config.properties");//加载配置文件
-		 channels=PropKit.get("redis.channels").trim();
+		 channels = PropKit.get("redis.channels").trim();
 		 redisPassword = PropKit.get("redis.password").trim();
 		 redisHost = PropKit.get("redis.host").trim();
-		 resourceUpload=PropKit.get("resource.upload.path").trim();
-		 resourceDown=PropKit.get("resource.upload.path").trim();
-		 weixinToken=PropKit.get("weixin.token").trim();
+		 resourceUpload = PropKit.get("resource.upload.path").trim();
+		 resourceDown = PropKit.get("resource.upload.down").trim();
+		 weixinToken = PropKit.get("weixin.token").trim();
 		// cookie_name=PropKit.get("cookie.name").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
 	}
@@ -101,12 +99,12 @@ public  class SysConfig extends JFinalConfig{
 					LOG.debug("add directive "+ cla.getName());
 				} catch (Exception e) {
 					LOG.error("add directive "+ directive.name()+" fail", e);
-					throw new RuntimeException();
 				}
 			}
 	    }
 		engine.addSharedFunction("/WEB-INF/views/macro/left_menu.vm");
 		engine.addSharedFunction("/WEB-INF/views/macro/paginate.vm");
+		engine.addSharedFunction("/WEB-INF/views/macro/head.vm");
 	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -118,7 +116,7 @@ public  class SysConfig extends JFinalConfig{
 		DruidPlugin primaryDruid = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 	    plugin.add(primaryDruid);
 	    AutoTableBindPlugin primaryAtbp = new AutoTableBindPlugin(primaryDruid);
-	    primaryAtbp.setBaseSqlTemplatePath(PathKit.getWebRootPath()+"/WEB-INF/classes");
+	    primaryAtbp.setBaseSqlTemplatePath(PathKit.getWebRootPath() + "/WEB-INF/classes");
 	    primaryAtbp.addSqlTemplate("system.sql");
 	    //如果你只想用注解而不想让没有注解的model被自动注册，则如下使用
 	    primaryAtbp.autoScan(false);
@@ -133,13 +131,11 @@ public  class SysConfig extends JFinalConfig{
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
 	    redisCacheManger.setCache(true);//设置启用分布式缓存
-	    //aop自动注入插件
-	    AopBeanPlugin beanPlugin=new AopBeanPlugin();
+	    
+	    //proxy代理类自动注入插件
+	    ProxyBeanPlugin beanPlugin = new ProxyBeanPlugin();
 	    beanPlugin.setPackageName("com.stroe.admin.service");
-	    beanPlugin.addExcludeClasses(BaseService.class);
-	    beanPlugin.addExcludeClasses(DefaultResult.class);
-	    beanPlugin.addExcludeClasses(Result.class);
-	    beanPlugin.addExcludeClasses(BaseService.class);
+	    beanPlugin.addExcludeClasses(BaseService.class,DefaultResult.class,Result.class,BaseService.class);
 	    plugin.add(beanPlugin);
 	    
 	}
@@ -148,7 +144,7 @@ public  class SysConfig extends JFinalConfig{
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
-		interceptors.add(new AopInterceptor(SpringBeanManger.getContext()));
+		interceptors.add(new ProxyBeanInterceptor(SpringBeanManger.getContext()));
 		//interceptors.add(new ShiroInterceptor());
 	}
 	
@@ -168,9 +164,13 @@ public  class SysConfig extends JFinalConfig{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-		         RedisListener redisListener = new RedisListener();
-		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
-				 LOG.info("消息订阅成功");
+				try {
+					redisCacheManger.sub(new RedisListener(),channels);
+					LOG.info("消息订阅成功");
+				} catch (Exception e) {
+					LOG.error("消息订阅异常。。。。。",e);
+					redisCacheManger.close();
+				}
 			}
 		 }).start();
 	}
