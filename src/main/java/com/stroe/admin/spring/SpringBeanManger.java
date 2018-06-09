@@ -13,7 +13,7 @@ public class SpringBeanManger {
 	
 
 	public static void initContext(ApplicationContext ctx){
-		context=ctx;
+		context = ctx;
 	}
 	
 	public static Object getBean(String name){

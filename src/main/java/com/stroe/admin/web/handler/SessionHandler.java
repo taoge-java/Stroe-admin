@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.handler.Handler;
-import com.stroe.admin.web.session.RequestManger;
+import com.stroe.admin.web.session.RequestManager;
 import com.stroe.admin.web.session.StroeServletRequestWrapper;
 
 /**
@@ -18,7 +18,7 @@ import com.stroe.admin.web.session.StroeServletRequestWrapper;
  */
 public class SessionHandler extends Handler {
 
-	private static final RequestManger requestManger = RequestManger.getRequestManger();
+	private static final RequestManager requestManger = RequestManager.getRequestManger();
 	
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response,

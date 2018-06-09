@@ -30,6 +30,7 @@ public class PermissionInterceptor implements Interceptor{
 	 */
 	public PermissionInterceptor(){
 		noNeedLoginUrl.add("/account");
+		noNeedLoginUrl.add("/account/test");
 		noNeedLoginUrl.add("/weixin");
 		noNeedLoginUrl.add("/auth/account");  
 	}
@@ -38,11 +39,12 @@ public class PermissionInterceptor implements Interceptor{
 	public void intercept(Invocation inv) {
 		HttpServletRequest request = inv.getController().getRequest();
 		HttpServletResponse response = inv.getController().getResponse();
-		if(inv.getControllerKey().startsWith("/information")){
-			inv.invoke();
-			return;
-		}
+//		if(inv.getControllerKey().startsWith("/information")){
+//			inv.invoke();
+//			return;
+//		}
 		UserSession session = (UserSession) request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
+		System.err.println(request.getSession().getId());
 		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey()) && session == null){
 			try {
 				response.sendRedirect(request.getContextPath()+"/account/");

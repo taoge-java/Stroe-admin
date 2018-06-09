@@ -13,9 +13,9 @@ import com.stroe.admin.util.Md5Utils;
  */
 public class OnlineUser {
 	
-	private Map<String,Object> map=new HashMap<String,Object>();
+	private Map<String,Object> map = new HashMap<String,Object>();
 	
-	public static final String SESSION_ID_KEY="session_id_key";
+	public static final String SESSION_ID_KEY = "session_id_key";
 	
 	public OnlineUser(){
 		setSessionAttr(SESSION_ID_KEY,Md5Utils.generatorKey());

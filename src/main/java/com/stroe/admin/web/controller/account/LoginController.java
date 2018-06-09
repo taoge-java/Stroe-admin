@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.annotation.Inject;
 import com.stroe.admin.constant.CommonConstant;
@@ -30,6 +31,8 @@ import com.stroe.admin.web.controller.base.BaseController;
 @ControllerBind(controllerKey="/account")
 public class LoginController extends BaseController{
 
+
+	
 	@Autowired
 	private OnlineManger onlineManger;
 	
@@ -54,7 +57,7 @@ public class LoginController extends BaseController{
 		ImageUtil image = new ImageUtil();
 		render(image);
 	}
-
+	
 	/**
 	 * 用户登录
 	 */

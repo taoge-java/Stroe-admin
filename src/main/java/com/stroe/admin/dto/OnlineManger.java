@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OnlineManger {
 
-	private  Map<String,UserSession> session=new ConcurrentHashMap<String,UserSession>();
+	private  Map<String,UserSession> session = new ConcurrentHashMap<String,UserSession>();
 	
 	/**
 	 * 添加用户
@@ -57,9 +57,9 @@ public class OnlineManger {
 	 * @return
 	 */
 	public UserSession getUserSessionById(int userId){
-		for(String key:session.keySet()){
-			UserSession userSession=session.get(key);
-			if(userSession.getUserId()==userId){
+		for(String key : session.keySet()){
+			UserSession userSession = session.get(key);
+			if(userSession.getUserId() == userId){
 				return userSession;
 			}
 		}

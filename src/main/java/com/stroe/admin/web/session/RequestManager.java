@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @createTime 2017年9月29日下午8:52:38
  */
-public class RequestManger {
+public class RequestManager {
 
-	private static RequestManger requestManger = new RequestManger();
+	private static RequestManager requestManger = new RequestManager();
 	
 	private ThreadLocal<HttpServletRequest> requests = new ThreadLocal<>();
 	
 	private ThreadLocal<HttpServletResponse> responses = new ThreadLocal<>();
 	
-	private RequestManger(){
+	private RequestManager(){
 		
 	}
 	
@@ -33,7 +33,7 @@ public class RequestManger {
         responses.set(response);
 	}
 	 
-	public static RequestManger getRequestManger(){
+	public static RequestManager getRequestManger(){
 		return requestManger;
 	}
 	

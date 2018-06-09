@@ -1,5 +1,6 @@
 package com.stroe.admin.web.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfinal.ext.route.ControllerBind;
@@ -16,6 +17,7 @@ import com.stroe.admin.web.controller.base.BaseController;
  */
 @ControllerBind(controllerKey="/")
 public class IndexController extends BaseController{
+
 
 	/**
 	 * 访问商城首页

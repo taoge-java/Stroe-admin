@@ -13,7 +13,7 @@ public class ResultCode {
 	
 	public int code = SUCCESS;
 	
-	public String message = "";
+	public String message = "操作成功";
 
 	public int getCode() {
 		return code;
@@ -27,8 +27,16 @@ public class ResultCode {
 		this.code = code;
 		this.message = message;
 	}
+	
+	public ResultCode() {
+	}
 
 	public ResultCode(int code) {
 		this.code = code;
+		if(code == SUCCESS) {
+			this.message = "处理成功";
+		} else {
+			this.message = "处理失败";
+		}
 	}
 }

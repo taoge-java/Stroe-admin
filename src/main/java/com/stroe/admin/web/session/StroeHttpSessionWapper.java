@@ -27,6 +27,10 @@ public class StroeHttpSessionWapper implements HttpSession {
     
     private static final RedisCacheManger redisCacheManger = RedisCacheManger.getRedisCacheManger();
     
+    private static final RequestManager requestManager = RequestManager.getRequestManger();
+    
+    public static final String DEFAULT_COOKIENAME = "JSESSIONID";
+    
 	@Override
 	public Object getAttribute(String key) {
 		return redisCacheManger.get(generateKey(key));
@@ -48,19 +52,19 @@ public class StroeHttpSessionWapper implements HttpSession {
 	}
 
 	private String getOrCreateSessionId(){
-		String sessionid = getCookie("JSESSIONID");
+		String sessionid = getCookie(DEFAULT_COOKIENAME);
         if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 
-        sessionid = RequestManger.getRequestManger().getRequestAttr("JSESSIONID");
+        sessionid = RequestManager.getRequestManger().getRequestAttr(DEFAULT_COOKIENAME);
         if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 
         sessionid = UUID.randomUUID().toString().replace("-", "");
-        RequestManger.getRequestManger().setRequestAttr("JSESSIONID", sessionid);
-        setCookie("JSESSIONID", sessionid, (int) SESSION_TIME);
+        RequestManager.getRequestManger().setRequestAttr(DEFAULT_COOKIENAME, sessionid);
+        setCookie(DEFAULT_COOKIENAME, sessionid, (int) SESSION_TIME);
         return sessionid;
 	}
 	
@@ -144,7 +148,7 @@ public class StroeHttpSessionWapper implements HttpSession {
         cookie.setMaxAge(maxAgeInSeconds);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
-        RequestManger.getRequestManger().getResponse().addCookie(cookie);
+        requestManager.getResponse().addCookie(cookie);
 	}
 
 	/**
@@ -161,7 +165,7 @@ public class StroeHttpSessionWapper implements HttpSession {
 	 * @return
 	 */
 	private Cookie getCookieObject(String name) {
-        Cookie[] cookies = RequestManger.getRequestManger().getRequest().getCookies();
+        Cookie[] cookies = requestManager.getRequest().getCookies();
         if (cookies != null){
             for (Cookie cookie : cookies){
             	if (cookie.getName().equals(name)){

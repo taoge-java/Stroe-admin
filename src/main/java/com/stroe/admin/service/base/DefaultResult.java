@@ -13,9 +13,9 @@ import com.stroe.admin.util.ResultCode;
  */
 public class DefaultResult implements Result{
 
-	private Map<String,Object> map=new HashMap<String, Object>();
+	private Map<String,Object> map = new HashMap<String, Object>();
 	
-	private boolean success=true;
+	private boolean success = true;
 	
 	private ResultCode resultCode;
 	
@@ -33,18 +33,18 @@ public class DefaultResult implements Result{
 	
 	public DefaultResult(boolean success){
 		if(success){
-			this.resultCode=new ResultCode(ResultCode.SUCCESS);
+			this.resultCode = new ResultCode(ResultCode.SUCCESS);
 		}else{
-			this.resultCode=new ResultCode(ResultCode.FAIL);
+			this.resultCode = new ResultCode(ResultCode.FAIL);
 		}
 	}
 	
     public DefaultResult(ResultCode resultCode){
     	this.resultCode=resultCode;
-    	if(resultCode.code==ResultCode.SUCCESS){
-			success=true;
+    	if(resultCode.code == ResultCode.SUCCESS){
+			success = true;
 		}else{
-			success=false;
+			success = false;
 		}
     }
     
@@ -60,11 +60,11 @@ public class DefaultResult implements Result{
 
 	@Override
 	public void setResultCode(ResultCode resultCode) {
-		this.resultCode=resultCode;
-		if(resultCode.code==ResultCode.SUCCESS){
-			success=true;
+		this.resultCode = resultCode;
+		if(resultCode.code == ResultCode.SUCCESS){
+			success = true;
 		}else{
-			success=false;
+			success = false;
 		}
 	}
 

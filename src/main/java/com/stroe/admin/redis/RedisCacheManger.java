@@ -5,6 +5,7 @@ import com.jfinal.plugin.redis.Cache;
 import com.jfinal.plugin.redis.Redis;
 import com.stroe.admin.constant.CommonConstant;
 
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 /**
@@ -49,19 +50,27 @@ public class RedisCacheManger {
 		Redis.use().getJedis().close();
 	}
 	
-	public  String set(String key,Object value){
+	public Jedis getJedis(){
+		return Redis.use().getJedis();
+	}
+	
+	public Jedis getJedis(String cacheName){
+		return Redis.use(cacheName).getJedis();
+	}
+	
+	public  String set(Object key,Object value){
 		return Redis.use(CommonConstant.SESSION_CACHE_NAME).set(key, value);
 	}
 	
-	public  String set(String key,Object value,int seconds){
+	public  String set(Object key,Object value,int seconds){
 		return Redis.use(CommonConstant.SESSION_CACHE_NAME).setex(key, seconds, value);
 	}
 	
-	public  <T> T get(String key){
+	public  <T> T get(Object key){
 		return Redis.use(CommonConstant.SESSION_CACHE_NAME).get(key);
 	}
 	
-	public  void delete(String key){
+	public  void delete(Object key){
 		 Redis.use(CommonConstant.SESSION_CACHE_NAME).del(key);
 	}
 	

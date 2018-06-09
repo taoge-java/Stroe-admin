@@ -16,7 +16,6 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
-import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.directive.annotation.Directive;
@@ -68,7 +67,6 @@ public  class SysConfig extends JFinalConfig{
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
-		 constants.setViewType(ViewType.JFINAL_TEMPLATE);
 		 constants.setEncoding("utf-8");
 		 constants.setError404View(BASE_VIEW+"/common/404.vm");
 		 constants.setError500View(BASE_VIEW+"/common/500.vm");
