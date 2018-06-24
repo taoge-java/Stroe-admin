@@ -30,8 +30,6 @@ import com.stroe.admin.web.controller.base.BaseController;
  */
 @ControllerBind(controllerKey="/account")
 public class LoginController extends BaseController{
-
-
 	
 	@Autowired
 	private OnlineManger onlineManger;
@@ -39,15 +37,12 @@ public class LoginController extends BaseController{
 	@Inject
 	private  SystemRoleService systemRoleService;
 	
+	
 	/**
 	 * 用户登录页面
 	 */
 	public void index(){
-		if(getSession().getAttribute(CommonConstant.SESSION_ID_KEY)!= null){
-			redirect("/");
-		}else{
-			renderView("/account/login.vm");
-		}
+		renderView("/account/login.vm");
 	}
 
 	/**
@@ -142,7 +137,7 @@ public class LoginController extends BaseController{
 	 * 加载权限
 	 */
 	private void loadPermissions(SystemAdmin admin){
-		Set<String> operCode = systemRoleService.findRoleById(admin.getInt("role_id"));//操作列表
+		Set<String> operCode = systemRoleService.findOperCode(admin.getInt("role_id"));//操作列表
 		Set<String> menuCode = addMenuCode(operCode);//菜单列表
 		getCurrentUser().setOperCodeSet(operCode);
 		getCurrentUser().setMenuCodeSet(menuCode);

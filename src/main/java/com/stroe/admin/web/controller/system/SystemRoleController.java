@@ -3,6 +3,7 @@ package com.stroe.admin.web.controller.system;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.kit.Kv;
 import com.stroe.admin.annotation.Inject;
+import com.stroe.admin.model.system.SystemRole;
 import com.stroe.admin.service.base.Result;
 import com.stroe.admin.service.system.SystemRoleService;
 import com.stroe.admin.web.controller.base.BaseController;
@@ -42,15 +43,32 @@ public class SystemRoleController extends BaseController{
     }
     
 	public void add(){
-		
+		renderView("/system/role/add.vm");
+	}
+	
+	/**
+	 * 创建角色
+	 */
+	public void create(){
+		String roleName = getPara("roleName");
+		String remark = getPara("remark");
+		Result result = systemRoleService.cretaeRole(roleName, remark);
+		renderJson(result.getResultCode());
 	}
 	
     public void edit(){
-		
+    	int roleId = getParaToInt("id");
+    	SystemRole systemRole = systemRoleService.findByid(roleId);
+    	setAttr("systemRole", systemRole);
+    	renderView("/system/role/edit.vm");
 	}
     
     public void update(){
-		
+    	int roleId = getParaToInt("id");
+    	String roleName = getPara("roleName");
+		String remark = getPara("remark");
+		Result result = systemRoleService.updateRole(roleId, roleName, remark);
+		renderJson(result.getResultCode());
    	}
 
 }

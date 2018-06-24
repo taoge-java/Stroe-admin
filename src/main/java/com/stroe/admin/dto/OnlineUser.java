@@ -21,8 +21,8 @@ public class OnlineUser {
 		setSessionAttr(SESSION_ID_KEY,Md5Utils.generatorKey());
 	}
 	
-	public void setSessionAttr(String key,String code){
-		map.put(key,code);
+	public void setSessionAttr(String key,String sessionId){
+		map.put(key,sessionId);
 	}
 	
 	public String getSessionId(){

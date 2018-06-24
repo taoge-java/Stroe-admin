@@ -164,6 +164,7 @@ public  class SysConfig extends JFinalConfig{
 			public void run() {
 				try {
 					redisCacheManger.sub(new RedisListener(),channels);
+					redisCacheManger.deleteAll();
 					LOG.info("消息订阅成功");
 				} catch (Exception e) {
 					LOG.error("消息订阅异常。。。。。",e);

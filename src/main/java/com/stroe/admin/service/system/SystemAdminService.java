@@ -35,7 +35,7 @@ public class SystemAdminService extends BaseService{
 		try {
 			StringBuilder context = new StringBuilder(" from system_admin where 1=1");
 			List<Object> param = new ArrayList<Object>();
-			if(StrKit.isEmpty(login_name)){
+			if(StrKit.isNotEmpty(login_name)){
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}
@@ -48,6 +48,8 @@ public class SystemAdminService extends BaseService{
 		result.setResultCode(resultCode);
 		return result;
 	}
+	
+	
 	/**
 	 * 保存管理员
 	 * @param systemAdmin
@@ -56,26 +58,26 @@ public class SystemAdminService extends BaseService{
 	 */
 	@SuppressWarnings("static-access")
 	public Result save(SystemAdmin systemAdmin,String password){
-		Result result=new DefaultResult();
-		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
+		Result result = new DefaultResult();
+		ResultCode resultCode = new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
 		try{
 			if(StrKit.isEmpty(systemAdmin.getStr("login_name"))||StrKit.isEmpty(password)){
-			    resultCode=new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
+			    resultCode = new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
 			    result.setResultCode(resultCode);
 				return result;
 			}
-		    SystemAdmin admin=systemAdmin.dao.findFirst("select * from system_admin where login_name=?",systemAdmin.getStr("login_name"));
-		    if(admin!=null){
+		    SystemAdmin admin = systemAdmin.dao.findFirst("select * from system_admin where login_name=?",systemAdmin.getStr("login_name"));
+		    if(admin != null){
 		    	resultCode=new ResultCode(ResultCode.FAIL, "该管理员已存在,请勿重复创建!");
 		    	result.setResultCode(resultCode);
 		    	return result;
 		    }
-		    String encrypt=EncryptUtil.encodeSalt(Md5Utils.generatorKey());
+		    String encrypt = EncryptUtil.encodeSalt(Md5Utils.generatorKey());
             systemAdmin.set("encrypt",encrypt);
 		    systemAdmin.set("sys_password",Md5Utils.getMd5(password,encrypt));
 		    systemAdmin.save();
 		}catch(Exception e){
-			resultCode=new ResultCode(ResultCode.FAIL, "数据创建异常!");
+			resultCode = new ResultCode(ResultCode.FAIL, "数据创建异常!");
 			LOG.error("数据创建异常",e);
 		}
 		result.setResultCode(resultCode);
@@ -105,13 +107,13 @@ public class SystemAdminService extends BaseService{
 	
 	
 	public Result update(SystemAdmin systemAdmin,String password){
-		Result result=new DefaultResult();
-		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS,"数据更新成功");
+		Result result = new DefaultResult();
+		ResultCode resultCode = new ResultCode(ResultCode.SUCCESS,"数据更新成功");
 		try{
 			systemAdmin.set("sys_password",Md5Utils.getMd5(password));
 	        systemAdmin.update();
 		}catch(Exception e){
-			resultCode=new ResultCode(ResultCode.FAIL,"更新数据异常");
+			resultCode = new ResultCode(ResultCode.FAIL,"更新数据异常");
 			LOG.error("删除数据异常",e);
 		}
 		result.setResultCode(resultCode);
@@ -124,14 +126,14 @@ public class SystemAdminService extends BaseService{
 	 * @return
 	 */
 	public Result delAll(String ids[]){
-		Result result=new DefaultResult();
-		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "删除数据成功");
+		Result result = new DefaultResult();
+		ResultCode resultCode = new ResultCode(ResultCode.SUCCESS, "删除数据成功");
 		try{
 			for(String id:ids){
 				SystemAdmin.dao.deleteById(id);
 			}
 		}catch(Exception e){
-			resultCode=new ResultCode(ResultCode.FAIL, "删除数据异常");
+			resultCode = new ResultCode(ResultCode.FAIL, "删除数据异常");
 			LOG.error("删除数据异常....",e);
 		}
 		result.setResultCode(resultCode);

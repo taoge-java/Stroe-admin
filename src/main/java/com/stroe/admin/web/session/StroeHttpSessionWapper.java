@@ -11,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
+
+import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.redis.RedisCacheManger;
 import com.stroe.admin.util.StrKit;
 
@@ -28,8 +30,6 @@ public class StroeHttpSessionWapper implements HttpSession {
     private static final RedisCacheManger redisCacheManger = RedisCacheManger.getRedisCacheManger();
     
     private static final RequestManager requestManager = RequestManager.getRequestManger();
-    
-    public static final String DEFAULT_COOKIENAME = "JSESSIONID";
     
 	@Override
 	public Object getAttribute(String key) {
@@ -52,19 +52,19 @@ public class StroeHttpSessionWapper implements HttpSession {
 	}
 
 	private String getOrCreateSessionId(){
-		String sessionid = getCookie(DEFAULT_COOKIENAME);
+		String sessionid = getCookie(CommonConstant.DEFAULT_COOKIE_NAME);
         if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 
-        sessionid = RequestManager.getRequestManger().getRequestAttr(DEFAULT_COOKIENAME);
+        sessionid = RequestManager.getRequestManger().getRequestAttr(CommonConstant.DEFAULT_COOKIE_NAME);
         if (StrKit.isNotEmpty(sessionid)) {
             return sessionid;
         }
 
         sessionid = UUID.randomUUID().toString().replace("-", "");
-        RequestManager.getRequestManger().setRequestAttr(DEFAULT_COOKIENAME, sessionid);
-        setCookie(DEFAULT_COOKIENAME, sessionid, (int) SESSION_TIME);
+        RequestManager.getRequestManger().setRequestAttr(CommonConstant.DEFAULT_COOKIE_NAME, sessionid);
+        setCookie(CommonConstant.DEFAULT_COOKIE_NAME, sessionid, (int) SESSION_TIME);
         return sessionid;
 	}
 	

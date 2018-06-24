@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
@@ -71,6 +73,11 @@ public abstract class BaseController extends Controller{
 		systemLog.set("login_type",type);
 		systemLog.set("oper_desc",oper_des);
 		systemLog.save();
+	}
+	
+	
+	public HttpSession getSession(){
+		return getRequest().getSession();
 	}
 	
 	/**

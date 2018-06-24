@@ -18,4 +18,5 @@ public class CommonConstant {
 	public static final String COOKIE_PASSWORD = "password_cookie";
 	/*redis缓存常量*/	
 	public static final String SESSION_CACHE_NAME = "JSESSION";
-}
+	
+	public static final String DEFAULT_COOKIE_NAME = "JSESSIONID";}

@@ -1,7 +1,9 @@
 package com.stroe.admin.web.controller.system;
 
+
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.annotation.Inject;
+import com.stroe.admin.service.base.Result;
 import com.stroe.admin.service.system.SystemAdminService;
 import com.stroe.admin.web.controller.base.BaseController;
 
@@ -23,11 +25,15 @@ public class SystemAdminController extends BaseController{
 	}
 	
     public void list(){
+    	String loginName = getPara("login_name");
+    	int pageNumber = getParaToInt("pageNumber",1);
+    	Result result = systemAdminService.list(loginName, pageNumber);
+    	setAttr("page", result.getDefaultModel());
     	renderView("/system/admin/list.vm");
 	}
     
 	public void add(){
-		
+		render("");
 	}
 	
     public void create(){

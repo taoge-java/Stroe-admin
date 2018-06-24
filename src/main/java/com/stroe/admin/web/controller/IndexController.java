@@ -45,7 +45,7 @@ public class IndexController extends BaseController{
 		UserSession session = getCurrentUser();
 		UserSession onlineUser = onlineManger.getUserSession(session.getSessionId());
 		if(onlineUser == null){
-			renderJson(new ResultCode(ResultCode.FAIL, "您的帐号已在"+session.getLast_login_ip()+"上登录,"+"请重新登录"+session.getLast_login_ip()));
+			renderJson(new ResultCode(ResultCode.FAIL, "您的帐号已在"+session.getLast_login_ip()+"上登录,"+"请重新登录"));
 			return;
 		}
 		renderNull();

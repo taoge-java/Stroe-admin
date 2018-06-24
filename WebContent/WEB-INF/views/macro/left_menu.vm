@@ -1,90 +1,176 @@
 #define left_menu (menu,subMenu)
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
+		#if(session.hasMenu('1_1'))
 		<dl id="menu-article">
 			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "information")  class="selected" #end>
 				<ul>
-					<li><a href="#(BASE_PATH)/information" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" title="资讯管理">资讯管理</a></li>
-		       </ul>
+					#if(session.hasMenu('1_1_1'))
+					<li>
+						<a href="#(BASE_PATH)/information" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" title="资讯管理">资讯管理</a>
+					</li>
+  		            #end
+                </ul>
 	        </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_2'))
 		<dl id="menu-picture">
 			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "picture") class="selected" #end>
 				<ul>
-					<li><a href="#(BASE_PATH)/picture" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" title="图片管理">图片管理</a></li>
+					#if(session.hasMenu('1_2_1'))
+					<li>
+						<a href="#(BASE_PATH)/picture" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" title="图片管理">图片管理</a>
+					</li>
+					#end
 		       </ul>
 	        </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_3'))
 		<dl id="menu-product">
 			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "product") class="selected" #end>
 				<ul>
+					#if(session.hasMenu('1_3_1'))
 					<li><a href="#(BASE_PATH)/goods/brand" #if(subMenu == "brand") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="品牌管理">品牌管理</a></li>
+					#end
+					#if(session.hasMenu('1_3_2'))
 					<li><a href="#(BASE_PATH)/goods/category" #if(subMenu == "category") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="分类管理">分类管理</a></li>
+					#end
+					#if(session.hasMenu('1_3_3'))
 					<li><a href="#(BASE_PATH)/goods/info" #if(subMenu == "info") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="产品管理">产品管理</a></li>
-		        </ul>
+		            #end
+				</ul>
 	        </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_4'))
 		<dl id="menu-comments">
 			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					#if(session.hasMenu('1_4_1'))
 					<li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
+					#end
+					#if(session.hasMenu('1_4_2'))
 					<li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>
+					#end
 		        </ul>
 	         </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_5'))
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					#if(session.hasMenu('1_5_1'))
 					<li><a href="member-list.html" title="会员列表">会员列表</a></li>
+					#end
+					#if(session.hasMenu('1_5_2'))
 					<li><a href="member-del.html" title="删除的会员">删除的会员</a></li>
+					#end
+					#if(session.hasMenu('1_5_3'))
 					<li><a href="member-level.html" title="等级管理">等级管理</a></li>
+					#end
+					#if(session.hasMenu('1_5_4'))
 					<li><a href="member-scoreoperation.html" title="积分管理">积分管理</a></li>
+					#end
+					#if(session.hasMenu('1_5_5'))
 					<li><a href="member-record-browse.html" title="浏览记录">浏览记录</a></li>
-					<li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
+					#end
+					###if(session.hasMenu('1_5_6'))
+					##<li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
+					###end
+					#if(session.hasMenu('1_5_6'))
 					<li><a href="member-record-share.html" title="分享记录">分享记录</a></li>
+					#end
 		        </ul>
 	        </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_6'))
 		<dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd #if(menu == "system") class="selected" #end>
 				<ul>
+					#if(session.hasMenu('1_6_1'))
 					<li><a href="#(BASE_PATH)/system/role" #if(subMenu == "role") class="selected"  style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="角色管理">角色管理</a></li>
+					#end
+					#if(session.hasMenu('1_6_2'))
 					<li><a href="#(BASE_PATH)/system/admin" #if(subMenu == "admin") class="selected" style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="管理员列表">管理员列表</a></li>
-		        </ul>
+		            #end
+				</ul>
 	      </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_7'))
 		<dl id="menu-tongji">
 			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					#if(session.hasMenu('1_7_1'))
 					<li><a href="charts-1.html" title="折线图">折线图</a></li>
+					#end
+					
+					#if(session.hasMenu('1_7_2'))
 					<li><a href="charts-2.html" title="时间轴折线图">时间轴折线图</a></li>
+					#end
+					#if(session.hasMenu('1_7_3'))
 					<li><a href="charts-3.html" title="区域图">区域图</a></li>
+					#end
+					#if(session.hasMenu('1_7_4'))
 					<li><a href="charts-4.html" title="柱状图">柱状图</a></li>
+					#end
+					#if(session.hasMenu('1_7_5'))
 					<li><a href="charts-5.html" title="饼状图">饼状图</a></li>
+					#end
+					
+					#if(session.hasMenu('1_7_6'))
 					<li><a href="charts-6.html" title="3D柱状图">3D柱状图</a></li>
+					#end
+					
+					#if(session.hasMenu('1_7_7'))
 					<li><a href="charts-7.html" title="3D饼状图">3D饼状图</a></li>
+					#end
 		        </ul>
 	       </dd>
         </dl>
+		#end
+		
+		#if(session.hasMenu('1_8'))
 		<dl id="menu-system">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					#if(session.hasMenu('1_8_1'))
 					<li><a href="system-base.html" title="系统设置">系统设置</a></li>
+					#end
+					#if(session.hasMenu('1_8_2'))
 					<li><a href="system-category.html" title="栏目管理">栏目管理</a></li>
+					#end
+					#if(session.hasMenu('1_8_3'))
 					<li><a href="system-data.html" title="数据字典">数据字典</a></li>
+					#end
+					#if(session.hasMenu('1_8_4'))
 					<li><a href="system-shielding.html" title="屏蔽词">屏蔽词</a></li>
+					#end
+					#if(session.hasMenu('1_8_5'))
 					<li><a href="system-log.html" title="系统日志">系统日志</a></li>
+					#end
 		        </ul>
 	        </dd>
        </dl>
+	   #end
 </div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

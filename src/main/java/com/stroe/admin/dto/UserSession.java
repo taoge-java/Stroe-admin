@@ -43,9 +43,9 @@ public class UserSession implements Serializable {
 	
 	private String last_login_ip;//用户登录ip
 	
-	private Set<String> menuCode;//菜单code
-	
-	private Set<String> operCode;//操作code
+//	private Set<String> menuCode;//菜单code
+//	
+//	private Set<String> operCode;//操作code
 	
 	private long heartTime; //心跳时间
 	
@@ -147,21 +147,6 @@ public class UserSession implements Serializable {
 		this.last_login_ip = last_login_ip;
 	}
 	
-	public Set<String> getMenuCode() {
-		return menuCode;
-	}
-	
-	public void setMenuCode(Set<String> menuCode) {
-		this.menuCode = menuCode;
-	}
-	
-	public Set<String> getOperCode() {
-		return operCode;
-	}
-	
-	public void setOperCode(Set<String> operCode) {
-		this.operCode = operCode;
-	}
 	
 	public Set<String> getOperCodeSet() {
 		return operCodeSet;
@@ -179,7 +164,7 @@ public class UserSession implements Serializable {
 		this.menuCodeSet = menuCodeSet;
 	}
 	
-    public boolean HasMenu(){
+    public boolean hasMenu(String menuCode){
     	 if(isSuperFlag())
     		 return true;
     	 return menuCodeSet.contains(menuCode);
@@ -188,7 +173,7 @@ public class UserSession implements Serializable {
     public boolean hasOper(String code){
     	if(isSuperFlag())
    		   return true;
-   	    return operCodeSet.contains(operCode);
+   	    return operCodeSet.contains(code);
     }
     
     public boolean hasAnyOper(String[] operCode){
