@@ -1,6 +1,5 @@
 package com.stroe.admin.model.goods;
 
-import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.stroe.admin.model.BaseModel;
 
 /**
@@ -9,7 +8,7 @@ import com.stroe.admin.model.BaseModel;
  * @version 1.0
  * @createTime 2018年3月30日下午7:59:42
  */
-@TableBind(tableName = "goods_category")
+//@TableBind(tableName = "goods_category")
 public class GoodsCategory extends BaseModel<GoodsCategory>{
 
 	/**

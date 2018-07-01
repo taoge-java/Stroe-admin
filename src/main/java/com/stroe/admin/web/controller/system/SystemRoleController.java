@@ -3,9 +3,12 @@ package com.stroe.admin.web.controller.system;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.kit.Kv;
 import com.stroe.admin.annotation.Inject;
+import com.stroe.admin.annotation.Permission;
 import com.stroe.admin.model.system.SystemRole;
 import com.stroe.admin.service.base.Result;
 import com.stroe.admin.service.system.SystemRoleService;
+import com.stroe.admin.service.system.SystemService;
+import com.stroe.admin.util.ResultCode;
 import com.stroe.admin.web.controller.base.BaseController;
 
 /**
@@ -20,11 +23,16 @@ public class SystemRoleController extends BaseController{
 	@Inject
 	private SystemRoleService systemRoleService;
 	
+	@Inject
+	private SystemService systemService;
+	
+	@Permission(points = {"1_8_1_1"})
 	@Override
 	public void index() {
 		renderView("/system/role/index.vm");
 	}
 	
+	@Permission(points = {"1_8_1_1"})
     public void list(){
     	int currentPage = getParaToInt("currentPage",1);
     	String roleName = getPara("roleName");
@@ -70,5 +78,18 @@ public class SystemRoleController extends BaseController{
 		Result result = systemRoleService.updateRole(roleId, roleName, remark);
 		renderJson(result.getResultCode());
    	}
-
+    
+    /**
+	 * 保存用户操作权限集合
+	 */
+	public void saveOper(){
+		int roleId = getParaToInt("roleId");
+		String operIds = getPara("operIds");
+		Result result = systemService.saveOper(roleId, operIds);
+		if(result.isSuccess()){
+			renderJson(new ResultCode(ResultCode.SUCCESS, "操作成功"));
+		}else{
+			renderJson(new ResultCode(ResultCode.FAIL, "操作失败"));
+		}
+	}
 }

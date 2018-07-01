@@ -20,9 +20,9 @@
 					<td>#(e.role_name)</td>
 					<td>#(e.remark??)</td>
 					<td class="td-manage">
-						#if(!session.isSuperFlag())
+						#if(!e.super_flag)
     						<a style="text-decoration:none"  href="javascript:;" title="设置权限">
-    							<i class="Hui-iconfont" onClick="operRole()">&#xe61d;</i>
+    							<i class="Hui-iconfont" onClick="operRole(#(e.id))">&#xe61d;</i>
     						</a> 
 						#end
 						<a title="编辑" href="javascript:;" onclick="admin_role_edit(#(e.id))" class="ml-5" style="text-decoration:none">

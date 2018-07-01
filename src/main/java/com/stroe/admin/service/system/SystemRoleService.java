@@ -12,7 +12,8 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.annotation.Inject;
-import com.stroe.admin.model.system.SystemAdminRoleRef;
+import com.stroe.admin.dto.UserSession;
+import com.stroe.admin.model.system.SystemAdminRole;
 import com.stroe.admin.model.system.SystemMenu;
 import com.stroe.admin.model.system.SystemOper;
 import com.stroe.admin.model.system.SystemRole;
@@ -84,18 +85,34 @@ public class SystemRoleService extends BaseService{
 	 * @param roleId 角色id
 	 * @return
 	 */
-	public Set<String> findOperCode(int adminId){
-		List<SystemAdminRoleRef> list = systemService.findRoles(adminId);
+	public Set<String> findOperCode(UserSession userSession){
+		List<SystemAdminRole> list = systemService.findRoles(userSession.getUserId());
 		String roleIds = "";
 		//获取用户所有角色
-		for (SystemAdminRoleRef systemAdminRoleRef : list) {
+		for (SystemAdminRole systemAdminRoleRef : list) {
 			roleIds += systemAdminRoleRef.getInt("role_id") + ",";
 		}
-		//获取角色操作权限
-		List<SystemOper> oper = SystemOper.dao.find("select * from system_oper where id "
-				+ "in(select oper_id from system_role_oper_ref "
-				+ "where role_id in("+roleIds.substring(0,roleIds.length()-1)+"))");
+		
+		List<SystemRole> roles = SystemRole.dao.find("select super_flag,role_name from system_role where id in (?)",roleIds.substring(0,roleIds.length()-1));
+		/**
+		 * 判断是否拥有超级管理员权限
+		 */
+		for (SystemRole role : roles) {
+			userSession.addRole(role.getStr("role_name"));
+			if(role.getBoolean("super_flag") && !userSession.isSuperFlag()){
+				userSession.setSuperFlag(true);
+			}
+		}
 		Set<String> operCode = new LinkedHashSet<String>();
+		List<SystemOper> oper = null;
+		if(userSession.isSuperFlag()){//超级管理员
+		    oper = SystemOper.dao.find("select * from system_oper");
+		}else{
+			//获取角色操作权限
+		    oper = SystemOper.dao.find("select * from system_oper where id "
+					+ "in(select oper_id from system_role_oper_ref "
+					+ "where role_id in("+roleIds.substring(0,roleIds.length()-1)+"))");
+		}
 		for(SystemOper code : oper){
 			operCode.add(code.getStr("oper_code"));
 		}

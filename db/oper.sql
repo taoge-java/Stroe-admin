@@ -61,6 +61,8 @@ insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(25,"列表
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(26,"删除",18,"1_5_6_2",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(27,"列表",20,"1_6_1_1",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(28,"删除",20,"1_5_1_2",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(55,"新增",20,"1_5_1_3",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(56,"修改",20,"1_5_1_4",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(29,"列表",21,"1_6_2_1",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(30,"删除",21,"1_6_2_2",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(31,"列表",23,"1_7_1_1",null);

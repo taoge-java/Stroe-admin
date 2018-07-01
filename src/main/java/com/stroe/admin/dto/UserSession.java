@@ -2,6 +2,7 @@ package com.stroe.admin.dto;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 /**
  * 保存用户登录信息
@@ -16,6 +17,8 @@ public class UserSession implements Serializable {
 	private String sessionId;//用户sessionId
 	
 	private int userId;//用户id
+	
+	private Set<String> roleSet = new LinkedHashSet<>();
 
 	private int loginCount;
 	
@@ -43,10 +46,6 @@ public class UserSession implements Serializable {
 	
 	private String last_login_ip;//用户登录ip
 	
-//	private Set<String> menuCode;//菜单code
-//	
-//	private Set<String> operCode;//操作code
-	
 	private long heartTime; //心跳时间
 	
 	public String getLast_login_time() {
@@ -71,6 +70,10 @@ public class UserSession implements Serializable {
 	
 	public void setSuperFlag(boolean superFlag) {
 		this.superFlag = superFlag;
+	}
+	
+	public Set<String> getRoleSet() {
+		return roleSet;
 	}
 	
 	/**
@@ -105,6 +108,10 @@ public class UserSession implements Serializable {
 	
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+	
+	public void addRole(String roleName){
+		roleSet.add(roleName);
 	}
 	
 	public String getNickName() {

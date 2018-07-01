@@ -115,7 +115,6 @@ public class LoginController extends BaseController{
 		session.setHeartTime(System.currentTimeMillis());
 		session.setLast_login_time(DateUtil.getSecondDate(admin.getDate("last_login_time")));
 		session.setLoginName(admin.getStr("login_name"));
-		session.setSuperFlag(admin.getBoolean("super_flag") ? true : false);
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
 		admin.set("last_login_time",DateUtil.getDate());
@@ -124,23 +123,21 @@ public class LoginController extends BaseController{
 		admin.update();
 		session.setLast_login_ip(admin.getStr("last_login_ip"));
 		session.setLoginCount(admin.getInt("login_count"));
+		loadPermissions(session);//加载权限
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
 		onlineManger.add(session);
 		//非超级管理员加载权限
-		if(!session.isSuperFlag()){
-			loadPermissions(admin);
-		}
 		systemLog("登录系统",LogType.LOGIN.getValue());
 	}
 	
 	/**
 	 * 加载权限
 	 */
-	private void loadPermissions(SystemAdmin admin){
-		Set<String> operCode = systemRoleService.findOperCode(admin.getInt("role_id"));//操作列表
+	private void loadPermissions(UserSession userSession){
+		Set<String> operCode = systemRoleService.findOperCode(userSession);//操作列表
 		Set<String> menuCode = addMenuCode(operCode);//菜单列表
-		getCurrentUser().setOperCodeSet(operCode);
-		getCurrentUser().setMenuCodeSet(menuCode);
+		userSession.setOperCodeSet(operCode);
+		userSession.setMenuCodeSet(menuCode);
 	}
 
 	/**

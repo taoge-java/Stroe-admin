@@ -160,11 +160,11 @@
   }
   
   
-  function operRole(){
+  function operRole(id){
       $.ajax({
 		   url:"#(BASE_PATH)/system/role/operRole",
 		   data:{
-		      "id":1
+		      "id":id
 		   },
 		   type:"post",
 		   dataType:"html",
