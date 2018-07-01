@@ -33,6 +33,83 @@ function page(cont,totalPage,groups,url,content){
 	});
 }
 
+/**
+ * layer操作成功提示消息
+ * @param message
+ */
+function alertSuccess(message){
+	if(!message){
+        message = "操作成功";
+	}
+	layer.alert(message, {
+         icon: 1,
+		 closeBtn: 0,
+		 time: 1000,
+         skin: 'layer-ext-moon',
+    });
+}
+
+/**
+ * layer操作失败提示
+ * @param message
+ */
+function  alertFail(message) {
+    if(!message){
+        message = "操作失败";
+    }
+    layer.alert(message,{
+        icon: 2,
+        time: 2000,
+        skin: 'layer-ext-moon',
+    });
+}
+
+
+function popSuccess(message) {
+	layer.msg(message, {
+	    skin: 'layui-layer-green',
+	    closeBtn: 0,
+	    time: 2000,
+	    icon: 1,
+	    shift: 0 //动画类型
+  	});
+}
+
+var global = {
+	
+	loading:function(message){
+		if(!message){
+			message = '正在提交，请稍等...';
+		}
+		var index = layer.msg(message, {
+			  icon: 16
+			  ,shade: 0.01,
+			  time:999999999//设置超长时间
+		});
+		  
+	    return index;
+	},
+	
+	close: function(index){
+		if(index){
+			layer.close(index);
+		}else{
+			layer.closeAll();
+		}
+	}
+}
+
+function popError(message) {
+	layer.alert(message, {
+	    skin: 'layui-layer-green',
+	    closeBtn: 0,
+	    time: 2000,
+	    icon: 2,
+	    shift: 0 //动画类型
+  	});
+}
+
+
 function addInformation(url,data,dataType){
 	
 }

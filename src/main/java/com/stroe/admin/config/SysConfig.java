@@ -159,6 +159,7 @@ public  class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
+		redisCacheManger.deleteAll();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

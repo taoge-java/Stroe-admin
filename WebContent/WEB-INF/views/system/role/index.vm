@@ -75,6 +75,10 @@
 <script type="text/javascript" src="#(BASE_PATH)/resource/lib/layer/2.4/layer.js"></script> 
 <script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui/js/H-ui.js"></script> 
 <script type="text/javascript" src="#(BASE_PATH)/resource/static/h-ui.admin/js/H-ui.admin.page.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/js/global.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="#(BASE_PATH)/resource/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
 <!--/_footer /作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="#(BASE_PATH)/resource/lib/My97DatePicker/4.8/WdatePicker.js"></script>
@@ -88,17 +92,72 @@
   }
 
 
-    /*管理员-角色-添加*/
+  /*管理员-角色-添加*/
   function admin_role_add(title,url,w,h){
       layer_show(title,url,w,h);
   }
+  
+  /*管理员-角色-编辑*/
+  function admin_role_edit(id){
+      $.ajax({
+	     url:"#(BASE_PATH)/system/role/edit/"+id,
+		 dataType:"html",
+		 success:function(data){
+		     layer.open({
+                	  type:1,
+                	  area:['600px','300px'],
+                	  title:'编辑角色',
+                	  content:data,
+                	  scrollbar: false,
+                      skin:'layui-layer-green',
+                      yes:function(index,layero){
+					      updateRole(id,index);
+                      },
+                      btn:['修改','关闭']
+        	 });
+		 }
+	  });
+  }
+  
 
   $(function(){
-      $.post("#(BASE_PATH)/system/role/list",{},function(data){
+      list(true);
+  });
+  
+  function updateRole(id,index){
+      if($("#form-admin-role-add").valid()){
+		    $.ajax({
+			   url:"#(BASE_PATH)/system/role/update",
+			   data:{
+			      "role_id" : id,
+			      "roleName": $("#roleName").val(),
+				  "remark":$("#remark").val()
+			   },
+			   dataType:"json",
+			   success:function(data){
+			      if(data.code == 1){
+					  layer.close(index); 
+				      popSuccess(data.message);
+				  }else {
+			          popError(data.message);
+				  }
+				  list();
+			   }
+			});
+		}
+  }
+  
+  function list(flag){
+        global.loading("加载中,请稍后...");
+		if(flag){
+		   
+		}
+        $.post("#(BASE_PATH)/system/role/list",{},function(data){
 		   $("#role_list").html("");
 		   $("#role_list").html(data);
-		},"html");
-  });
+		   setTimeout("global.close()",500);
+	 },"html");
+  }
   
   
   function operRole(){
@@ -120,6 +179,24 @@
 					getOper(index,id);
 				},
 			 });
+		   }
+	   });
+  }
+  
+  function delRole(id){
+     $.ajax({
+		   url:"#(BASE_PATH)/system/role/del/"+id,
+		   data:{
+		      "id":id
+		   },
+		   type:"post",
+		   dataType:"json",
+		   success:function(data){
+		      if(data.code == 1){
+			     popSuccess(data.message);
+			  }else{
+			     popError(data.message);
+			  }
 		   }
 	   });
   }

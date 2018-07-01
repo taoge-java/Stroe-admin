@@ -57,14 +57,14 @@ public class SystemRoleController extends BaseController{
 	}
 	
     public void edit(){
-    	int roleId = getParaToInt("id");
+    	int roleId = getParaToInt(0);
     	SystemRole systemRole = systemRoleService.findByid(roleId);
     	setAttr("systemRole", systemRole);
     	renderView("/system/role/edit.vm");
 	}
     
     public void update(){
-    	int roleId = getParaToInt("id");
+    	int roleId = getParaToInt("role_id");
     	String roleName = getPara("roleName");
 		String remark = getPara("remark");
 		Result result = systemRoleService.updateRole(roleId, roleName, remark);
