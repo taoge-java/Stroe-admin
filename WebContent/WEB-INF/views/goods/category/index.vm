@@ -9,78 +9,160 @@
 <!--/_menu 作为公共模版分离出去-->
 
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品分类 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 
+		<span class="c-gray en">&gt;</span> 产品分类
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+			<i class="Hui-iconfont">&#xe68f;</i>
+		</a>
+	</nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<table class="table">
-				<tr>
-					<td width="200" class="va-t"><ul id="treeDemo" class="ztree"></ul></td>
-					<td class="va-t"><iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=390px SRC=""></iframe></td>
-				</tr>
-			</table>
+			<form class="Huiform" id="roleForm">
+    			<div class="text-c">
+    					<input type="text" class="input-text" style="width:250px" placeholder="类别名称" name="name">
+							
+				<span class="select-box" style="float:left">
+    				<select class="select" name="goodsCategory.level" size="1">
+    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="1">一级分类</option>
+    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="2">二级分类</option>
+    				</select>
+				</span> 
+    					<button type="button" onclick="list(true)" class="btn btn-success" id="">
+    						<i class="Hui-iconfont">&#xe665;</i> 搜索
+    					</button>
+						
+					
+    			</div>
+    			<div class="cl pd-5 bg-1 bk-gray"> 
+    				<span class="l"> <a href="javascript:;" onclick="deleteBatch()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+    					<a class="btn btn-primary radius" href="javascript:;"   onclick="goods_category_add('添加类别','700','510')">
+    						<i class="Hui-iconfont">&#xe600;</i> 添加类别</a>
+                     </span> 
+    				 ##<span class="r">共有数据：<strong>54</strong> 条</span> </div>
+    			<div class="mt-10">
+                    <div id="category_list">
+        			
+                    </div>
+					
+    			</div>
+		    </form>
+			
 		</article>
 	</div>
 </section>
 <!--_footer 作为公共模版分离出去-->
 #include("/WEB-INF/views/common/bottom.vm")
 <script type="text/javascript">
-var setting = {
-	view: {
-		dblClickExpand: false,
-		showLine: false,
-		selectedMulti: false
-	},
-	data: {
-		simpleData: {
-			enable:true,
-			idKey: "id",
-			pIdKey: "pId",
-			rootPId: ""
+
+    $('.table-sort').dataTable({
+    	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+    	"bStateSave": true,//状态保存
+    	"aoColumnDefs": [
+    	  {"orderable":false,"aTargets":[0,8]}// 制定列不参与排序
+    	]
+    });
+     $(function(){
+        list(true);
+     });
+	 
+	 function goods_category_add(title,w,h){
+	     $.ajax({
+    	     url:"#(BASE_PATH)/goods/category/add",
+    		 dataType:"html",
+    		 success:function(data){
+    		     layer.open({
+                	  type:1,
+                	  area: [w+'px', h +'px'],
+                	  title: title,
+                	  content : data,
+                	  scrollbar: false,
+                      skin:'layui-layer-green',
+                      yes:function(index,layero){
+    				     createGoodsCategory(index);
+                      },
+                      btn:['保存','关闭']
+            	 });
+		    }
+	     });
+	 }
+  
+	 //添加类别
+	 function createGoodsCategory(index){
+	   if($("#form-category-add").valid()){
+	       $.post("#(BASE_PATH)/goods/category/create",$("#form-category-add").serialize(),function(data){
+		      if(data.code == 1){
+			     layer.close(index); 
+				 popSuccess(data.message);
+			  }else{
+			     popError(data.message);
+			  }
+			  list(false);
+		   },"json");
+	   }
+	 }
+	 
+	 
+	 
+	 function deleteBatch(){
+	    var ids = '';
+		$("input[name='categoryId']").each(function(){
+		   if(this.checked){
+		      ids += $(this).val() + ",";
+		   }
+		});
+		if(ids == ''){
+		   popError('请选择类别');
+		   return;
 		}
-	},
-	callback: {
-		beforeClick: function(treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("tree");
-			if (treeNode.isParent) {
-				zTree.expandNode(treeNode);
-				return false;
-			} else {
-				demoIframe.attr("src",treeNode.file + ".html");
-				return true;
-			}
+	    layer.confirm('您确认删除选中的类别吗？',{skin:'layui-layer-green'}, function(index){
+		    $.post("#(BASE_PATH)/goods/category/deleteBatch",{"ids":ids},"json",function(data){
+		      if(data.code == 1){
+				 popSuccess(data.message);
+			  }else{
+			     popError(data.message);
+			  }
+			  list(false);
+		    });
+			layer.close(index); 
+		}); 
+	 }
+	 
+	 function deleteById(id){
+	    layer.confirm('您确认删除该类别吗？',{skin:'layui-layer-green'}, function(index){
+		    $.post("#(BASE_PATH)/goods/category/delete",{"id":id},"json",function(data){
+		      if(data.code == 1){
+				 popSuccess(data.message);
+			  }else{
+			     popError(data.message);
+			  }
+			  list(false);
+		    });
+			layer.close(index); 
+		}); 
+	 }
+	 
+	 
+     //类别列表
+	 function list(flag){
+	    global.loading("数据加载中,请稍后...");
+	    if(flag){
+		   $("#category_list #currentPage").val(1);
 		}
-	}
-};
-
-var zNodes =[
-	{ id:1, pId:0, name:"一级分类", open:true},
-	{ id:11, pId:1, name:"二级分类"},
-	{ id:111, pId:11, name:"三级分类"},
-	{ id:112, pId:11, name:"三级分类"},
-	{ id:113, pId:11, name:"三级分类"},
-	{ id:114, pId:11, name:"三级分类"},
-	{ id:115, pId:11, name:"三级分类"},
-	{ id:12, pId:1, name:"二级分类 1-2"},
-	{ id:121, pId:12, name:"三级分类 1-2-1"},
-	{ id:122, pId:12, name:"三级分类 1-2-2"},
-];
-
-var code;
-
-function showCode(str) {
-	if (!code) code = $("#code");
-	code.empty();
-	code.append("<li>"+str+"</li>");
-}
-
-$(document).ready(function(){
-	var t = $("#treeDemo");
-	t = $.fn.zTree.init(t, setting, zNodes);
-	demoIframe = $("#testIframe");
-	demoIframe.bind("load", loadReady);
-	var zTree = $.fn.zTree.getZTreeObj("tree");
-	zTree.selectNode(zTree.getNodeByParam("id",'11'));
-});
+		$.ajax({
+    	     url:"#(BASE_PATH)/goods/category/list",
+    		 data:{
+    		 
+    		 },
+    		 type:"post",
+    		 dataType:"html",
+    		 success:function(data){
+    		     $("#category_list").html("");
+    			 $("#category_list").html(data);
+				 setTimeout("global.close()",500);
+    		 }
+    	 });
+	 }
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

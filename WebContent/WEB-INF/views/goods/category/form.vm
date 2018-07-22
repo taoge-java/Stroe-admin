@@ -1,0 +1,118 @@
+<article class="cl pd-20">
+	<form  method="post" enctype="multipart/form-data" class="form form-horizontal"  id="form-category-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类别名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="#(goodsCategory.name??)" placeholder="类别名称" name="goodsCategory.name">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">类别编码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="#(goodsCategory.code??)" placeholder="类别编码" name="goodsCategory.code">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否首页显示：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal" id="is_flag">
+				<div class="radio-box">
+					<input name="goodsCategory.show_index_flag" value="1" type="radio" class="show_index_flag" checked="checked">
+					<label for="sex-1">是</label>
+				</div>
+				<div class="radio-box">
+					<input name="goodsCategory.show_index_flag" #if(goodsCategory && goodsCategory.show_index_flag == 0) checked #end value="0" type="radio" class="show_index_flag">
+					<label for="sex-2">否</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl" id="category_icon">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类别图标：</label>
+			<div class="formControls col-xs-8 col-sm-9" style="float:left;width:100px;" >
+				<img id="image" style="width:80px;height:80px;"
+					#if(goodsCategory && goodsCategory.icon)
+					src="#(resourceDown)/#(goodsCategory.icon)" 
+					#else
+					src="#(BASE_PATH)/resource/images/weixin/hongjiu.png" 
+					#end
+					alt="..." class="round"> 
+			</div>
+			<div style="width:80px;height:10px;float:left;margin-top:20px;" class="formControls col-xs-8 col-sm-9">
+    			<span class="btn-upload">
+                  <a href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" id="file" value="#(goodsCategory.icon??)" multiple name="file" class="input-file">
+                  <input type="hidden" id="icon" value="#(goodsCategory.icon??)" name="goodsCategory.icon"/>
+               </span>
+            </div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">分类级别：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+    				<select class="select" name="goodsCategory.level" size="1">
+    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="1">一级分类</option>
+    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="2">二级分类</option>
+    				</select>
+				</span> 
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="goodsCategory.remark" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">
+				 #(goodsCategory.remark??)
+				</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+	</form>
+</article>
+
+<script >
+  $(function(){
+      getCheckBoxValue();
+	  
+	  //表单校验
+	  $("#form-category-add").validate({
+		rules:{
+			'goodsCategory.name':{
+				required:true,
+			},
+		},
+		messages :{
+		    'goodsCategory.name':{
+				required:"请输入类别名称",
+			},
+		}
+	  });
+	 
+	  $("#file").change(function(){
+	     $("#form-category-add").ajaxSubmit({
+			 url:"#(BASE_PATH)/goods/category/uploadImg",
+			 type:"post",
+			 dataType:"json",
+			 success:function(data){
+			     $("#image").attr("src","#(resourceDown)/" + data.message);
+				 $("#icon").val(data.message);
+			 }
+		  });
+	  });
+	  
+      $(".show_index_flag").click(function(){
+	       getCheckBoxValue();
+	  });
+   });
+   
+   
+   function getCheckBoxValue(){
+      var value = $("#is_flag").find("input[type='radio']:checked").val();
+	  if(value == 1){
+		 $("#category_icon").show();
+	  }else{
+		 $("#category_icon").hide();
+	  }
+   }
+</script>
