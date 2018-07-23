@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.stroe.admin.config.SysConfig;
 import com.stroe.admin.constant.CommonConstant;
 import com.stroe.admin.dto.UserSession;
 /**
@@ -21,6 +22,8 @@ public class ViewContextInterceptor implements 	Interceptor{
 		if(session != null){
 			request.setAttribute("session", session);
 		}
+		request.setAttribute("resourceDown", SysConfig.resourceDown);
+		request.setAttribute("resourceUpload", SysConfig.resourceUpload);
 		inv.invoke();
 	}
 }

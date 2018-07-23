@@ -2,7 +2,7 @@ package com.stroe.admin.web.controller.goods;
 
 import com.jfinal.ext.route.ControllerBind;
 import com.stroe.admin.annotation.Inject;
-import com.stroe.admin.service.product.ProductBrandService;
+import com.stroe.admin.service.goods.GoodsBrandService;
 import com.stroe.admin.web.controller.base.BaseController;
 
 /**
@@ -15,7 +15,7 @@ import com.stroe.admin.web.controller.base.BaseController;
 public class GoodsBrandController extends BaseController{
 
 	@Inject
-	private ProductBrandService productBrandService;
+	private GoodsBrandService productBrandService;
 	
 	public  void index() {
 		renderView("/goods/brand/index.vm");

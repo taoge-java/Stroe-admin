@@ -1,16 +1,9 @@
 <article class="cl pd-20">
-	<form  method="post" enctype="multipart/form-data" class="form form-horizontal"  id="form-category-add">
+	<form  method="post" enctype="multipart/form-data" class="form form-horizontal"  id="form-category">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类别名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="#(goodsCategory.name??)" placeholder="类别名称" name="goodsCategory.name">
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">类别编码：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="#(goodsCategory.code??)" placeholder="类别编码" name="goodsCategory.code">
 			</div>
 		</div>
 		
@@ -51,21 +44,32 @@
 			<label class="form-label col-xs-4 col-sm-3">分类级别：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<span class="select-box" style="width:150px;">
-    				<select class="select" name="goodsCategory.level" size="1">
-    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="1">一级分类</option>
-    					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="2">二级分类</option>
+    				<select class="select" name="goodsCategory.level" onchange="changeLevel()" id="category_level" size="1">
+    					<option #if(goodsCategory && goodsCategory.level == 1)selected #end value="1">一级分类</option>
+    					<option #if(goodsCategory && goodsCategory.level == 2)selected #end value="2">二级分类</option>
+    				</select>
+				</span> 
+			</div>
+		</div>
+		
+		<div class="row cl" id="parent_category">
+			<label class="form-label col-xs-4 col-sm-3">父级类别：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+    				<select class="select" name="goodsCategory.parent_id">
+						<option  value="">请选择父级类别</option>
+						#for(e:list)
+    					<option #if(goodsCategory && goodsCategory.parent_id == e.id) selected #end value="#(e.id??)">#(e.name??)</option>
+						#end
     				</select>
 				</span> 
 			</div>
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<label class="form-label col-xs-4 col-sm-3">备注:</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="goodsCategory.remark" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">
-				 #(goodsCategory.remark??)
-				</textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+				<input type="text" class="input-text" value="#(goodsCategory.remark??)" placeholder="备注" name="goodsCategory.remark">
 			</div>
 		</div>
 	</form>
@@ -73,24 +77,31 @@
 
 <script >
   $(function(){
+      getLevelValue();
       getCheckBoxValue();
 	  
 	  //表单校验
-	  $("#form-category-add").validate({
+	  $("#form-category").validate({
 		rules:{
 			'goodsCategory.name':{
 				required:true,
 			},
+			'goodsCategory.parent_id':{
+			    required:true,
+			}
 		},
 		messages :{
 		    'goodsCategory.name':{
 				required:"请输入类别名称",
 			},
+			'goodsCategory.parent_id':{
+			    required:"请选择父级类别",
+			}
 		}
 	  });
 	 
 	  $("#file").change(function(){
-	     $("#form-category-add").ajaxSubmit({
+	     $("#form-category").ajaxSubmit({
 			 url:"#(BASE_PATH)/goods/category/uploadImg",
 			 type:"post",
 			 dataType:"json",
@@ -99,6 +110,11 @@
 				 $("#icon").val(data.message);
 			 }
 		  });
+	  });
+	  
+	  
+	  $("#category_level").change(function(){
+	       getLevelValue();
 	  });
 	  
       $(".show_index_flag").click(function(){
@@ -115,4 +131,18 @@
 		 $("#category_icon").hide();
 	  }
    }
+   
+   function getLevelValue(){
+      var value = $("#category_level").find("option:selected").val();
+	  if(value == 1){
+	    $("#parent_category").hide();
+	  }else{
+	    $("#parent_category").show();
+	  }
+   }
+   
+   function changeLevel(){
+      getLevelValue();
+   }
+   
 </script>

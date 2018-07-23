@@ -1,11 +1,11 @@
 package com.stroe.admin.spring;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class ProxyBeanManger {
 
-    private static final ConcurrentMap<String,Object> beanMap = new ConcurrentHashMap<String,Object>();
+    private static final Map<String,Object> beanMap = new ConcurrentHashMap<String,Object>();
 	
     private static final ProxyBeanManger proxyBeanManger = new ProxyBeanManger();
     
@@ -16,7 +16,7 @@ public class ProxyBeanManger {
 		return proxyBeanManger;
 	}
     
-	public  ConcurrentMap<String, Object> getBeanMap() {
+	public  Map<String, Object> getBeanMap() {
 		return beanMap;
 	}
 

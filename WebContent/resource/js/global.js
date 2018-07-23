@@ -94,7 +94,7 @@ var global = {
 		if(index){
 			layer.close(index);
 		}else{
-			layer.closeAll();
+			layer.closeAll("loading");
 		}
 	}
 }

@@ -27,5 +27,7 @@ public interface Result {
 	
 	public Map<String,Object>  getModels();
 	
+	public Object  getModel(String key);
+	
 	public Object getDefaultModel();
 }

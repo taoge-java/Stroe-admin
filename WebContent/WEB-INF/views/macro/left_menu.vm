@@ -43,7 +43,7 @@
 					<li><a href="#(BASE_PATH)/goods/category" #if(subMenu == "category") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="分类管理">分类管理</a></li>
 					#end
 					#if(session.hasMenu('1_3_3'))
-					<li><a href="#(BASE_PATH)/goods/info" #if(subMenu == "info") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="产品管理">产品管理</a></li>
+					<li><a href="#(BASE_PATH)/goods/info" #if(subMenu == "info") style="color:#148cf1;background-color:rgba(255,255,255,0.2)" #end title="商品管理">产品管理</a></li>
 		            #end
 				</ul>
 	        </dd>

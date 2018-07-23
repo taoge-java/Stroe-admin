@@ -42,6 +42,8 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
+		setAttr("user", new SystemAdmin());
+		setAttr("admin", new SystemAdmin());
 		renderView("/account/login.vm");
 	}
 

@@ -91,10 +91,27 @@
    
   }
 
-
   /*管理员-角色-添加*/
   function admin_role_add(title,url,w,h){
-      layer_show(title,url,w,h);
+     // layer_show(title,url,w,h);
+	 $.ajax({
+	     url:"#(BASE_PATH)/system/role/add",
+		 dataType:"html",
+		 success:function(data){
+		     layer.open({
+            	  type:1,
+            	  area: [w+'px', h +'px'],
+            	  title: title,
+            	  content : data,
+            	  scrollbar: false,
+                  skin:'layui-layer-green',
+                  yes:function(index,layero){
+				      saveRole(index);
+                  },
+                  btn:['保存','关闭']
+        	 });
+		 }
+	 });
   }
   
   /*管理员-角色-编辑*/
@@ -104,16 +121,16 @@
 		 dataType:"html",
 		 success:function(data){
 		     layer.open({
-                	  type:1,
-                	  area:['600px','300px'],
-                	  title:'编辑角色',
-                	  content:data,
-                	  scrollbar: false,
-                      skin:'layui-layer-green',
-                      yes:function(index,layero){
-					      updateRole(id,index);
-                      },
-                      btn:['修改','关闭']
+            	  type:1,
+            	  area:['600px','300px'],
+            	  title:'编辑角色',
+            	  content:data,
+            	  scrollbar: false,
+                  skin:'layui-layer-green',
+                  yes:function(index,layero){
+				      updateRole(id,index);
+                  },
+                  btn:['修改','关闭']
         	 });
 		 }
 	  });
@@ -141,11 +158,37 @@
 				  }else {
 			          popError(data.message);
 				  }
-				  list();
+				  list(false);
 			   }
 			});
 		}
   }
+  
+  
+  function saveRole(index){
+      if($("#form-admin-role-add").valid()){
+		    $.ajax({
+			   url:"#(BASE_PATH)/system/role/create",
+			   data:{
+			      "role_id" : id,
+			      "roleName": $("#roleName").val(),
+				  "remark":$("#remark").val()
+			   },
+			   dataType:"json",
+			   success:function(data){
+			      if(data.code == 1){
+					  layer.close(index); 
+				      popSuccess(data.message);
+				  }else {
+			          popError(data.message);
+				  }
+				  list(false);
+			   }
+			});
+		}
+  }
+  
+  
   
   function list(flag){
         global.loading("加载中,请稍后...");

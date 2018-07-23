@@ -1,13 +1,12 @@
-    <input  type="hidden" name="currentPage" id="currentPage"/>
+<input  type="hidden" name="pageNumber" id="currentPage"/>
 	<input  type="hidden" id="totalPage" value="#(page.totalPage??)"/>
-	<span class="r">共有数据：<strong>#(count??)</strong> 条</span> </div>
-	<table class="table table-border table-bordered table-bg table-hover table-sort">
+	<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer">
 		<thead>
 				<tr>
 					<th scope="col" colspan="9">分类列表</th>
 				</tr>
 				<tr class="text-c">
-					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th width="25"><input type="checkbox"></th>
 					<th width="40">ID</th>
 					<th width="150">名称</th>
 					<th width="90">图标</th>
@@ -17,43 +16,49 @@
 				</tr>
 		</thead>
 		<tbody id="content">
-			#for(e:page.getList())
-			<tr class="text-c">
-				<td><input type="checkbox"  value="#(e.id??)" name="categoryId"></td>
-				<td>#(e.id??)</td>
-				<td>#(e.name??)</td>
-				<td>
-					<img style="width:80px;height:80px;" #if(e.icon) src="#(resourceDown)/#(e.icon)" #else src="#(BASE_PATH)/resource/images/weixin/hongjiu.png" #end/>
-				</td>
-				<td>
-				 #if(e.show_index_flag == 1)
-					是
-				 #else
-					否
-				 #end
-				</td>
-				<td>
-				 #if(e.level == 1)
-					一级分类
-				 #else
-					二级分类
-				 #end
-				</td>
-				<td class="td-manage">
-					<a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
-						<i class="Hui-iconfont">&#xe631;</i>
-					</a> 
-					<a title="编辑" href="javascript:;" onclick="goods_category_edit('编辑类别','700','510')" class="ml-5" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6df;</i>
-					</a> 
-					<a title="删除" href="javascript:;" onclick="deleteById(#(e.id??))" class="ml-5" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6e2;</i>
-					</a>
-				</td>
-			</tr>
+			#if(page.getList().size()>0)
+    			#for(e : page.getList())
+        			<tr class="text-c">
+        				<td><input type="checkbox" value="#(e.id??)" name="categoryId"></td>
+        				<td>#(e.id??)</td>
+        				<td>#(e.name??)</td>
+        				<td>
+        					<img style="width:30px;height:30px;" #if(e.icon) src="#(resourceDown)/#(e.icon)" #else src="#(BASE_PATH)/resource/images/weixin/hongjiu.png" #end/>
+        				</td>
+        				<td>
+        				 #if(e.show_index_flag == 1)
+        					是
+        				 #else
+        					否
+        				 #end
+        				</td>
+        				<td>
+        				 #if(e.level == 1)
+        					一级分类
+        				 #else
+        					二级分类
+        				 #end
+        				</td>
+        				<td class="td-manage">
+        					<a title="编辑" href="javascript:;" onclick="goods_category_edit(#(e.id??),'编辑类别','700','510')" class="ml-5" style="text-decoration:none">
+        						<i class="Hui-iconfont">&#xe6df;</i>
+        					</a> 
+        					<a title="删除" href="javascript:;" onclick="deleteById(#(e.id??))" class="ml-5" style="text-decoration:none">
+        						<i class="Hui-iconfont">&#xe6e2;</i>
+        					</a>
+        				</td>
+        			</tr>
+				#end
+    		#else
+                <tr class="text-c">
+				  <td colspan="7">无符合条件的数据</td>
+				</tr>	
 			#end
 		</tbody>
 	</table>
-   <!--<div class="panel-head" id="bottom">
-         <div id="demo" style="margin-left:500px;float:rigth;width:400px;"></div>
-   </div> -->
+	<div class="layui-box layui-laypage layui-laypage-default" style="float:right" id="layui-laypage-10">
+		 #if(page.getList().size() > 0)
+			   #@paginate(page.pageNumber,page.pageSize,page.totalPage,"paginate-link")
+		 #end
+    </div>
+	

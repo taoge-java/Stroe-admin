@@ -1,4 +1,4 @@
-package com.stroe.admin.service.product;
+package com.stroe.admin.service.goods;
 
 import com.stroe.admin.annotation.Bean;
 import com.stroe.admin.service.base.BaseService;
@@ -10,6 +10,6 @@ import com.stroe.admin.service.base.BaseService;
  * @create_at 2017年8月27日下午12:14:07
  */
 @Bean
-public class ProductBrandService extends BaseService{
+public class GoodsBrandService extends BaseService{
 
 }

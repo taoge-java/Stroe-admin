@@ -1,53 +1,58 @@
-
-#define paginate(currentPage,totalPage,paginateName)
+#define paginate(currentPage,pageSize,totalPage,paginateName)
+    #if(paginateName) #setLocal(paginateName = "paginate-link") #end
     #if ((totalPage <= 0) || (currentPage > totalPage)) #end
     #setLocal(startPage = currentPage - 4)
-    #if (startPage < 1) 
-		#setLocal(startPage = 1) 
-	#end
+    #if (startPage < 1) #setLocal(startPage = 1) #end
     #setLocal(endPage = currentPage + 4)
-    #if (endPage > totalPage) 
-		#setLocal(endPage = totalPage) 
-	#end
-            共#(totalPage)页　第　
+    #if (endPage > totalPage) #setLocal(endPage = totalPage) #end
+          <span class="layui-laypage-count">共 #(totalPage)页</span>
     #if(currentPage <= 8)
-         #setLocal(startPage = 1)
+            #setLocal(startPage = 1)
     #end
     #if((totalPage - currentPage) < 8)
-        #setLocal(endPage = totalPage)
+            #setLocal(endPage = totalPage)
     #end
     #if(currentPage == 1)
-		<a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="#(prePage)">上一页</a>
     #else
         #setLocal(prePage = currentPage - 1)
-		
+		    <a href="javascript:;" class="layui-laypage-prev" name="#(paginateName)" data-page="#(prePage)">上一页</a>
     #end
     #if(currentPage > 8)
-            <a href="javascript:;" data-page="1" name="#(paginateName)">1</a>
-            <a href="javascript:;" data-page="2" name="#(paginateName)">2</a>
+		    <a href="javascript:;" data-page="1">1</a>
+			<a href="javascript:;" data-page="2">2</a>
             <a href="javascript:;" data-page="#">…</a>
     #end
     #if(endPage >= startPage)
         #for(i = startPage;i <= endPage;i++)
             #if(currentPage == i)
-                <a href="javascript:;" data-page="#" class="layui-laypage-em" style="background-color:#1E9FFF;">#(i)
-				</a>
+				   <span class="layui-laypage-curr">
+					  <em class="layui-laypage-em" page="#" style="background-color:#1E9FFF;"></em>
+				      <em>#(i)</em>
+				   </span>
             #else
-                <a href="javascript:;" data-page="#(i)" name="#(paginateName)">#(i)</a>
+				<a href="javascript:;" data-page="#(i)" name="#(paginateName)">#(i)</a>
             #end
         #end
     #end
     #if ((totalPage - currentPage) >= 8)
             <a href="javascript:;" page="#">…</a>
         #setLocal(prePage = totalPage - 1)
-            <a href="javascript:;" data-page="#(prePage)" name="#(paginateName)">#(prePage)</a>
-            <a href="javascript:;" data-page="#(totalPage)" name="#(paginateName)">#(totalPage)</a>
-	#end
-	<a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
+		<a href="javascript:;" name="#(paginateName)" data-page="#(prePage)">#(prePage)</a>
+		<a href="javascript:;" name="#(paginateName)" data-page="#(totalPage)">#(totalPage)</a>
+    #end
     #if (currentPage == totalPage || totalPage <= 0)
     #else
         #setLocal(nextPage = currentPage + 1)
-           
-    #end
-    　页
+		<a href="javascript:;" class="layui-laypage-next" name="#(paginateName)" data-page="#(nextPage)">下一页</a>
+	#end
+	<input type="hidden" id="pageSize" value="#(pageSize)" name="pageSize"/>
+	<span class="layui-laypage-limits">
+		<select lay-ignore="" id="changeSize">
+			<option value="10" #if(pageSize == 10) selected #end>10 条/页</option>
+			<option value="20" #if(pageSize == 20) selected #end>20 条/页</option>
+			<option value="30" #if(pageSize == 30) selected #end>30 条/页</option>
+			<option value="40" #if(pageSize == 40) selected #end>40 条/页</option>
+			<option value="50" #if(pageSize == 50) selected #end>50 条/页</option>
+		</select>
+	</span>
 #end

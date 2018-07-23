@@ -113,7 +113,6 @@ public abstract class BaseController extends Controller{
 			}
 			file.delete();
 			return imagePath + "/" + newName;
-//			return basePath + "/" + newName;
 		} catch (Exception e) {
 			LOG.error("文件上传异常",e);
 		}

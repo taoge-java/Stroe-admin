@@ -2,6 +2,11 @@
 <body>
 <!--_header 作为公共模版分离出去-->
 #include("/WEB-INF/views/common/header.vm")
+<style>
+	#category_list #layui-laypage-3 a:hover{
+	   background-color:#1E9FFF;
+	}
+</style>
 <!--/_header 作为公共模版分离出去-->
 
 <!--_menu 作为公共模版分离出去-->
@@ -18,12 +23,13 @@
 	</nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<form class="Huiform" id="roleForm">
+			<form class="Huiform" id="categoryForm">
     			<div class="text-c">
     					<input type="text" class="input-text" style="width:250px" placeholder="类别名称" name="name">
 							
-				<span class="select-box" style="float:left">
-    				<select class="select" name="goodsCategory.level" size="1">
+				<span class="select-box" style="width:10%;">
+    				<select class="select" name="level" size="1">
+						<option value="0">选择分类级别</option>
     					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="1">一级分类</option>
     					<option #if(goodsCategory && goodsCategory.lelevel == 1)selected #end value="2">二级分类</option>
     				</select>
@@ -31,15 +37,14 @@
     					<button type="button" onclick="list(true)" class="btn btn-success" id="">
     						<i class="Hui-iconfont">&#xe665;</i> 搜索
     					</button>
-						
 					
     			</div>
-    			<div class="cl pd-5 bg-1 bk-gray"> 
+    			<div class="cl pd-5 bg-1 bk-gray" style="margin-top:10px;"> 
     				<span class="l"> <a href="javascript:;" onclick="deleteBatch()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
     					<a class="btn btn-primary radius" href="javascript:;"   onclick="goods_category_add('添加类别','700','510')">
     						<i class="Hui-iconfont">&#xe600;</i> 添加类别</a>
                      </span> 
-    				 ##<span class="r">共有数据：<strong>54</strong> 条</span> </div>
+					 </div>
     			<div class="mt-10">
                     <div id="category_list">
         			
@@ -47,7 +52,6 @@
 					
     			</div>
 		    </form>
-			
 		</article>
 	</div>
 </section>
@@ -55,13 +59,6 @@
 #include("/WEB-INF/views/common/bottom.vm")
 <script type="text/javascript">
 
-    $('.table-sort').dataTable({
-    	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-    	"bStateSave": true,//状态保存
-    	"aoColumnDefs": [
-    	  {"orderable":false,"aTargets":[0,8]}// 制定列不参与排序
-    	]
-    });
      $(function(){
         list(true);
      });
@@ -86,11 +83,32 @@
 		    }
 	     });
 	 }
-  
-	 //添加类别
-	 function createGoodsCategory(index){
-	   if($("#form-category-add").valid()){
-	       $.post("#(BASE_PATH)/goods/category/create",$("#form-category-add").serialize(),function(data){
+	 
+	 function goods_category_edit(id,title,w,h){
+	     $.ajax({
+    	     url:"#(BASE_PATH)/goods/category/edit/"+id,
+    		 dataType:"html",
+    		 success:function(data){
+    		     layer.open({
+                	  type:1,
+                	  area: [w+'px', h +'px'],
+                	  title: title,
+                	  content : data,
+                	  scrollbar: false,
+                      skin:'layui-layer-green',
+                      yes:function(index,layero){
+    				     updateGoodsCategory(id,index);
+                      },
+                      btn:['修改','关闭']
+            	 });
+		    }
+	     });
+	 }
+	 
+	 //更新类别
+	 function updateGoodsCategory(id,index){
+	     if($("#form-category").valid()){
+	       $.post("#(BASE_PATH)/goods/category/update/"+id,$("#form-category").serialize(),function(data){
 		      if(data.code == 1){
 			     layer.close(index); 
 				 popSuccess(data.message);
@@ -101,9 +119,23 @@
 		   },"json");
 	   }
 	 }
+  
+	 //添加类别
+	 function createGoodsCategory(index){
+	   if($("#form-category").valid()){
+	       $.post("#(BASE_PATH)/goods/category/create",$("#form-category").serialize(),function(data){
+		      if(data.code == 1){
+				 popSuccess(data.message);
+			     layer.close(index); 
+			  }else{
+			     popError(data.message);
+			  }
+			  setTimeout("list(false)",500);
+		   },"json");
+	   }
+	 }
 	 
-	 
-	 
+	 //批量删除
 	 function deleteBatch(){
 	    var ids = '';
 		$("input[name='categoryId']").each(function(){
@@ -116,50 +148,61 @@
 		   return;
 		}
 	    layer.confirm('您确认删除选中的类别吗？',{skin:'layui-layer-green'}, function(index){
-		    $.post("#(BASE_PATH)/goods/category/deleteBatch",{"ids":ids},"json",function(data){
+		    $.post("#(BASE_PATH)/goods/category/deleteBatch",{"ids":ids},function(data){
 		      if(data.code == 1){
 				 popSuccess(data.message);
+				 layer.close(index); 
 			  }else{
 			     popError(data.message);
 			  }
-			  list(false);
-		    });
-			layer.close(index); 
+			  setTimeout("list(false)",500);
+		    },"json");
+			
 		}); 
 	 }
 	 
 	 function deleteById(id){
 	    layer.confirm('您确认删除该类别吗？',{skin:'layui-layer-green'}, function(index){
-		    $.post("#(BASE_PATH)/goods/category/delete",{"id":id},"json",function(data){
+		    $.post("#(BASE_PATH)/goods/category/deleteById",{"id":id},function(data){
 		      if(data.code == 1){
-				 popSuccess(data.message);
+			     popSuccess(data.message);
+			     layer.close(index); 
 			  }else{
 			     popError(data.message);
 			  }
-			  list(false);
-		    });
-			layer.close(index); 
+			  setTimeout("list(false)",500);
+		    },"json");
 		}); 
 	 }
 	 
 	 
      //类别列表
 	 function list(flag){
-	    global.loading("数据加载中,请稍后...");
 	    if(flag){
 		   $("#category_list #currentPage").val(1);
 		}
+	    global.loading("数据加载中,请稍后...");
 		$.ajax({
     	     url:"#(BASE_PATH)/goods/category/list",
-    		 data:{
-    		 
-    		 },
+    		 data:$("#categoryForm").serialize(),
     		 type:"post",
     		 dataType:"html",
     		 success:function(data){
     		     $("#category_list").html("");
     			 $("#category_list").html(data);
 				 setTimeout("global.close()",500);
+				 $('#category_list a[name=paginate-link]').click(function() {
+    	   			  var page = $(this).attr("data-page");
+    	   			  $("#category_list").find("#currentPage").val(page);
+    	   			  list(false);
+	             });
+				 
+				 //改变每页页数
+				 $("#changeSize").change(function(){
+				     var pageSize = $(this).find("option:selected").val();
+					 $("#category_list").find("#pageSize").val(pageSize);
+					 list(true);
+				 })
     		 }
     	 });
 	 }

@@ -86,4 +86,9 @@ public class DefaultResult implements Result{
 		return map.get(DEFAULT_MODEL_KEY);
 	}
 
+	@Override
+	public Object getModel(String key) {
+		return getModels().get(key);
+	}
+
 }

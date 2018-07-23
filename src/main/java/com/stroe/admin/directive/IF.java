@@ -33,10 +33,4 @@ public class IF extends BaseDirective{
 		if(Logic.isTrue(object))
 		   stat.exec(env, scope, writer);
 	}
-	
-	@Override
-	public boolean hasEnd() {
-		return true;
-	}
-
 }
